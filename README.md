@@ -1,6 +1,14 @@
-# OpenSA
-# 企业级运维自动化平台 
-####安装部署说明
+# OpenSA 运维自动化平台 
+
+#### 架构说明
+* Django 2.1 + Mysql 5.7 + redis 5.0 + celery v4.2.0 
+* 生产环境请使用 nginx + uwsgi,不对公网开放,或者使用SSL双向认证
+* 命令和文件分发基于SSH协议，支持Linux/Windows(cygwin)|支持快速修改为ansible
+* 使用2.7版本inspina模版
+* 支持国际化(默认中/英)，有些细节未完善，欢迎加入完善项目，联系WX “leoiceo” 或者加群
+* 交流群号 ：142189771
+
+#### 安装部署说明
 * 系统: CentOS 7
 ```
 setenforce 0
@@ -11,12 +19,17 @@ localedef -c -f UTF-8 -i zh_CN zh_CN.UTF-8
 export LC_ALL=zh_CN.UTF-8
 echo 'LANG="zh_CN.UTF-8"' > /etc/locale.conf
 ```
-* 安装 Python3 
+* 安装 Python3  && redis 
 ```
 wget http://www.python.org/ftp/python/3.7.1/Python-3.7.1.tar.xz
 tar -zxvf Python-3.7.1.tar.xz && cd Python-3.7.1 
 ./configure --prefix=/usr/local/python37
 make && make install
+
+yum install redis -y
+service redis start
+
+##settings 设置了密码，可自行修改Redis.conf
 ```
 * 拉取代码安装模块
 ```
@@ -58,45 +71,15 @@ python manage.py runserver 0.0.0.0:8000
 >http://opensa.imdst.com 
 >user: demo@imdst.com 
 >pass: Demo123
-#### 功能说明
-### 资产管理
-### 作业管理
-* 脚本管理
-* 计划任务
-* 任务编排
-* 文件分发
-* 批量执行脚本
-* 批量执行命令
-* 批量执行任务
 
-### 日志审计
-* 改密日志
-* 登陆日志
-* 请求日志
-* 作业日志
-* 录像回放
-
-### 系统设置
-* 用户管理  
-* 部门管理  
-* 项目管理 
-* 权限管理 
-* 角色管理 
-* 密钥管理
-
-### 未来开发计划
-* 持续集成(待开发)
-* 灰度发布(待开发)
-* 反向代理可视化(待开发)
-
-#### 架构说明
-* Django 2.1 + Mysql 5.7 + redis 3.2 + celery v4.2.0 
-* 命令和文件分发基于SSH协议，支持Linux/Windows(cygwin)|支持快速修改为ansible
-* 使用2.7版本inspina模版
-* 支持国际化(默认中/英)
+#### [中文指南 wiki](https://github.com/leoiceo/OpenSA/wiki)
 
 #### 交流群QQ: 142189771
 
 #### 预览进度
 * [博客地址](https://blog.imdst.com/kai-yuan-yun-wei-zi-dong-hua-ping-tai-kai-fa-she-ji-si-lu/)
 
+#### 作者
+* v 0.1
+* leoiceo
+* 盘振鹏 
