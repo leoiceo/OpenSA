@@ -6,7 +6,6 @@ from __future__ import unicode_literals
 
 import json
 from django.http import HttpResponseRedirect, HttpResponse
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, ListView, View, CreateView, UpdateView, DeleteView, DetailView
 from django.utils.translation import ugettext as _
 from django.conf import settings
@@ -14,14 +13,11 @@ from users.models import RoleList,PermissionList
 from django.utils.translation import ugettext_lazy as _
 from django.db.models import Q
 from pure_pagination import PageNotAnInteger, Paginator
-from django.urls import reverse_lazy
 from ..forms import RoleForm
 from opensa.api import LoginPermissionRequired
 
 class RoleAll(LoginPermissionRequired,ListView):
-    '''
-    角色列表
-    '''
+
     model = RoleList
     template_name = 'users/role-list.html'
     queryset = RoleList.objects.all()
@@ -71,9 +67,7 @@ class RoleAll(LoginPermissionRequired,ListView):
 
 
 class RoleEdit(LoginPermissionRequired,UpdateView):
-    '''
-    添加角色权限
-    '''
+
     model = RoleList
     template_name = 'users/role-edit.html'
     form_class = RoleForm
@@ -124,9 +118,7 @@ class RoleEdit(LoginPermissionRequired,UpdateView):
             return HttpResponse(json.dumps(ret))
 
 class RoleAllDel(LoginPermissionRequired,DeleteView):
-    """
-    删除角色
-    """
+
     model = RoleList
 
     def post(self, request, *args, **kwargs):

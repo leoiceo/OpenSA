@@ -2,22 +2,13 @@
 # -*- coding: utf-8 -*-
 # by leoiceo
 from __future__ import absolute_import, unicode_literals
-import time
 import os
 import pwd
 import paramiko
-import select
 from django.http import HttpResponse, HttpResponseRedirect
-from django.urls import reverse
-from django.conf import settings
 from django.views.generic import TemplateView, View
-from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
-from django.db.models import Count
-from django.shortcuts import redirect,render
 from django.contrib.auth.mixins import AccessMixin,LoginRequiredMixin
 from users.models import Project,UserProfile,RoleList
-from asset.models import Asset
 import difflib
 import sys,json
 import numpy as np
@@ -45,13 +36,6 @@ def readfile(filename):
         sys.exit()
 
 def diff_content(old_file,new_file,fileid):
-    """
-    内容对比
-    :param old:
-    :param new:
-    :return:
-    """
-    print (old_file,new_file)
     old_lines = readfile(old_file)
     new_lines = readfile(new_file)
     d = difflib.HtmlDiff()
@@ -66,11 +50,6 @@ def diff_content(old_file,new_file,fileid):
     return diff_content_file
 
 def generate_scripts(id,content):
-    """
-    生成脚本
-    :param content:
-    :return:
-    """
     script_dir = "{}/script".format(DATA_DIR)
     mkdir(script_dir)
     script_name = "{}.sh".format(id)
@@ -85,12 +64,6 @@ def generate_scripts(id,content):
     return script_dir,script_name
 
 def generate_keyfile(id,pkey):
-    """
-    生成keyfile
-    :param id:
-    :param pkey:
-    :return:
-    """
     keydir = "{}/key".format(DATA_DIR)
     mkdir(keydir)
     key_name = "{}.key".format(id)
@@ -116,10 +89,6 @@ def chown(path, user, group=''):
         pass
 
 def mkdir(dir_name, username='', mode=0o755):
-    """
-    insure the dir exist and mode ok
-    目录存在，如果不存在就建立，并且权限正确
-    """
     if not os.path.isdir(dir_name):
         os.makedirs(dir_name)
         os.chmod(dir_name, mode)
@@ -294,6 +263,19 @@ class Connection(object):
             else:
                 return {"result":False, "message":result}
 
+    def rsync(self,local_dir, remote_dir,exclude_file, dot=True):
+        check_and_file(exclude_file)
+
+        if dot:
+            cmd = "/usr/bin/rsync -q -rt --delete --delete-after --progress --exclude-from='{0}' -e 'ssh -i {1} -o StrictHostKeyChecking=no -o PasswordAuthentication=no -p {2}' {3}/ {4}@{5}:{6}/".format(
+                exclude_file,self.private_key , self.port, local_dir, self.user, self.ip, remote_dir)
+        else:
+            cmd = "/usr/bin/rsync -q -rt --progress --exclude-from='{0}' -e 'ssh -i {1} -o StrictHostKeyChecking=no -o PasswordAuthentication=no -p {2}' {3}/ {4}@{5}:{6}/".format(
+                exclude_file,self.private_key, self.port, local_dir, self.user, self.ip, remote_dir)
+        ret = self.linux_cmd(cmd)
+        return ret
+
+
 
 class RequestMiddleware(object):
 
@@ -331,7 +313,7 @@ class RequestMiddleware(object):
         except Exception as e:
             import datetime
             now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-            print(now, 'AnonymousUser', request.path,e)
+
 
         response = self.get_response(request)
         #print("中间件结束")

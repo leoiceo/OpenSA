@@ -2,11 +2,9 @@
 # ~*~ coding: utf-8 ~*~
 # by leoiceo
 from __future__ import absolute_import
-
 from django.urls import path
-from jobs.views import scripts
 from audit.views import loginfo, joblog
-#from . import views
+
 app_name = 'audit'
 
 urlpatterns = [

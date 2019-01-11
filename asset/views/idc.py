@@ -4,25 +4,17 @@
 from __future__ import unicode_literals
 
 import json
-import time
-from django.http import HttpResponseRedirect, HttpResponse
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import TemplateView, ListView, View, CreateView, UpdateView, DeleteView, DetailView
+from django.http import HttpResponse
+from django.views.generic import TemplateView, ListView, View, CreateView, UpdateView
 from django.utils.translation import ugettext as _
-from django.conf import settings
 from asset.models import Idc
 from django.utils.translation import ugettext_lazy as _
-from django.db.models import Q
-from pure_pagination import PageNotAnInteger, Paginator
 from django.urls import reverse_lazy
-from asset.forms import AssetFormAdd, AssetForm
 from opensa.api import LoginPermissionRequired
 from ..forms import IdcForm,IdcFormUpdate
 
 class IdcList(LoginPermissionRequired,ListView):
-    '''
-    项目列表
-    '''
+
     template_name = 'asset/idc-list.html'
     model = Idc
     context_object_name = "idc_list"
@@ -43,9 +35,7 @@ class IdcList(LoginPermissionRequired,ListView):
 
 
 class IdcAdd(LoginPermissionRequired,CreateView):
-    """
-    项目增加
-    """
+
     model = Idc
     form_class = IdcForm
     template_name = 'asset/idc-add-update.html'
@@ -72,9 +62,7 @@ class IdcAdd(LoginPermissionRequired,CreateView):
         return super(IdcAdd, self).form_invalid(form)
 
 class IdcUpdate(LoginPermissionRequired,UpdateView):
-    '''
-    用户更新信息
-    '''
+
     model = Idc
     form_class = IdcFormUpdate
     template_name = 'asset/idc-add-update.html'
@@ -105,9 +93,7 @@ class IdcUpdate(LoginPermissionRequired,UpdateView):
         return self.url
 
 class IdcDel(LoginPermissionRequired,View):
-    """
-    删除用户
-    """
+
     model = Idc
 
     def post(self, request):

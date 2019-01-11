@@ -2,32 +2,22 @@
 # -*- coding: utf-8 -*-
 # by leoiceo
 from __future__ import absolute_import, unicode_literals
-import subprocess,re
-from django.http import JsonResponse
-from django.http import HttpResponseRedirect, HttpResponse
 from django.views.generic import ListView, View, CreateView, UpdateView,TemplateView
 from opensa.api import LoginPermissionRequired
 from django.utils.translation import ugettext_lazy as _
 from django.shortcuts import HttpResponse
 from audit.models import JobsResults,TaskSchedule
-from django.db.models import Q
 from opensa import settings
 import json, datetime, logging
-from asset.models import Asset
-from jobs.models import ScheduledTasks,ScriptsManage
 from users.models import Project,UserProfile,KeyManage
 from pure_pagination import PageNotAnInteger, Paginator
-from django_celery_results.models import TaskResult
-from jobs.tasks import ExecutionCmd
 import sys
 import imp
 imp.reload(sys)
 
 
 class CrontadbList(LoginPermissionRequired,ListView):
-    '''
-    用户列表列表
-    '''
+
     model = JobsResults
     template_name = "audit/jobs_logs_crontab.html"
 

@@ -111,7 +111,7 @@ class PeriodicTasksForm(forms.ModelForm):
         value = cleaned_data.get('name')
         try:
             PeriodicTask.objects.get(name=value)
-            self._errors['name'] = self.error_class(["%s的信息已经存在" % value])
+            self._errors['name'] = self.error_class([_("{} User information already exists".format(value))])
         except PeriodicTask.DoesNotExist:
             pass
         return cleaned_data

@@ -6,7 +6,6 @@ from __future__ import unicode_literals
 
 import json
 from django.http import HttpResponseRedirect, HttpResponse
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, ListView, View, CreateView, UpdateView, DeleteView, DetailView
 from django.utils.translation import ugettext as _
 from django.conf import settings
@@ -19,9 +18,7 @@ from ..forms import KeyManageForm
 from opensa.api import LoginPermissionRequired
 
 class KeyListAll(LoginPermissionRequired,ListView):
-    '''
-    密钥列表
-    '''
+
     model = KeyManage
     template_name = 'users/keys-list.html'
     queryset = KeyManage.objects.all()
@@ -57,9 +54,7 @@ class KeyListAll(LoginPermissionRequired,ListView):
 
 
 class KeyAdd(LoginPermissionRequired,CreateView):
-    '''
-    添加密钥
-    '''
+
     model = KeyManage
     form_class = KeyManageForm
     template_name = 'users/keys-add-update.html'
@@ -99,9 +94,7 @@ class KeyAdd(LoginPermissionRequired,CreateView):
 
 
 class KeyUpdate(LoginPermissionRequired,UpdateView):
-    '''
-    更新密钥
-    '''
+
     model = KeyManage
     form_class = KeyManageForm
     template_name = 'users/keys-add-update.html'
@@ -132,9 +125,7 @@ class KeyUpdate(LoginPermissionRequired,UpdateView):
 
 
 class KeyAllDel(LoginPermissionRequired,DeleteView):
-    """
-    删除密钥
-    """
+
     model = KeyManage
 
     def post(self, request, *args, **kwargs):

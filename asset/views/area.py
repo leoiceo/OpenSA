@@ -2,27 +2,17 @@
 # ~*~ coding: utf-8 ~*~
 
 from __future__ import unicode_literals
-
 import json
-import time
-from django.http import HttpResponseRedirect, HttpResponse
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import TemplateView, ListView, View, CreateView, UpdateView, DeleteView, DetailView
+from django.http import HttpResponse
+from django.views.generic import ListView, View, CreateView, UpdateView
 from django.utils.translation import ugettext as _
-from django.conf import settings
 from asset.models import Area
 from django.utils.translation import ugettext_lazy as _
-from django.db.models import Q
-from pure_pagination import PageNotAnInteger, Paginator
 from django.urls import reverse_lazy
-from asset.forms import AssetFormAdd, AssetForm
 from opensa.api import LoginPermissionRequired
 from ..forms import AreaForm, AreaFormUpdate
 
 class AreaList(LoginPermissionRequired,ListView):
-    '''
-    项目列表
-    '''
     template_name = 'asset/area-list.html'
     model = Area
     context_object_name = "area_list"
@@ -43,9 +33,6 @@ class AreaList(LoginPermissionRequired,ListView):
 
 
 class AreaAdd(LoginPermissionRequired,CreateView):
-    """
-    项目增加
-    """
     model = Area
     form_class = AreaForm
     template_name = 'asset/area-add-update.html'
@@ -70,11 +57,9 @@ class AreaAdd(LoginPermissionRequired,CreateView):
 
     def form_invalid(self, form):
         return super(AreaAdd, self).form_invalid(form)
-#
+
+
 class AreaUpdate(LoginPermissionRequired,UpdateView):
-    '''
-    用户更新信息
-    '''
     model = Area
     form_class = AreaFormUpdate
     template_name = 'asset/area-add-update.html'
@@ -105,9 +90,6 @@ class AreaUpdate(LoginPermissionRequired,UpdateView):
         return self.url
 
 class AreaDel(LoginPermissionRequired,View):
-    """
-    删除用户
-    """
     model = Area
 
     def post(self, request):

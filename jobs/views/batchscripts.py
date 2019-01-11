@@ -6,9 +6,6 @@ from django.shortcuts import HttpResponse
 from django.views.generic import ListView, View, CreateView, UpdateView
 from django.urls import reverse_lazy
 from ..forms import ScritsManageForm
-from django_celery_beat.models import  CrontabSchedule, PeriodicTask, IntervalSchedule
-from django_celery_results.models import TaskResult
-from opensa import settings
 import json, datetime, logging,time
 from asset.models import Asset
 from jobs.models import ScriptsManage
@@ -20,9 +17,6 @@ import logging
 logger = logging.getLogger(__name__)
 
 class BatchScripts(LoginPermissionRequired,CreateView):
-    """
-    批量执行脚本
-    """
 
     model = ScriptsManage
     form_class = ScritsManageForm
@@ -108,7 +102,6 @@ class BatchScriptsProcess(LoginPermissionRequired,CreateView):
         jr_obj = JobsResults.objects.create(type=1, operator=operator,key=key_obj,
                                             project=project_id,job_name=script_obj.name)
         from celery import group
-        #yet = group(batch_scripts_func.s(jr_obj.id,script_id,timeout,input_args,i) for i in asset_list)(queue="batch_jobs_collect")
         yet = group(batch_scripts_func.s(jr_obj.id,script_id,timeout,input_args,i) for i in asset_list)()
 
         jobs_obj = JobsResults.objects.get(id=jr_obj.id)
@@ -140,7 +133,6 @@ class TaskScheduleApi(LoginPermissionRequired,ListView):
                 info = {
                     "status":True,
                     "data": {
-                        #"result": ts_obj.result.encode('utf-8').decode('unicode_escape').strip('"').replace("\\n","\r\n"),
                         "result": ts_obj.result.encode('utf-8').decode('unicode_escape').strip('"').replace("\\n","\r\n"),
                     }
                 }

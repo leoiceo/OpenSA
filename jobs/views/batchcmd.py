@@ -4,7 +4,6 @@
 from __future__ import absolute_import, unicode_literals
 import subprocess,re
 from django.http import JsonResponse
-from django.http import HttpResponseRedirect, HttpResponse
 from django.views.generic import ListView, View, CreateView, UpdateView,TemplateView
 from opensa.api import LoginPermissionRequired
 from django.utils.translation import ugettext_lazy as _
@@ -14,10 +13,8 @@ from django.db.models import Q
 from opensa import settings
 import json, datetime, logging
 from asset.models import Asset
-from jobs.models import ScheduledTasks,ScriptsManage
 from users.models import Project,UserProfile,KeyManage
 from pure_pagination import PageNotAnInteger, Paginator
-from django_celery_results.models import TaskResult
 from jobs.tasks import ExecutionCmd
 import sys
 import imp
@@ -25,9 +22,7 @@ imp.reload(sys)
 
 
 class CmdListAll(LoginPermissionRequired,ListView):
-    '''
-    用户列表列表
-    '''
+
     model = Asset
     template_name = "jobs/cmd.html"
 
@@ -97,17 +92,8 @@ class CmdListAll(LoginPermissionRequired,ListView):
             jr_obj = JobsResults.objects.create(type=0, operator=operator, key=key_obj,
                                                 job_name='{}'.format(cmd),project=pro)
             ret['id'] = '{}'.format(jr_obj.id)
-            # ExecutionCmd(jr_obj.id, asset[0], cmd)
-            # for i in asset:
-            #     ts = ExecutionCmd.delay(jr_obj.id, i, cmd)
-            #     asset_obj = Asset.objects.get(id=i)
-            #     ts_obj = TaskSchedule.objects.create(task_id=ts.task_id,asset=asset_obj)
-            #     jr_obj.task_schedule.add(ts_obj)
             from celery import group
             group(ExecutionCmd.s(jr_obj.id, i, cmd) for i in asset)()
-            # for i in group_id:
-            #     ts_obj = TaskSchedule.objects.create(task_id=i.task_id)
-            #     jr_obj.task_schedule.add(ts_obj)
         except Exception as e:
             ret['status'] = False
             ret['error'] = "{}".format(e)

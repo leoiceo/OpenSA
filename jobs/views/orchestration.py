@@ -4,16 +4,11 @@
 from __future__ import unicode_literals
 import json,uuid
 from django.http import HttpResponseRedirect, HttpResponse
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, ListView, View, CreateView, UpdateView, DeleteView, DetailView
-from django.utils.translation import ugettext as _
 from django.conf import settings
 from django.shortcuts import render,reverse
-from users.models import KeyManage
-from django.utils.translation import ugettext_lazy as _
 from django.db.models import Q
 from pure_pagination import PageNotAnInteger, Paginator
-from django.urls import reverse_lazy
 from jobs.models import TaskScheduling,ScriptsManage,TaskSchedulScripts
 from opensa.api import LoginPermissionRequired
 from ..forms import ScritsManageForm
@@ -21,9 +16,7 @@ from users.models import UserProfile,Project
 
 
 class OrchestrationListAll(LoginPermissionRequired,ListView):
-    '''
-    密钥列表
-    '''
+
     model = TaskScheduling
     template_name = 'jobs/orchestration-list.html'
     queryset = TaskScheduling.objects.all()
@@ -65,9 +58,7 @@ class OrchestrationListAll(LoginPermissionRequired,ListView):
 
 
 class OrchestrationAdd(LoginPermissionRequired,ListView):
-    """
-    增加
-    """
+
     model = TaskScheduling
     template_name = 'jobs/orchestration-add.html'
 
@@ -122,9 +113,7 @@ class OrchestrationAdd(LoginPermissionRequired,ListView):
 
 
 class OrchestrationAllDel(LoginPermissionRequired,View):
-    """
-    删除
-    """
+
     model = TaskScheduling
     def post(self, request):
         ret = {'status': True, 'error': None, }
@@ -155,13 +144,11 @@ class OrchestrationAllDel(LoginPermissionRequired,View):
 
 
 class OrchestrationUpdate(LoginPermissionRequired,UpdateView):
-    """
-    增加
-    """
+
     model = TaskScheduling
     form_class = ScritsManageForm
     template_name = 'jobs/orchestration-edit.html'
-    # success_url = reverse_lazy('tasks:scritps_list')
+
 
     def get_project(self):
         try:

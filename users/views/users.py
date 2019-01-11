@@ -4,18 +4,6 @@
 from __future__ import unicode_literals
 
 import json
-# import os
-# from django.core.cache import cache
-# from django.shortcuts import render
-# from django.contrib.auth import login as auth_login, logout as auth_logout
-# from django.core.files.storage import default_storage
-# from django.shortcuts import reverse, redirect
-# from django.utils.decorators import method_decorator
-# from django.views.decorators.cache import never_cache
-# from django.views.decorators.csrf import csrf_protect
-# from django.views.decorators.debug import sensitive_post_parameters
-# from django.views.generic.base import TemplateView
-# from django.views.generic.edit import FormView
 from django.http import HttpResponseRedirect, HttpResponse
 from django.views.generic import TemplateView, ListView, View, CreateView, UpdateView, DeleteView, DetailView
 from django.utils.translation import ugettext as _
@@ -30,9 +18,7 @@ from opensa.api import LoginPermissionRequired
 from audit.models import PasswordChangeLog
 
 class UsersListAll(LoginPermissionRequired,ListView):
-    '''
-    用户列表列表
-    '''
+
     model = UserProfile
     template_name = 'users/users-list.html'
     queryset = UserProfile.objects.all()
@@ -55,31 +41,16 @@ class UsersListAll(LoginPermissionRequired,ListView):
 
     def get_queryset(self):
         self.queryset = super().get_queryset()
-        # user = UserProfile.objects.get(username=self.request.user)
-        # project = [i.id for i in Project.objects.filter(Project_user=user.id)]
-        # if user.is_superuser:
         if self.request.GET.get('name'):
             query = self.request.GET.get('name', None)
             self.queryset = self.queryset.filter(Q(username__icontains=query)
                                                  ).order_by('-id')
         else:
             self.queryset = self.queryset.all().order_by('id')
-        # else:
-        #     if self.request.GET.get('name'):
-        #         query = self.request.GET.get('name', None)
-        #         self.queryset = self.queryset.filter(project__in=project).filter(
-        #             Q(username__contains=query) |
-        #             Q(ip__contains=query) |
-        #             Q(other_ip__contains=query)
-        #         ).order_by('-id')
-        #     else:
-        #         self.queryset = self.queryset.filter(project__in=project).order_by('id')
         return self.queryset
 
 class UsersAdd(LoginPermissionRequired,CreateView):
-    """
-    用户增加
-    """
+
     model = UserProfile
     form_class = UsersFormAdd
     template_name = 'users/users-add-update.html'
@@ -114,9 +85,7 @@ class UsersAdd(LoginPermissionRequired,CreateView):
 
 
 class UsersUpdate(LoginPermissionRequired,UpdateView):
-    '''
-    用户更新信息
-    '''
+
     model = UserProfile
     form_class = UsersForm
     template_name = 'users/users-add-update.html'
@@ -148,9 +117,7 @@ class UsersUpdate(LoginPermissionRequired,UpdateView):
 
 
 class UsersAllDel(LoginPermissionRequired,View):
-    """
-    删除用户
-    """
+
     model = UserProfile
 
     def post(self, request):
@@ -169,9 +136,7 @@ class UsersAllDel(LoginPermissionRequired,View):
             return HttpResponse(json.dumps(ret))
 
 class UsersChangePassword(LoginPermissionRequired,View):
-    """
-    修改密码
-    """
+
     model = UserProfile
 
     def post(self, request):
@@ -186,7 +151,6 @@ class UsersChangePassword(LoginPermissionRequired,View):
             pk = request.POST.get('id', None)
             newpassword = request.POST.get('password', None)
             upobj = UserProfile.objects.get(id=pk)
-            #print (newpassword)
             upobj.set_password(newpassword)
             upobj.save()
             operator = UserProfile.objects.get(email=self.request.user).username
@@ -199,9 +163,7 @@ class UsersChangePassword(LoginPermissionRequired,View):
 
 
 class UsersDetail(LoginPermissionRequired,DetailView):
-    '''
-    用户详细信息
-    '''
+
     model = UserProfile
     template_name = 'users/users-detail.html'
 

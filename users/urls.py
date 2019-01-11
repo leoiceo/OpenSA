@@ -5,7 +5,7 @@ from __future__ import absolute_import
 from django.urls import path
 
 from users.views import login, users, groups, project, permission,role,keys
-#from . import views
+
 app_name = 'users'
 
 urlpatterns = [

@@ -36,10 +36,7 @@ JOBS_TYPE=(
     (4,_("Crontab Task")),
 )
 class JobsResults(models.Model):
-    """
-    异步任务状态信息
-    job name：任务名称、脚本名、命令名,文件远程路径
-    """
+
     id = models.UUIDField(default=uuid.uuid4, primary_key=True)
     type = models.IntegerField(choices=JOBS_TYPE, blank=True, null=True, verbose_name=_("Jobs Type"))
     start_time = models.DateTimeField(auto_now_add=True, verbose_name=_("Start Time"))
@@ -59,13 +56,6 @@ class JobsResults(models.Model):
         return self.id
 
 class TaskSchedule(models.Model):
-    """
-    type: 任务清单
-    """
-    # version = models.IntegerField(blank=True, null=True,verbose_name=_("Version"))
-    # appname = models.IntegerField(blank=True, null=True,verbose_name=_("App Name"))
-    # port = models.IntegerField(blank=True, null=True,verbose_name=_("App Port"))
-
     id = models.UUIDField(default=uuid.uuid4,primary_key=True)
     task_id = models.UUIDField(max_length=255, blank=True, null=True, verbose_name=_('Task ID'), unique=True)
     log = models.CharField(max_length=128,blank=True,null=True,verbose_name=_("Log Info"))

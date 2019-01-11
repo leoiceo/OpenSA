@@ -4,12 +4,10 @@
 from __future__ import unicode_literals
 import json,uuid
 from django.http import HttpResponseRedirect, HttpResponse
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, ListView, View, CreateView, UpdateView, DeleteView, DetailView
 from django.utils.translation import ugettext as _
 from django.conf import settings
 from django.shortcuts import render
-from users.models import KeyManage
 from django.utils.translation import ugettext_lazy as _
 from django.db.models import Q
 from pure_pagination import PageNotAnInteger, Paginator
@@ -20,9 +18,7 @@ from ..forms import ScritsManageForm
 from users.models import UserProfile,Project
 
 class ScriptsListAll(LoginPermissionRequired,ListView):
-    '''
-    密钥列表
-    '''
+
     model = ScriptsManage
     template_name = 'jobs/scripts-list.html'
     queryset = ScriptsManage.objects.all()
@@ -63,9 +59,7 @@ class ScriptsListAll(LoginPermissionRequired,ListView):
 
 
 class ScriptsAdd(LoginPermissionRequired,CreateView):
-    '''
-    添加脚本
-    '''
+
     model = ScriptsManage
     form_class = ScritsManageForm
     template_name = 'jobs/scripts-add.html'
@@ -91,9 +85,6 @@ class ScriptsAdd(LoginPermissionRequired,CreateView):
         content = request.POST.get("content")
         args_list = request.POST.getlist("input[]")
         create_user =  UserProfile.objects.get(email="{}".format(request.user))
-        # print(content)
-        # a=content.replace('\r\n','\n')
-        # print(a)
         try:
             project = request.session["project"]
         except Exception as e:
@@ -117,9 +108,7 @@ class ScriptsAdd(LoginPermissionRequired,CreateView):
         return HttpResponseRedirect(self.success_url)
 
 class ScriptsUpdate(LoginPermissionRequired,UpdateView):
-    '''
-    更新密钥
-    '''
+
     model = ScriptsManage
     form_class = ScritsManageForm
     template_name = 'jobs/scripts-edit.html'
@@ -162,9 +151,6 @@ class ScriptsUpdate(LoginPermissionRequired,UpdateView):
             script_obj.args = input_args
             script_obj.save()
             script_obj.update.add(ucl_obg.id)
-            # new_file = generate_scripts(script_obj.id, content)
-            # scripts_dir = "{}/script/".format(DATA_DIR)
-            #diff_content("{}/{}.old.sh".format(scripts_dir, script_obj.id), new_file,ucl_obg.id)
         except Exception as e:
             return HttpResponseRedirect('/jobs/scripts-add/?error={}'.format(e))
         return HttpResponseRedirect(self.success_url)
@@ -230,46 +216,9 @@ class ScriptsDiff(LoginPermissionRequired,View):
 
 
 
-# class ScriptsDiff(LoginPermissionRequired,ListView):
-#
-#     model = UpdateConfigLog
-#     form_class = ScritsManageForm
-#     template_name = 'jobs/test.html'
-#     queryset = UpdateConfigLog.objects.all()
-#     success_url = reverse_lazy('jobs:scripts_list')
-#
-#     def get_context_data(self, **kwargs):
-#         #pk = self.kwargs.get(self.pk_url_kwarg, None)
-#         #script_obj = ScriptsManage.objects.get(id=pk.hex)
-#         context = {
-#             "jobs_active": "active",
-#             "scripts_manage_active": "active",
-#             #"script_obj": script_obj,
-#         }
-#         kwargs.update(context)
-#         return super().get_context_data(**kwargs)
-
-    # form_class = ScritsManageForm
-    # template_name = 'jobs/scripts-diff.html'
-    # queryset = UpdateConfigLog.objects.all()
-    # success_url = reverse_lazy('jobs:scripts_list')
-    #
-    # def get_context_data(self, **kwargs):
-    #     pk = self.request.POST.get("id")
-    #     diff_id = self.request.POST.getlist("diff_id[]")
-    #     #script_obj = ScriptsManage.objects.get(id=pk.hex)
-    #     context = {
-    #         "jobs_active": "active",
-    #         "scripts_manage_active": "active",
-    #         #"script_obj": script_obj,
-    #     }
-    #     kwargs.update(context)
-    #     return super().get_context_data(**kwargs)
 
 class ScriptsAllDel(LoginPermissionRequired,DeleteView):
-    """
-    删除密钥
-    """
+
     model = ScriptsManage
 
     def post(self, request, *args, **kwargs):

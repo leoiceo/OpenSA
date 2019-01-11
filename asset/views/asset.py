@@ -6,7 +6,6 @@ from __future__ import unicode_literals
 import json
 import time,uuid
 from django.http import HttpResponseRedirect, HttpResponse
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, ListView, View, CreateView, UpdateView, DeleteView, DetailView
 from django.utils.translation import ugettext as _
 from django.conf import settings
@@ -19,9 +18,7 @@ from asset.forms import AssetFormAdd, AssetForm
 from opensa.api import LoginPermissionRequired
 
 class AssetListAll(LoginPermissionRequired,ListView):
-    '''
-    用户列表列表
-    '''
+
     model = Asset
     template_name = 'asset/asset-list.html'
     ordering = ('id',)
@@ -69,9 +66,6 @@ class AssetListAll(LoginPermissionRequired,ListView):
         return self.queryset
 
 class AssetAdd(LoginPermissionRequired,CreateView):
-    """
-    增加
-    """
     model = Asset
     form_class = AssetFormAdd
     template_name = 'asset/asset-add-update.html'
@@ -95,30 +89,8 @@ class AssetAdd(LoginPermissionRequired,CreateView):
 
         return super().get_context_data(**kwargs)
 
-    # def get_initial(self):
-    #     """
-    #     Returns the initial data to use for forms on this view.
-    #     """
-    #     initial = super(AssetAdd, self).get_initial()
-    #     user = UserProfile.objects.get(hostname=self.request.user)
-    #     # project = [i.id for i in Project.objects.filter(Project_user=user.id)]
-    #     if not user.is_superuser:
-    #         project = Project.objects.filter(Project_user=user.id)
-    #         initial['project'] = project
-    #         return initial
-
-    # def get_form_kwargs(self):
-    #     kwargs = super(AssetAdd, self).get_form_kwargs()
-    #     kwargs['user'] = self.request.user
-    #     return kwargs
-#
-#
-#
-#
 class AssetUpdate(LoginPermissionRequired,UpdateView):
-    '''
-    更新
-    '''
+
     model = Asset
     form_class = AssetForm
     template_name = 'asset/asset-add-update.html'
@@ -150,9 +122,6 @@ class AssetUpdate(LoginPermissionRequired,UpdateView):
 #
 #
 class AssetAllDel(LoginPermissionRequired,View):
-    """
-    删除用户
-    """
     model = Asset
 
     def post(self, request):
@@ -171,9 +140,6 @@ class AssetAllDel(LoginPermissionRequired,View):
             return HttpResponse(json.dumps(ret))
 #
 class AssetDetail(LoginPermissionRequired,DetailView):
-    '''
-    用户详细信息
-    '''
     model = Asset
     template_name = 'asset/asset-detail.html'
 
@@ -192,11 +158,6 @@ class AssetDetail(LoginPermissionRequired,DetailView):
 
 
 def AssetZtree(request):
-    """
-    获取 区域 资产树 的相关数据
-    :param request:
-    :return:
-    """
     try:
         project = request.session["project"]
     except Exception as e:

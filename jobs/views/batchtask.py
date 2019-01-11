@@ -6,23 +6,15 @@ import json,uuid
 from django.http import HttpResponseRedirect, HttpResponse
 from asset.models import Asset
 from django.views.generic import TemplateView, ListView, View, CreateView, UpdateView, DeleteView, DetailView
-from django.utils.translation import ugettext as _
-from django.conf import settings
 from jobs.tasks import batch_task_func
 from users.models import KeyManage
-from django.utils.translation import ugettext_lazy as _
 from jobs.models import TaskScheduling,ScriptsManage,TaskSchedulScripts
 from audit.models import JobsResults,TaskSchedule
-from django.urls import reverse_lazy
-from jobs.models import ScriptsManage,UpdateConfigLog
 from opensa.api import LoginPermissionRequired
 from ..forms import ScritsManageForm
 from users.models import UserProfile,Project
 
 class BatchTask(LoginPermissionRequired,CreateView):
-    """
-    批量执行脚本
-    """
 
     model = TaskScheduling
     form_class = ScritsManageForm
@@ -80,7 +72,6 @@ class BatchTaskProcess(LoginPermissionRequired,CreateView):
         jr_obj = JobsResults.objects.create(type=3, operator=operator,key=key_obj,
                                             project=project_id,job_name=task_obj.name)
         from celery import group
-        #yet = group(batch_scripts_func.s(jr_obj.id,script_id,timeout,input_args,i) for i in asset_list)(queue="batch_jobs_collect")
         yet = group(batch_task_func.s(jr_obj.id,task_id,timeout,i) for i in asset_list)()
 
         jobs_obj = JobsResults.objects.get(id=jr_obj.id)

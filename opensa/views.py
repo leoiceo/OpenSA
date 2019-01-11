@@ -1,14 +1,10 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.conf import settings
 from django.views.generic import TemplateView, View
-from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
-from django.db.models import Count
 from django.shortcuts import redirect,render
 from django.contrib.auth.mixins import LoginRequiredMixin
 import io
 from opensa.utils import create_validate_code
-from users.models import Project
+
 
 class IndexView(LoginRequiredMixin, TemplateView):
     template_name = 'index.html'

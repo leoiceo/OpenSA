@@ -7,8 +7,6 @@ from django.shortcuts import HttpResponse,render,HttpResponseRedirect
 from django.views.generic import ListView, View, CreateView, UpdateView
 from django.urls import reverse_lazy
 from ..forms import ScritsManageForm
-from django_celery_beat.models import  CrontabSchedule, PeriodicTask, IntervalSchedule
-from django_celery_results.models import TaskResult
 from opensa import settings
 import json, datetime, uuid,subprocess,os,time
 from asset.models import Asset
@@ -21,9 +19,6 @@ from jobs.tasks import batch_files_func
 
 
 class BatchFiles(LoginPermissionRequired,CreateView):
-    """
-    文件分发
-    """
 
     model = ScriptsManage
     form_class = ScritsManageForm

@@ -5,7 +5,6 @@ from __future__ import absolute_import
 
 from django.urls import path
 from jobs.views import scripts, crontab, batchscripts, batchcmd, batchfiles, orchestration, batchtask
-#from . import views
 app_name = 'jobs'
 
 urlpatterns = [

@@ -14,8 +14,10 @@ from __future__ import absolute_import
 from django.urls import reverse_lazy
 import os
 import pymysql
+import configparser
 pymysql.install_as_MySQLdb()
-from kombu import Exchange, Queue
+
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -33,9 +35,6 @@ DEBUG = True
 ALLOWED_HOSTS = ['*']
 
 
-#文件或者配置目录
-DATA_DIR="/data/opensa"
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -46,10 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
-    'bootstrap3',
-    'rest_framework',
-    'django_celery_beat',
     'django_celery_results',
+    'django_celery_beat',
+    'bootstrap3',
     'users',
     'asset',
     'audit',
@@ -68,6 +66,8 @@ MIDDLEWARE = [
     'opensa.api.RequestMiddleware',
 ]
 
+
+
 ROOT_URLCONF = 'opensa.urls'
 
 TEMPLATES = [
@@ -80,76 +80,45 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
-                'opensa.api.custom_project',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.i18n',
-
+                'opensa.api.custom_project',
             ],
         },
     },
 ]
 
 
+
 WSGI_APPLICATION = 'opensa.wsgi.application'
+
+
 
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+# #保留
+config = configparser.ConfigParser()
+config.read(os.path.join(BASE_DIR, 'config.conf'))
+DB_HOST = config.get('db', 'host')
+DB_PORT = config.getint('db', 'port')
+DB_USER = config.get('db', 'user')
+DB_PASSWORD = config.get('db', 'password')
+DB_DATABASE = config.get('db', 'database')
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'opensa',
-        'USER':'root',
-        'PASSWORD':'123456',
-        'HOST':'localhost',
-        'PORT':3306,
-        'OPTIONS':{
-            'init_command':"SET sql_mode='STRICT_TRANS_TABLES'",
-            'charset': 'utf8mb4',
-        }
+        'NAME': DB_DATABASE,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
+        'HOST': DB_HOST,
+        'PORT': DB_PORT,
+        'CONN_MAX_AGE':60,
     }
 }
 
-#Cache db and Celery
-redis_ip = '127.0.0.1'
-redis_port = 6379
-redis_pwd = 123456
-redis_brokerdb = 2
-redis_backenddb = 3
-
-CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://{}:{}".format(redis_ip,redis_port),
-        "OPTIONS": {
-            'DB': '{}'.format(redis_brokerdb),
-            'PASSWORD': '{}'.format(redis_pwd),
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
-            "CONNECTION_POOL_KWARGS": {"max_connections": 100}
-        }
-    }
-}
-
-#celery
-#CELERY_RESULT_BACKEND = 'redis://:{}@{}:{}/{}'.format(redis_pwd,redis_ip,redis_port,redis_backenddb)
-CELERY_RESULT_BACKEND = 'django-db'
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_BROKER_URL = 'redis://:{}@{}:{}/{}'.format(redis_pwd,redis_ip,redis_port,redis_brokerdb)
-#CELERYBEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
-CELERY_BEAT_SCHEDULER  = 'django_celery_beat.schedulers:DatabaseScheduler'
-CELERYD_CONCURRENCY = 5
-CELERY_TIMEZONE = 'Asia/Shanghai'
-CELERYD_MAX_TASKS_PER_CHILD = 30
-CELERYD_FORCE_EXECV = True
-CELERY_IGNORE_RESULT = True
-CELERY_CREATE_MISSING_QUEUES = True
-CELERYD_TASK_SOFT_TIME_LIMIT = 1200
-CELERY_TASK_RESULT_EXPIRES = 1200
-#Celery 使用UTC时间
-CELERY_ENABLE_UTC = True
-CELERY_IMPORTS = ('opensa.celery')
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -191,10 +160,10 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 USE_THOUSAND_SEPARATOR = True
-
 LANGUAGES = (
     ('en', ugettext('Simple Chinese')),
     ('zh-hans', ugettext('English')),
+
 )
 
 LOCALE_PATHS = (
@@ -205,56 +174,16 @@ LOCALE_PATHS = (
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_DIR = os.path.join(DATA_DIR, "static")
+STATIC_DIR = os.path.join(BASE_DIR, "static")
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 
-# Channels settings
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "asgi_redis.RedisChannelLayer",  # use redis backend
-        "CONFIG": {
-            #"hosts": [("localhost", 6380)],  # set redis address
-            "hosts": ["redis://:{}@{}:{}/0".format(redis_pwd,redis_ip,redis_port)],
-            "channel_capacity": {
-                "http.request": 1000,
-                "websocket.send*": 10000,
-            },
-            "capacity": 1000000000,
-        },
-        # load routing from our routing.py file
-        "ROUTING": "terminal.routing.channel_routing",
-    },
-}
 
-# Rest framework api auth config
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-    ),
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
-    'DEFAULT_PARSER_CLASSES': (
-        'rest_framework.parsers.JSONParser',
-        'rest_framework.parsers.FormParser',
-    ),
-}
-
-# Session expire
 SESSION_COOKIE_AGE=60*60
 SESSION_EXPIRE_AT_BROWSER_CLOSE=True
 SESSION_SAVE_EVERY_REQUEST=True
-
-# 计划任务
-# CRONJOBS = [
-#     ('0 6 * * *', 'multitask.scripts.cron.run_python',[],{},'>/tmp/django_crontab.log'),
-#     ('0 12 * * 0', 'multitask.scripts.cron.run_collect_system_info',[],{},'>/tmp/django_crontab.log'),
-#     ('*/5 * * * *', 'multitask.scripts.cron.run_update_proxy_upstream',[],{},'>/tmp/django_crontab.log'),
-# ]
 
 
 PAGINATION_SETTINGS = {
@@ -262,100 +191,50 @@ PAGINATION_SETTINGS = {
     'MARGIN_PAGES_DISPLAYED': 2,
     'SHOW_FIRST_PAGE_WHEN_INVALID': True,
 }
-#默认15页
+
 DISPLAY_PER_PAGE = 15
 
+#redis
+config = configparser.ConfigParser()
+config.read(os.path.join(BASE_DIR, 'config.conf'))
+redis_ip = config.get('redis', 'redis_ip')
+redis_port = config.getint('redis', 'redis_port')
+redis_pwd = config.get('redis', 'redis_pwd')
+redis_db = config.get('redis', 'redis_db')
 
-# LOG_LEVEL = 'DEBUG' if DEBUG else 'INFO'
-#
-# # Logging setting
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': False,
-#     'formatters': {
-#         'verbose': {
-#             'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
-#         },
-#         'main': {
-#             'datefmt': '%Y-%m-%d %H:%M:%S',
-#             'format': '%(asctime)s [%(module)s %(levelname)s] %(message)s',
-#         },
-#         'simple': {
-#             'format': '%(levelname)s %(message)s'
-#         },
-#     },
-#     'handlers': {
-#         'null': {
-#             'level': 'DEBUG',
-#             'class': 'logging.NullHandler',
-#         },
-#         'console': {
-#             'level': 'DEBUG',
-#             'class': 'logging.StreamHandler',
-#             'formatter': 'main'
-#         },
-#         'file': {
-#             'level': 'DEBUG',
-#             'class': 'logging.FileHandler',
-#             'formatter': 'main',
-#             'filename': os.path.join(DATA_DIR, 'log', 'terminal.log')
-#         },
-#         'sshconsumer': {
-#             'level': 'DEBUG',
-#             'class': 'logging.FileHandler',
-#             'formatter': 'main',
-#             'filename': os.path.join(DATA_DIR, 'log', 'sshconsumer.log')
-#         },
-#     },
-#     'loggers': {
-#         'django': {
-#             'handlers': ['null'],
-#             'propagate': False,
-#             'level': LOG_LEVEL,
-#         },
-#         'django.request': {
-#             'handlers': ['console', 'file'],
-#             'level': LOG_LEVEL,
-#             'propagate': False,
-#         },
-#         'django.server': {
-#             'handlers': ['console', 'file'],
-#             'level': LOG_LEVEL,
-#             'propagate': False,
-#         },
-#         'jobs.views.batchscripts': {
-#             'handlers': ['console'],
-#             'level': LOG_LEVEL,
-#             'propagate': False,
-#         },
-#         'terminal.views': {
-#             'handlers': ['console', 'file'],
-#             'level': LOG_LEVEL,
-#             'propagate': False,
-#         },
-#         'terminal.consumers': {
-#             'handlers': ['console', 'sshconsumer'],
-#             'level': LOG_LEVEL,
-#             'propagate': False,
-#         },
-#         'terminal.interactive': {
-#             'handlers': ['console', 'sshconsumer'],
-#             'level': LOG_LEVEL,
-#             'propagate': False,
-#         },
-#         'terminal.instruction': {
-#             'handlers': ['console', 'sshconsumer'],
-#             'level': LOG_LEVEL,
-#             'propagate': False,
-#         },
-#         'terminal.sudoterminal': {
-#             'handlers': ['console', 'sshconsumer'],
-#             'level': LOG_LEVEL,
-#             'propagate': False,
-#         },
-#         'django.db': {
-#             'handlers': ['console', 'file'],
-#             'level': 'INFO'
-#         }
-#     }
-# }
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://{}:{}".format(redis_ip,redis_port),
+        "OPTIONS": {
+            'DB': '{}'.format(redis_db),
+            'PASSWORD': '{}'.format(redis_pwd),
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "CONNECTION_POOL_KWARGS": {"max_connections": 100}
+        }
+    }
+}
+
+#celery
+CELERY_ACCEPT_CONTENT = ['application/json']
+#将返回结果取到数据中
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_BROKER_URL = 'redis://:{}@{}:{}/{}'.format(redis_pwd,redis_ip,redis_port,redis_db)
+CELERY_BEAT_SCHEDULER  = 'django_celery_beat.schedulers:DatabaseScheduler'
+CELERYD_CONCURRENCY = 1
+CELERY_TIMEZONE = 'Asia/Shanghai'
+CELERYD_MAX_TASKS_PER_CHILD = 1
+CELERYD_FORCE_EXECV = True
+CELERY_IGNORE_RESULT = True
+CELERY_CREATE_MISSING_QUEUES = True
+CELERY_DISABLE_RATE_LIMITS = True
+CELERYD_TASK_SOFT_TIME_LIMIT = 1200
+CELERY_TASK_RESULT_EXPIRES = 1200
+CELERY_IMPORTS = ('opensa.celery')
+
+
+#文件或者配置目录
+DATA_DIR="/data/opensa"
+

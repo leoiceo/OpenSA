@@ -3,14 +3,10 @@
 # by leoiceo
 from __future__ import unicode_literals
 import json,uuid,datetime
-from django.http import HttpResponseRedirect, HttpResponse
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, ListView, View, CreateView, UpdateView, DeleteView, DetailView
 from django.utils.translation import ugettext as _
 from django.conf import settings
-from users.models import KeyManage
-from django.utils.translation import ugettext_lazy as _
-from django.db.models import Q
+
 from pure_pagination import PageNotAnInteger, Paginator
 from users.models import UserProfile
 from audit.models import RequestRecord,PasswordChangeLog

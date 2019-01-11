@@ -7,7 +7,6 @@ from opensa.settings import DATA_DIR
 
 def list_upload_info(upload_id):
     file_info = {}
-    # 文件源目录setting指定，遍历源目录
     upload_dir = "{}/upload/{}".format(DATA_DIR, upload_id)
 
     file_list = os.listdir(upload_dir)

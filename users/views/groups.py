@@ -6,7 +6,6 @@ from __future__ import unicode_literals
 
 import json
 from django.http import HttpResponseRedirect, HttpResponse
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, ListView, View, CreateView, UpdateView, DeleteView, DetailView
 from django.utils.translation import ugettext as _
 from django.conf import settings
@@ -19,9 +18,7 @@ from ..forms import GroupsForm
 from opensa.api import LoginPermissionRequired
 
 class GroupsListAll(LoginPermissionRequired,ListView):
-    '''
-    部门列表
-    '''
+
     model = DepartMent
     template_name = 'users/groups-list.html'
     queryset = DepartMent.objects.all()
@@ -58,9 +55,7 @@ class GroupsListAll(LoginPermissionRequired,ListView):
 
 
 class GroupsAdd(LoginPermissionRequired,CreateView):
-    '''
-    添加部门
-    '''
+
     model = DepartMent
     form_class = GroupsForm
     template_name = 'users/groups-add-update.html'
@@ -93,9 +88,7 @@ class GroupsAdd(LoginPermissionRequired,CreateView):
 
 
 class GroupsUpdate(LoginPermissionRequired,UpdateView):
-    '''
-    更新部门
-    '''
+
     model = DepartMent
     form_class = GroupsForm
     template_name = 'users/groups-add-update.html'
@@ -126,9 +119,7 @@ class GroupsUpdate(LoginPermissionRequired,UpdateView):
 
 
 class GroupsAllDel(LoginPermissionRequired,DeleteView):
-    """
-        删除部门
-    """
+
     model = DepartMent
 
     def post(self, request, *args, **kwargs):

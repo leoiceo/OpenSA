@@ -6,7 +6,6 @@ from __future__ import unicode_literals
 
 import json
 from django.http import HttpResponseRedirect, HttpResponse
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, ListView, View, CreateView, UpdateView, DeleteView, DetailView
 from django.utils.translation import ugettext as _
 from django.conf import settings
@@ -19,9 +18,7 @@ from ..forms import PermissionListForm
 from opensa.api import LoginPermissionRequired
 
 class PermissionListAll(LoginPermissionRequired,ListView):
-    '''
-    部门列表
-    '''
+
     model = PermissionList
     template_name = 'users/permission-list.html'
     queryset = PermissionList.objects.all()
@@ -58,9 +55,7 @@ class PermissionListAll(LoginPermissionRequired,ListView):
 
 
 class PermissionAdd(LoginPermissionRequired,CreateView):
-    '''
-    添加部门
-    '''
+
     model = PermissionList
     form_class = PermissionListForm
     template_name = 'users/permission-add-update.html'
@@ -92,9 +87,7 @@ class PermissionAdd(LoginPermissionRequired,CreateView):
 
 
 class PermissionUpdate(LoginPermissionRequired,UpdateView):
-    '''
-    更新部门
-    '''
+
     model = PermissionList
     form_class = PermissionListForm
     template_name = 'users/permission-add-update.html'
@@ -137,9 +130,7 @@ class PermissionUpdate(LoginPermissionRequired,UpdateView):
 
 
 class PermissionAllDel(LoginPermissionRequired,DeleteView):
-    """
-        删除部门
-    """
+
     model = PermissionList
 
     def post(self, request, *args, **kwargs):

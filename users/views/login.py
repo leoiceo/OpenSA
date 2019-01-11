@@ -4,25 +4,15 @@
 
 from __future__ import unicode_literals
 import datetime
-from django.core.cache import cache
+
 from django.shortcuts import render
 from django.contrib.auth import login as auth_login, logout as auth_logout
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView,View
-from django.core.files.storage import default_storage
 from django.http import HttpResponseRedirect, HttpResponse
-from django.shortcuts import reverse, redirect
-from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext as _
-from django.views.decorators.cache import never_cache
-from django.views.decorators.csrf import csrf_protect
-from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
-from django.conf import settings
 from users.models import UserProfile
 from audit.models import RequestRecord
-from users import forms
 from django.contrib.auth import authenticate,login,logout
 
 

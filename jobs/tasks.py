@@ -2,9 +2,6 @@
 # -*- coding: utf-8 -*-
 # by leoiceo
 from __future__ import absolute_import
-from django.utils.timezone import now
-from celery.schedules import crontab
-from datetime import timedelta
 import os,json,time
 from opensa import settings
 from celery import shared_task,current_task
@@ -17,13 +14,7 @@ from django.utils.translation import ugettext as _
 
 @shared_task
 def batch_scripts_func(*args,**kwargs):
-    """
-    批量执行脚本
-    :param host_list:
-    :param script_name:
-    :param script_type:
-    :return:
-    """
+
     current_task.update_state(state='PROGRESS')
     jr_obj = JobsResults.objects.get(id=args[0])
     ts_obj = TaskSchedule.objects.get(task_id=batch_scripts_func.request.id)
@@ -74,7 +65,7 @@ def batch_scripts_func(*args,**kwargs):
 
 @shared_task
 def batch_files_func(*args,**kwargs):
-    """批量分发文件或者目录"""
+
     current_task.update_state(state='PROGRESS')
     jr_obj = JobsResults.objects.get(id=args[0])
     ts_obj = TaskSchedule.objects.get(task_id=batch_files_func.request.id)
@@ -138,7 +129,6 @@ def ExecutionCmd(*args,**kwargs):
 
 @shared_task
 def batch_task_func(*args,**kwargs):
-    #number = 0
     task_dict, message_dict = {}, {}
     message_list = []
     current_task.update_state(state='PROGRESS')
@@ -174,27 +164,27 @@ def batch_task_func(*args,**kwargs):
 
             batch_script.upload(localfile)
             cmd = "{} {}".format(script_env,remotefile)
-            # 延时执行
+
             time.sleep(i.delaytime)
             ret = batch_script.task_cmd(cmd)
 
             message = "script name:{} level:{} server:{}\\nresult:\\n{}\\n".format(script_obj.name,i.level,asset_obj.ip,ret["message"].decode())
             message_list.append(message)
-            # 执行成功 result True
+
             if ret["result"] and ret["status"]:
 
                 task_dict['{}_{}'.format(script_obj.name,i.level)] = _("execution successed")
-            # 执行失败 result False
+
             else:
                 if ret["result"]:
                     log = _("execution success,exception exit")
                 else:
                     log = _("execution success,error exit")
 
-                # 失败继续执行
+
                 if i.status == 1:
                     task_dict['{}_{}'.format(script_obj.name, i.level)] = log
-                # 失败退出
+
                 else:
                     task_dict['{}_{}'.format(script_obj.name, i.level)] = log
                     break

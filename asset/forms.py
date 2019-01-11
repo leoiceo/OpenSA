@@ -2,9 +2,7 @@
 # ~*~ coding: utf-8 ~*~
 
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm
 from django.utils.translation import gettext_lazy as _
-from users.models import Project, UserProfile
 from .models import Asset, ServerUse, Idc, Product, Work_Env, Area
 
 
@@ -21,17 +19,9 @@ class AssetForm(forms.ModelForm):
         required=False,
     )
 
-    # def __init__(self,user=None,*args, **kwargs):
-    #     super(AssetForm, self).__init__(*args, **kwargs)
-    #     users = UserProfile.objects.get(username=user)
-    #     if users.is_superuser:
-    #         self.fields['project'].queryset = Project.objects.all()
-    #     else:
-    #         self.fields['project'].queryset = Project.objects.filter(Project_user=users.id)
 
     class Meta:
         model = Asset
-        # fields='__all__'
         exclude = ("id",)
         fields = ["hostname", "ip", "other_ip", "port", "user", "password", "asset_type", "status",
                   "project", "idc", "product",  "work_env", "use", "os_type",  "system_version", "mac",
@@ -83,13 +73,6 @@ class AssetFormAdd(forms.ModelForm):
             pass
         return cleaned_data
 
-    # def __init__(self,user=None,*args, **kwargs):
-    #     super(AssetFormAdd, self).__init__(*args, **kwargs)
-    #     userss = UserProfile.objects.get(username=user)
-    #     if userss.is_superuser:
-    #         self.fields['project'].queryset = Project.objects.all()
-    #     else:
-    #         self.fields['project'].queryset = Project.objects.filter(Project_user=userss.id)
 
     class Meta:
         model = Asset
@@ -145,8 +128,6 @@ class IdcForm(forms.ModelForm):
         }
 
 class IdcFormUpdate(forms.ModelForm):
-
-
 
     class Meta:
         model = Idc
