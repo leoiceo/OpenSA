@@ -2,7 +2,7 @@
 # 企业级运维自动化平台 
 
 #### 架构说明
-* Django 2.1 + Mysql 5.7 + redis 3.2 + celery v4.2.0 
+* Django 2.1 + Mysql 5.7 + redis 5.0 + celery v4.2.0 
 * 命令和文件分发基于SSH协议，支持Linux/Windows(cygwin)|支持快速修改为ansible
 * 使用2.7版本inspina模版
 * 支持国际化(默认中/英)，有些细节未完善，欢迎加入完善项目，联系WX “leoiceo” 或者加群
@@ -18,12 +18,17 @@ localedef -c -f UTF-8 -i zh_CN zh_CN.UTF-8
 export LC_ALL=zh_CN.UTF-8
 echo 'LANG="zh_CN.UTF-8"' > /etc/locale.conf
 ```
-* 安装 Python3 
+* 安装 Python3  && redis 
 ```
 wget http://www.python.org/ftp/python/3.7.1/Python-3.7.1.tar.xz
 tar -zxvf Python-3.7.1.tar.xz && cd Python-3.7.1 
 ./configure --prefix=/usr/local/python37
 make && make install
+
+yum install redis -y
+service redis start
+
+##settings 设置了密码，可自行修改Redis.conf
 ```
 * 拉取代码安装模块
 ```
