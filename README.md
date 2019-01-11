@@ -1,5 +1,4 @@
-# OpenSA
-# 企业级运维自动化平台 
+# OpenSA 运维自动化平台 
 
 #### 架构说明
 * Django 2.1 + Mysql 5.7 + redis 5.0 + celery v4.2.0 
