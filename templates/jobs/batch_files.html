@@ -1,0 +1,228 @@
+{% extends "base.html" %}
+{% load	bootstrap3 %}
+{% load i18n %}
+{% load static %}
+
+{% block  title %}{% trans 'Batch Scripts' %}{% endblock %}
+{% block header-css %}
+    <link href="{% static 'css/plugins/dropzone/dropzone.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block page-content %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>{% trans 'File Distribution' %}</h2>
+            <ol class="breadcrumb">
+                <li>
+                     <a href="/">{% trans 'Home' %}</a>
+                </li>
+                <li>
+                    <a>{% trans 'Jobs Manage' %}</a>
+                </li>
+                <li class="active">
+                    <strong>{% trans 'File Distribution' %}</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+    <div class="wrapper wrapper-content">
+        <div class="row">
+
+            <div class="col-lg-12" id="split-right">
+
+                <div class="ibox float-e-margins">
+
+                    <div class="ibox-title">
+                        <h5>{% trans 'File Distribution' %}</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="#" >{% trans 'Config Option 1' %}</a>
+                                </li>
+                                <li><a href="#" >{% trans 'Config Option 2' %}</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content" >
+                        <h3>{% trans "Upload Flie" %}</h3>
+                        <div class="alert alert-warning text-center" id="error" style="display: none"></div>
+                        <div class="alert alert-success text-center" id="msg" style="display: none">{% trans 'Upload is successful, please select the distribution server!' %}</div>
+                        <form id="myAwesomeDropzone" method="post" class="dropzone dz-clickable" enctype="multipart/form-data" action="" style="border: 1px dashed #19b294;overflow:hidden;zoom:1;">
+                            {% csrf_token %}
+                            <div class="dz-default dz-message center-block">
+                                <div class="dz-icon icon-wrap icon-circle icon-wrap-md">
+                                    <i class="fa fa-cloud-upload fa-3x" style="color: #19b294;"></i>
+                                </div>
+                                <div>
+                                    <p class="dz-text">{% trans 'Drag and drop files or packaged code here.' %}</p>
+                                    <p class="text-muted">{% trans 'Maximum upload 10M, the compressed package must be ZIP!' %}</p>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary pull-right" id="subutton">{% trans 'Upload all' %}</button>
+                            <a type="button" class="btn btn-warning pull-right" id="chbutton" style="display: none;" href="{% url 'jobs:batch_files_list' 'sa' %}">{% trans 'Choice Server' %}</a>
+                        </form>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+{% block footer-js %}
+
+    <script src="{% static 'js/plugins/dropzone/dropzone.js' %}"></script>
+    <script type="text/javascript">
+
+
+    Dropzone.options.myAwesomeDropzone = {
+        autoProcessQueue: false,
+        uploadMultiple: true,
+        parallelUploads: 100,
+        maxFilesize: 100,
+        maxFiles: 10,
+        acceptedFiles: ".jpg,.jpeg,.sql,.txt,.bat,.sh,.py,.zip,.csv,.xlsx",
+        url: "{% url 'jobs:batch_files' %}",
+        // Dropzone settings
+        init: function() {
+            var myDropzone = this;
+            this.element.querySelector("button[type=submit]").addEventListener("click", function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                myDropzone.processQueue();
+            });
+            this.on("sendingmultiple", function() {
+
+            });
+            this.on("successmultiple", function(files, response) {
+                 var reg = new RegExp("[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}");
+                 console.log(response.match(':'));
+                 if (response.match(':') == null) {
+                     window.location.href = "/jobs/batch-files-list/"+response+"/";
+                 }else{
+                    $('#error').show();
+                    $('#error').html(response)
+                    $("#subutton").hide();
+                 }
+            });
+            this.on("errormultiple", function(files, response) {
+                $('#error').show();
+                $('#error').html(response)
+                $("#subutton").hide();
+            });
+        }
+    }
+
+
+{#    Dropzone.options.BathFileForm = {#}
+    {#$(document).ready(function () {#}
+    {##}
+    {#$("#BathFileForm").dropzone({#}
+{#        url: "{% url 'jobs:batch_files' %}",#}
+{#        maxFiles: 5,#}
+{#        maxFilesize: 100, //MB#}
+{#        acceptedFiles: ".jpg,.jpeg,.sql,.txt,.bat,.sh,.py,.zip",#}
+{#        autoProcessQueue: false,#}
+{#        autoDiscover:false,#}
+{#        paramName: "file",#}
+{#        //dictDefaultMessage: "拖入需要上传的文件",#}
+{#        init: function () {#}
+{#            var myDropzone = this, submitButton = document.querySelector("#qr"),#}
+{#                    cancelButton = document.querySelector("#cancel");#}
+{#            myDropzone.on('success', function (files, response) {#}
+{#                //文件上传成功之后的操作#}
+{#                console.log("上传成功");#}
+{#            });#}
+{#            myDropzone.on('error', function (files, response) {#}
+{#                //文件上传失败后的操作#}
+{#                console.log("上传失败");#}
+{#            });#}
+{#            myDropzone.on('totaluploadprogress', function (progress, byte, bytes) {#}
+{#                //progress为进度百分比#}
+{#                $("#pro").text("上传进度：" + parseInt(progress) + "%");#}
+{#                //计算上传速度和剩余时间#}
+{#                var mm = 0;#}
+{#                var byte = 0;#}
+{#                var tt = setInterval(function () {#}
+{#                    mm++;#}
+{#                    var byte2 = bytes;#}
+{#                    var remain;#}
+{#                    var speed;#}
+{#                    var byteKb = byte / 1024;#}
+{#                    var bytesKb = bytes / 1024;#}
+{#                    var byteMb = byte / 1024 / 1024;#}
+{#                    var bytesMb = bytes / 1024 / 1024;#}
+{#                    if (byteKb <= 1024) {#}
+{#                        speed = (parseFloat(byte2 - byte) / (1024) / mm).toFixed(2) + " KB/s";#}
+{#                        remain = (byteKb - bytesKb) / parseFloat(speed);#}
+{#                    } else {#}
+{#                        speed = (parseFloat(byte2 - byte) / (1024 * 1024) / mm).toFixed(2) + " MB/s";#}
+{#                        remain = (byteMb - bytesMb) / parseFloat(speed);#}
+{#                    }#}
+{#                    $("#dropz #speed").text("上传速率：" + speed);#}
+{#                    $("#dropz #time").text("剩余时间" + arrive_timer_format(parseInt(remain)));#}
+{#                    if (bytes >= byte) {#}
+{#                        clearInterval(tt);#}
+{#                        if (byteKb <= 1024) {#}
+{#                            $("#dropz #speed").text("上传速率：0 KB/s");#}
+{#                        } else {#}
+{#                            $("#dropz #speed").text("上传速率：0 MB/s");#}
+{#                        }#}
+{#                        $("#dropz #time").text("剩余时间：0:00:00");#}
+{#                    }#}
+{#                }, 1000);#}
+{#            });#}
+{#            submitButton.addEventListener('click', function () {#}
+{#                //点击上传文件#}
+{#                myDropzone.processQueue();#}
+{#            });#}
+{#            cancelButton.addEventListener('click', function () {#}
+{#                //取消上传#}
+{#                myDropzone.removeAllFiles();#}
+{#            });#}
+{#        }#}
+{#    };#}
+{#//剩余时间格式转换：#}
+{#    function arrive_timer_format(s) {#}
+{#        var t;#}
+{#        if (s > -1) {#}
+{#            var hour = Math.floor(s / 3600);#}
+{#            var min = Math.floor(s / 60) % 60;#}
+{#            var sec = s % 60;#}
+{#            var day = parseInt(hour / 24);#}
+{#            if (day > 0) {#}
+{#                hour = hour - 24 * day;#}
+{#                t = day + "day " + hour + ":";#}
+{#            }#}
+{#            else t = hour + ":";#}
+{#            if (min < 10) {#}
+{#                t += "0";#}
+{#            }#}
+{#            t += min + ":";#}
+{#            if (sec < 10) {#}
+{#                t += "0";#}
+{#            }#}
+{#            t += sec;#}
+{#        }#}
+{#        return t;#}
+{#    }#}
+
+    </script>
+
+    {% endblock %}
+    {% block footer-js-ajax %}
+    {% endblock %}

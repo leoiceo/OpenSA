@@ -1,0 +1,219 @@
+{% extends "base.html" %}
+{% load	bootstrap3 %}
+{% load i18n %}
+{% load static %}
+
+{% block  title %}{% trans 'Key Manage' %}{% endblock %}
+
+{% block page-content %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>{% trans 'Key Manage' %}</h2>
+            <ol class="breadcrumb">
+                <li>
+                     <a href="/">{% trans 'Home' %}</a>
+                </li>
+                <li>
+                    <a>{% trans 'System Setup' %}</a>
+                </li>
+                <li class="active">
+                    <strong>{% trans 'Key Manage' %}</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight   ">
+        <div class="row">
+
+            <div class="col-lg-12" id="split-right">
+
+                <div class="ibox float-e-margins">
+
+                    <div class="ibox-title">
+                        <h5>{% trans 'Key Manage' %}</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="#" >{% trans 'Config Option 1' %}</a>
+                                </li>
+                                <li><a href="#" >{% trans 'Config Option 2' %}</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="table-responsive">
+
+                            <form id="cha" class="form-horizontal" action="" method="GET">
+                                {% csrf_token %}
+                                <div class="pull-left"><input type="text" class="form-control" name="name" placeholder="{% trans 'Key Name' %}" required></div>
+                                &nbsp;
+                                <button class="btn btn-sm btn-primary" type="submit">{% trans 'Query' %}</button>
+
+                                <a href="{% url 'users:key_add' %}" class="btn btn-sm btn-primary ">{% trans 'Append' %}</a>
+
+                                <a class="btn btn-sm btn-danger  asset_all_del">{% trans 'Batch Remove' %}</a>
+
+                            </form>
+
+                            <form id="del_form_asset_all" class="form-horizontal" action="" method="post">
+                                {% csrf_token %}
+                                <table class="table table-striped table-bordered table-hover dataTables-asset">
+                                    <thead>
+                                    <tr>
+                                       <th width="20">
+                                            <input type="checkbox" id="CheckedAll">
+                                        </th>
+                                        <th>{% trans 'Key Name' %}</th>
+                                        <th>{% trans 'Key User' %}</th>
+                                        <th>{% trans 'Project Name' %}</th>
+                                        <th>{% trans 'Key Password' %}</th>
+                                        <th>{% trans 'Create By' %}</th>
+                                        <th>{% trans 'Action' %}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    {% for row in key_list.object_list %}
+                                        <tr class="gradeA" id="{{ row.id }}">
+                                        <td><input type="checkbox" value="{{ row.id }}" name="id"></td>
+                                        <td>{{ row.name }}</td>
+                                        <td>{{ row.user }}</td>
+                                        <td>{% for i in row.project_name %}{{ i.name }}{% endfor %}</td>
+                                        <td>{{ row.password }}</td>
+                                        <td>{{ row.create_date|date:"Y-m-d h:m:s" }}</td>
+                                        <td class="center">
+                                            <a class="btn btn-primary  btn-xs " href="{% url 'users:key_update' pk=row.id %}">{% trans 'Update' %}</a>
+                                            <a class="btn btn-danger  btn-xs asset_del">{% trans 'Delete' %}</a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+
+                                </table>
+                                <div class="pull-right">
+                                     <nav class="pagination">
+                                        {% if key_list.has_previous %}
+                                            <li class="long"><a href="?{{ key_list.previous_page_number.querystring }}">{% trans 'Home' %}</a></li>
+                                        {% else %}
+                                            <li><a href="{% url "users:key_list" %}?page=1">{% trans 'Home' %}</a></li>
+                                        {% endif %}
+
+                                        {% for page in key_list.pages %}
+                                        {% if page %}
+                                            {% ifequal page key_list.number %}
+                                                <li class="active"><a href="?{{ page.querystring }}">{{ page }}</a></li>
+                                            {% else %}
+                                                 <li><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+                                            {% endifequal %}
+                                        {% else %}
+                                            <li class="none"><a href="">...</a></li>
+                                        {% endif %}
+                                        {% endfor %}
+                                        {% if key_list.has_next %}
+                                            <li class="long"><a href="?{{ key_list.next_page_number.querystring }}">{% trans 'Next' %}</a></li>
+                                        {% endif %}
+                                        <li>
+                                            <a href="{% url "users:key_list" %}?page={{ key_list.paginator.num_pages }}">{% trans 'Trailer' %}</a>
+                                        </li>
+                                        <li><span style="color: #0a0a0a">{% trans 'Total' %}: &nbsp;{{ key_list.paginator.num_pages }} {% trans 'Page' %}</span>
+                                        </li>
+                                    </nav>
+                                </div> <!--页码 -->
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+{% block footer-js %}
+
+
+    <script>
+        $(document).on('click', '.asset_del', function () {
+            var id = $(this).parent().parent().attr('id');
+            swal({
+                title: '{% trans 'You Are Sure To Delete' %}',
+                text: '{% trans 'You Will Never Recover' %}',
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: '{% trans 'confirm' %}',
+                cancelButtonText:'{% trans 'cancel' %}',
+                closeOnConfirm: false
+            }, function () {
+                $.ajax({
+                    headers: {"X-CSRFToken": '{{ csrf_token }}'},
+                    url: "{% url 'users:key_all_del' %}",
+                    type: 'POST',
+                    data: {'nid': id},
+                    success: function (data) {
+                        var obj = JSON.parse(data);
+                        if (obj.status) {
+                            swal({title: '{% trans 'Delete' %}', text: '{% trans 'Deleted Successfully' %}', type: "success"}, function () {
+                                window.location.reload();
+                            })
+                        } else {
+                            swal('{% trans 'Delete Error' %}', '{% trans 'Delete Error' %}' + "[ " + obj.error + " ]" + '{% trans 'Error' %}', "error");
+                        }
+                    }
+                });
+
+
+            });
+
+        });
+
+        $(document).on('click', '.asset_all_del', function () {
+            swal({
+                title: '{% trans 'You Are Sure To Delete' %}',
+                text: '{% trans 'You Will Never Recover' %}',
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: '{% trans 'confirm' %}',
+                cancelButtonText:'{% trans 'cancel' %}',
+                closeOnConfirm: false
+            }, function () {
+                $.ajax({
+                     headers: {"X-CSRFToken": '{{ csrf_token }}'},
+                    url: "{% url 'users:key_all_del' %}",
+                    type: 'POST',
+                    data: $('#del_form_asset_all').serialize(),
+                    success: function (data) {
+                        var obj = JSON.parse(data);
+                        if (obj.status) {
+                            swal({title: '{% trans 'Delete' %}', text: '{% trans 'Deleted Successfully' %}', type: "success"}, function () {
+                                window.location.reload();
+                            })
+                        } else {
+                            swal('{% trans 'Delete Error' %}', '{% trans 'Delete Error' %}' + "[ " + obj.error + " ]" + '{% trans 'Error' %}', "error");
+                        }
+                    }
+                });
+
+
+            });
+        });
+    </script>
+
+    {% endblock %}
+{% block footer-js-ajax %}
+{% endblock %}

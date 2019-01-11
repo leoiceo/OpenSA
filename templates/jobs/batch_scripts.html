@@ -1,0 +1,291 @@
+{% extends "base.html" %}
+{% load	bootstrap3 %}
+{% load i18n %}
+{% load static %}
+
+{% block  title %}{% trans 'Batch Scripts' %}{% endblock %}
+{% block header-css %}
+    <link href="{% static 'css/plugins/dataTables/datatables.min.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block page-content %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>{% trans 'Batch Scripts' %}</h2>
+            <ol class="breadcrumb">
+                <li>
+                     <a href="/">{% trans 'Home' %}</a>
+                </li>
+                <li>
+                    <a>{% trans 'Jobs Manage' %}</a>
+                </li>
+                <li class="active">
+                    <strong>{% trans 'Batch Tasks' %}</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+    <div class="wrapper wrapper-content">
+        <div class="row">
+
+            <div class="col-lg-12" id="split-right">
+
+                <div class="ibox float-e-margins">
+
+                    <div class="ibox-title">
+                        <h5>{% trans 'Batch Scripts' %}</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="#" >{% trans 'Config Option 1' %}</a>
+                                </li>
+                                <li><a href="#" >{% trans 'Config Option 2' %}</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                    {% if msg %}
+                        <div class="alert alert-success text-center">{{ msg }}</div>
+                    {% endif %}
+                    {% if error %}
+                        <div class="alert alert-danger text-center">{{ error }}</div>
+                    {% endif %}
+                     <div class="alert alert-danger text-center" id="empty_error" hidden>{% trans 'This From is not None' %}</div>
+                    <form id="ScriptForm" method="post" class="form-horizontal"  enctype="multipart/form-data" action="{% url 'jobs:batch_scripts_process' %}">
+                        {% csrf_token %}
+                        <div class="hr-line-dashed"></div>
+                            <div class="form-group"><label class="col-md-3 control-label">{% trans 'Target Host' %}<span class="red-fonts">*</span></label>
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#choice-asset" data-whatever="@mdo" ><i class="fa fa-desktop" aria-hidden="true"></i> {% trans 'Choice Server' %}</button>
+                                    <p id="open_list"></p>
+                                    <input name="asset_info" style="display: none; " id="asset-info">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">{% trans 'Choice Key' %}<span class="red-fonts">*</span> </label>
+                            <div class="col-md-3">
+                                <select class="form-control" name="key_id" id="key_id">
+                                    <option value="" >------</option>
+                                        {% for row in key_list %}
+                                            <option value={{row.id}} >[{{ row.name }}]--{{row.user}}</option>
+                                        {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">{% trans 'Timeout(s)' %}<span class="red-fonts">*</span> </label>
+                            <div class="col-md-3">
+                                <input name="timeout" value="1000" class="form-control" title="" required>
+                           </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">{% trans 'Choice Scripts' %}<span class="red-fonts">*</span> </label>
+                            <div class="col-md-3">
+                                <select id="check_args" class="form-control" name="script_id">
+                                    <option value="" >------</option>
+                                    {% for row in script_list %}
+                                        <option value={{row.id}} >[{{ row.project }}]--{{row.name}}</option>
+                                    {% endfor %}
+                                </select>
+                           </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group input-args"></div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group" align="center">
+                            <button type="button" id="check_forms" class="btn btn-primary dim">{% trans 'Batch Scripts' %}</button>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" role="dialog" aria-labelledby="gridSystemModalLabel" id="choice-asset">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="gridSystemModalLabel" align="center">{% trans 'Choice Assets' %}</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid" align="center">
+                        <form id="contents_form">
+                            <table class="table table-striped table-bordered table-hover dataTables-asset">
+                                <thead>
+                                <th class="text-center" data-sort-ignore="false"><input type="checkbox" id="CheckedAll"></th>
+                                <th class="text-center">{% trans 'Product Name' %}</th>
+                                <th class="text-center">{% trans 'Area Name' %}</th>
+                                <th class="text-center">{% trans 'Work Env' %}</th>
+                                <th class="text-center">{% trans 'Hostname' %}</th>
+                                <th class="text-center">{% trans 'Ip Address' %}</th>
+                                <th class="text-center">{% trans 'Other Ipaddress' %}</th>
+                                <th class="text-center">{% trans 'Use List' %}</th>
+                                <th class="text-center">{% trans 'Os Type' %}</th>
+                                </thead>
+                                <tbody>
+                                {% for num in asset_list %}
+                                <tr class="gradeA text-center" id="{{ num.id }}">
+                                    <td><input type="checkbox" value="{{ num.idc.area }} {{ num.product }} {{ num.work_env.name }} {{ num.ip }} {{ num.hostname }} {{ num.id }}" name="id"></td>
+                                    <td>{{num.product}}</td>
+                                    <td>{{num.idc.area}}</td>
+                                    <td>{{num.work_env.name}}</td>
+                                    <td>{{num.hostname}}</td>
+                                    <td>{{num.ip}}</td>
+                                    <td>{{num.other_ip}}</td>
+                                    <td>
+                                        {% for u in num.use.all %}
+                                            {{u.name}}
+                                        {% endfor %}
+                                    </td>
+                                    <td>{{num.get_os_type_display}}</td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success" onclick="choice_server()">{% trans 'confirm' %}</button>
+                    <button type="button" class="btn btn-info" data-dismiss="modal">{% trans 'cancel' %}</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+{% endblock %}
+
+{% block footer-js %}
+    <script src="{% static 'js/plugins/dataTables/datatables.min.js' %}"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $('.dataTables-asset').dataTable().fnDestroy();
+        $('.dataTables-asset').DataTable({
+            pageLength: 25,
+            bInfo: false,
+            responsive: true,
+            dom: '<"html5buttons"B>lTfgitp',
+            columnDefs : [ { targets : 0, "orderable" : false } ], "order" : [ [ 1, 'asc' ] ] ,
+            buttons: [
+                //{extend: 'csv'},
+                //{extend: 'excel', title: 'ExampleFile'},
+            ]
+
+        });
+
+    });
+
+    $('#check_args').change(function () {
+        var sid = $(this).val();
+
+        if(sid.length >=0){
+          $.ajax({
+              headers: {"X-CSRFToken": '{{ csrf_token }}'},
+              type: "POST",
+              url : "{% url 'jobs:batch_scripts' %}",
+              data:{sid:sid},
+              dataType:"json",
+              success:function (res) {
+                  if(res.status == '1'){
+                      addInputHtml(res.args_dict);
+                  }else{
+                      console.log(res.msg);
+                  }
+              }
+          });
+      }
+    });
+
+    function addInputHtml(args_dict) {
+        $('.input-args:first').empty().siblings('.input-args').remove();
+        num = false;
+        for(var arg in args_dict){
+            var html='<label class="col-md-3 control-label"> '+ args_dict[arg] +' <span class="green-fonts"> </span>: </label> \
+                <div class="col-md-3"><input type="text" name="input[]" class="form-control args">\
+                </div>';
+            if(num == false){
+                $('.input-args').append(html);
+                num=true;
+            }else{
+                $('.input-args:last').after('<div class="form-group input-args">' + html + '</div>');
+            }
+
+        }
+    }
+
+    function choice_server (){
+        document.getElementById("open_list").innerHTML=""
+        var opendata=new Array();
+        var show=document.getElementsByName('id');
+        var isChecked = false;
+        for(var i=0;i<show.length;i++){
+            isChecked = show[i].checked?true:false;
+            if(isChecked){
+                opendata.push(show[i].value);
+            }
+        }
+        m = "<table class='table table-striped table-bordered table-hover'><tr><td>{% trans 'Area Name' %}</td><td>{% trans 'Product Name' %}</td><td>{% trans 'Work Env' %}</td><td>{% trans 'Ip Address' %}</td><td>{% trans 'Hostname' %}</td></tr>"
+        x = ""
+        asset_info = ""
+        for (var i = 0; i < opendata.length; i++) {
+            info = opendata[i].split(" ")
+            area = "<td>"+info[0]+"</td>"
+            product = "<td>"+info[1]+"</td>"
+            env = "<td>"+info[2]+"</td>"
+            ip = "<td>"+info[3]+"</td>"
+            hostname = "<td>"+info[4]+"</td>"
+            x = x+"<tr>"+area+product+env+ip+hostname+"</tr>"
+            asset_info = asset_info + info[5]+","
+        };
+        $("#open_list").append(m+x+"</table>");
+        $("#asset-info").attr("value",asset_info);
+        $('#choice-asset').modal('hide')
+    }
+
+    $('#check_forms').click(function(){
+       // var asset_info = $('#asset-info').val()
+       // console.log(asset_info);
+        var script_id = $("select[name='script_id']").val();
+        var key_id = $("select[name='key_id']").val();
+        if ( script_id == "" && key_id == "" ){
+            $('#empty_error').show();
+            return false;
+        }else{
+            swal({
+                title: '{% trans 'You Are Sure To Batch Scripts' %}',
+                text: '{% trans 'You Will Never Recover' %}',
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: '{% trans 'confirm' %}',
+                cancelButtonText:'{% trans 'cancel' %}',
+                closeOnConfirm: false
+            }, function () {
+                $('#ScriptForm').submit();
+            });
+
+        }
+    });
+
+    </script>
+
+    {% endblock %}
+    {% block footer-js-ajax %}
+    {% endblock %}

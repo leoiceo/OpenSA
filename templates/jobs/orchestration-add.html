@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% load	bootstrap3 %}
+{% load i18n %}
+{% load static %}
+
+{% block  title %}{% trans 'Scripts Manage' %}{% endblock %}
+{% block header-css %}
+
+{% endblock %}
+{% block page-content %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>{% trans 'Scripts Manage' %}</h2>
+            <ol class="breadcrumb">
+                <li>
+                     <a href="/">{% trans 'Home' %}</a>
+                </li>
+                <li>
+                    <a href="{% url "jobs:scripts_list" %}">{% trans 'Jobs Manage' %}</a>
+                </li>
+                <li class="active">
+                    <strong>{% trans 'Task Scripts' %}</strong>
+                </li>>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+    <div class="wrapper wrapper-content">
+        <div class="row">
+
+            <div class="col-lg-12" id="split-right">
+
+                <div class="ibox float-e-margins">
+
+                    <div class="ibox-title">
+                        <h5>{% trans 'Scripts Manage' %}</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="#" >{% trans 'Config Option 1' %}</a>
+                                </li>
+                                <li><a href="#" >{% trans 'Config Option 2' %}</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        {% if error %}
+                            <div class="alert alert-danger text-center">{{ error }}</div>
+                        {% endif %}
+
+                        <form id="assetForm" method="post"  class="form-horizontal">
+                            {% csrf_token %}
+                            <div class="form-group"><label class="col-sm-2 control-label"> {% trans 'Task Name' %} <span class="red-fonts">*</span></label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="name" class="form-control">
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group tasks_add" >
+                                <label class="col-sm-2 control-label red-fonts" name='0'>{% trans 'Task' %}0</label>
+                                <div class="col-md-9">
+                                    <div class="add-items-outer">
+                                        <button style="margin-left: 0px;" type="button" id="add-items" class="form-group btn btn-hover btn-info" onclick="add_tr(this)"><i class="glyphicon glyphicon-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <label class="col-sm-2 control-label" for="id_name"> {% trans 'Selection Script' %}<span class="red-fonts">*</span></label>
+                                <div class="col-md-9">
+                                    <select name="scritps" class="form-control" title="" required="" id="scritps" style="width: 410px;float: left;">
+                                        {% for host in scripts %}
+                                            <option value="{{ host.id }}">{{ host.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <label class="col-sm-2 control-label" for="id_name"> {% trans 'Delay Time' %}<span class="red-fonts">*</span></label>
+                                <div class="col-md-9">
+                                    <input type="text" name="time" class="form-control" value="0" style="width: 410px;float: left;">
+                                </div>
+                                <label class="col-sm-2 control-label" for="id_name"> {% trans 'Post-execution State' %}<span class="red-fonts">*</span></label>
+                                <div class="col-md-9">
+                                    <select name="status" class="form-control" title="" required="" id="status" style="width: 410px;float: left;">
+                                        <option value="0">{% trans 'Failed to Exit' %}</option>
+                                        <option value="1">{% trans 'Failure to Continue Execution' %}</option>
+                                    </select>
+                                </div>
+                                <label class="col-sm-2 control-label" for="id_name"> {% trans 'priority' %}<span class="red-fonts">*</span></label>
+                                <div class="col-md-9">
+                                    <input value="0" id="level" name="level"  readonly="readonly" type="text" class="form-control" style="width: 410px;float: left;">
+                                </div>
+                            </div>
+
+
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group"><label class="col-sm-2 control-label"> {% trans 'comment' %} </label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="comment" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-4 col-sm-offset-3">
+                                    {% ifequal user.level 2 %}
+                                        <button type="submit" class="btn btn-success"  form="assetForm" formmethod="post" formaction="{% url 'jobs:orchestration_add' %}">{% trans 'Commit' %}</button>
+                                    {% endifequal%}
+                                  <a type="submit" class="btn btn-primary" href="{% url 'jobs:scripts_list' %}" >{% trans 'Back' %}</a>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+{% block footer-js %}
+    <script>
+        function add_tr(obj) {
+            var tr = $(obj).parent().parent().parent();
+            var a = '<button style="margin-left: 0px;" type="button" id="add-items" class="form-group btn btn-hover btn-danger" onclick="del_tr(this)"><i class="glyphicon glyphicon-remove"></i>\n' +
+                '                                        </button>';
+            var b = $('.tasks_add:last').children('label.red-fonts').attr('name');
+            var parse = parseInt(b)+1;
+            $('.tasks_add:last').after(tr.clone());
+            $('.tasks_add:last').children('label.red-fonts').text("{% trans 'Task' %}"+parse);
+            $('.tasks_add:last').find('#level').val(parse);
+            $('.tasks_add:last').children('label.red-fonts').attr('name',parse);
+            $('.tasks_add:last').find('#add-items').remove();
+            $('.tasks_add:last').find('.add-items-outer').html(a);
+        }
+
+        function del_tr(obj) {
+            $(obj).parent().parent().parent().remove();
+            $.each($(".tasks_add"),function(k, v) {
+                $('.tasks_add:eq('+k+')').children('label.red-fonts').text("{% trans 'Task' %}"+k);
+                $('.tasks_add:eq('+k+')').find('#level').val(k);
+                $('.tasks_add:eq('+k+')').children('label.red-fonts').attr('name',k);
+            });
+
+        }
+
+    </script>
+{% endblock %}

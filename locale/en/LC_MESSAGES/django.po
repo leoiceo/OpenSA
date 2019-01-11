@@ -1,0 +1,2063 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-12-19 11:27+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: asset/forms.py:15 asset/forms.py:67 asset/models.py:61 asset/models.py:84
+#: asset/models.py:85 templates/admin.html:26 templates/nav_users.html:28
+msgid "Server Use"
+msgstr "用途列表"
+
+#: asset/forms.py:50 asset/forms.py:51 asset/forms.py:52 asset/forms.py:53
+#: asset/forms.py:54 asset/forms.py:111 asset/forms.py:112 asset/forms.py:113
+#: asset/forms.py:114 asset/forms.py:115 asset/forms.py:144 asset/forms.py:158
+#: asset/forms.py:181 asset/forms.py:192 asset/forms.py:213 asset/forms.py:224
+#: asset/forms.py:246 asset/forms.py:257 asset/forms.py:268 asset/forms.py:289
+#: jobs/forms.py:123 jobs/forms.py:193 users/forms.py:88 users/forms.py:89
+#: users/forms.py:122 users/forms.py:123 users/forms.py:237 users/forms.py:295
+msgid "* mandatory field"
+msgstr "* 必填字段"
+
+#: asset/forms.py:58 asset/forms.py:119
+msgid "Input parameters are too short"
+msgstr "输入参数太短"
+
+#: asset/forms.py:81 asset/forms.py:132 asset/forms.py:170 asset/forms.py:202
+#: asset/forms.py:235 asset/forms.py:278 users/forms.py:63 users/forms.py:277
+msgid "{} User information already exists"
+msgstr "{} 用户信息已经存在"
+
+#: asset/models.py:9 templates/asset/asset-detail.html:192
+msgid "Used"
+msgstr "使用中"
+
+#: asset/models.py:10 templates/asset/asset-detail.html:194
+msgid "Unused"
+msgstr "未使用"
+
+#: asset/models.py:11 templates/asset/asset-detail.html:196
+msgid "Scraped"
+msgstr "已报废"
+
+#: asset/models.py:12 templates/asset/asset-detail.html:198
+msgid "SoldOut"
+msgstr "已下架"
+
+#: asset/models.py:15 templates/asset/asset-detail.html:120
+msgid "Physical Machine"
+msgstr "物理机"
+
+#: asset/models.py:16 templates/asset/asset-detail.html:122
+msgid "Virtual Machine"
+msgstr "虚拟机"
+
+#: asset/models.py:17 templates/asset/asset-detail.html:124
+msgid "Switch Board"
+msgstr "交换机"
+
+#: asset/models.py:18 templates/asset/asset-detail.html:126
+msgid "Router"
+msgstr "路由"
+
+#: asset/models.py:19 templates/asset/asset-detail.html:128
+msgid "Firewall"
+msgstr "防火墙"
+
+#: asset/models.py:20 templates/asset/asset-detail.html:130
+msgid "Docker"
+msgstr "容器"
+
+#: asset/models.py:21 templates/asset/asset-detail.html:132
+msgid "Other"
+msgstr "其他"
+
+#: asset/models.py:30 templates/asset/asset-detail.html:78
+#: templates/asset/asset-list.html:97 templates/jobs/cmd.html:116
+msgid "HostName"
+msgstr "主机名"
+
+#: asset/models.py:31 templates/asset/asset-detail.html:102
+#: templates/asset/asset-list.html:79 templates/asset/asset-list.html:103
+#: templates/jobs/batch_files_process.html:99
+#: templates/jobs/batch_scripts_process.html:106 templates/jobs/cmd.html:101
+#: templates/jobs/cmd.html:121 templates/jobs/execution-result.html:67
+#: templates/jobs/execution-result.html:189
+#: templates/jobs/execution-result.html:191
+#: templates/jobs/execution-result.html:212
+msgid "IP"
+msgstr "管理地址"
+
+#: asset/models.py:32 templates/asset/asset-detail.html:106
+#: templates/asset/asset-list.html:79 templates/asset/asset-list.html:104
+#: templates/jobs/cmd.html:101 templates/jobs/cmd.html:122
+msgid "Other_IP"
+msgstr "其他地址"
+
+#: asset/models.py:33 templates/asset/asset-detail.html:110
+msgid "Port"
+msgstr "端口"
+
+#: asset/models.py:34 templates/asset/asset-detail.html:114
+msgid "Asset User"
+msgstr "服务器管理用户"
+
+#: asset/models.py:35
+msgid "Asset PassWord"
+msgstr "登录密码"
+
+#: asset/models.py:36 templates/asset/asset-detail.html:118
+msgid "Asset Type"
+msgstr "资产类型"
+
+#: asset/models.py:37 templates/asset/asset-detail.html:137
+msgid "System Type"
+msgstr "系统类型"
+
+#: asset/models.py:38 templates/asset/asset-detail.html:141
+#: templates/asset/asset-list.html:105
+msgid "System Version"
+msgstr "系统版本"
+
+#: asset/models.py:39 templates/asset/asset-detail.html:145
+msgid "MAC"
+msgstr "MAC"
+
+#: asset/models.py:40 templates/asset/asset-detail.html:149
+msgid "CPU Type"
+msgstr "CPU型号"
+
+#: asset/models.py:41 templates/asset/asset-detail.html:153
+msgid "CPU Core Count"
+msgstr "CPU个数"
+
+#: asset/models.py:42 templates/asset/asset-detail.html:157
+msgid "Number of CPUs"
+msgstr "CPU核数"
+
+#: asset/models.py:43 templates/asset/asset-detail.html:161
+msgid "Asset SN Number"
+msgstr "资产SN号"
+
+#: asset/models.py:44 templates/asset/asset-detail.html:165
+msgid "Asset Memory"
+msgstr "内存"
+
+#: asset/models.py:45 templates/asset/asset-detail.html:169
+
+#| msgid "Item InforMation"
+msgid "Disk Information"
+msgstr "项目信息"
+
+#: asset/models.py:46 templates/asset/asset-detail.html:173
+msgid "Mount Partition"
+msgstr "挂载分区"
+
+#: asset/models.py:47
+#| msgid "Server Use"
+msgid "Server Model"
+msgstr "用途列表"
+
+#: asset/models.py:48 templates/asset/asset-detail.html:181
+msgid "System Kernel Version"
+msgstr "系统核心版本"
+
+#: asset/models.py:49 templates/asset/asset-detail.html:185
+msgid "System Platform"
+msgstr "系统平台"
+
+#: asset/models.py:50 templates/asset/asset-detail.html:189
+msgid "Equipment Status"
+msgstr "设备状态"
+
+#: asset/models.py:51 jobs/models.py:22 jobs/models.py:55
+#: templates/asset/asset-detail.html:203
+#: templates/jobs/periodictask-list.html:88 templates/jobs/scripts-list.html:83
+#: templates/users/keys-list.html:83 templates/users/users-detail.html:122
+#: users/models.py:64 users/models.py:91 users/models.py:160
+msgid "Create By"
+msgstr "创建时间"
+
+#: asset/models.py:52 jobs/models.py:39 templates/asset/asset-detail.html:207
+#: templates/jobs/scripts-diff-list.html:80
+msgid "Update By"
+msgstr "更新时间"
+
+#: asset/models.py:55 jobs/models.py:52 templates/users/users-detail.html:94
+#: users/models.py:152
+msgid "User Project"
+msgstr "用户关联项目"
+
+#: asset/models.py:56
+msgid "IDC"
+msgstr "机房"
+
+#: asset/models.py:58
+msgid "Product"
+msgstr "产品"
+
+#: asset/models.py:60
+msgid "Working Environment"
+msgstr "业务工作环境"
+
+#: asset/models.py:67 asset/models.py:68
+msgid "Asset Information List"
+msgstr "资产信息"
+
+#: asset/models.py:79 templates/asset/asset-detail.html:90
+#: templates/asset/asset-list.html:100 templates/asset/use-list.html:87
+#: templates/jobs/cmd.html:119
+msgid "Server Use Name"
+msgstr "服务器用途名"
+
+#: asset/models.py:80 templates/asset/use-list.html:88
+msgid "Server Use Short Name"
+msgstr "项目用途简称"
+
+#: asset/models.py:92 templates/asset/area-list.html:87
+#: templates/jobs/batch_files_list.html:152
+#: templates/jobs/batch_files_list.html:225
+#: templates/jobs/batch_scripts.html:134 templates/jobs/batch_scripts.html:244
+msgid "Area Name"
+msgstr "地区名称"
+
+#: asset/models.py:93 templates/asset/area-list.html:88
+msgid "Area Short Name"
+msgstr "地区简称"
+
+#: asset/models.py:97 asset/models.py:98
+msgid "Area"
+msgstr "地区"
+
+#: asset/models.py:104
+msgid "Work_Env Name"
+msgstr "工作环境名称"
+
+#: asset/models.py:105
+msgid "Work_Env Short Name"
+msgstr "工作环境简称"
+
+#: asset/models.py:109 asset/models.py:110
+msgid "Work_Env"
+msgstr "工作环境"
+
+#: asset/models.py:117
+msgid "Idc Name"
+msgstr "项目名称"
+
+#: asset/models.py:118 templates/asset/idc-list.html:89
+
+#| msgid "email address"
+msgid "Idc Address"
+msgstr "邮件地址"
+
+#: asset/models.py:119 templates/asset/idc-list.html:90
+msgid "Line"
+msgstr "线路"
+
+#: asset/models.py:120 templates/asset/idc-list.html:91
+msgid "Bandwidth"
+msgstr "带宽"
+
+#: asset/models.py:121 templates/asset/idc-list.html:92
+msgid "Customer Manager"
+msgstr "客户经理"
+
+#: asset/models.py:122 templates/asset/idc-list.html:93
+msgid "Contact number"
+msgstr "联系电话"
+
+#: asset/models.py:123 templates/asset/idc-list.html:94
+msgid "Cabinet information"
+msgstr "机柜信息"
+
+#: asset/models.py:124 templates/asset/idc-list.html:95
+msgid "IP Range"
+msgstr "IP范围"
+
+#: asset/models.py:125 users/models.py:163
+msgid "User Comment"
+msgstr "用户备注"
+
+#: asset/models.py:127 templates/asset/idc-list.html:88
+
+#| msgid "Role Manage"
+msgid "Regional Management"
+msgstr "角色管理"
+
+#: asset/models.py:131 asset/models.py:132 templates/admin.html:20
+#: templates/nav_users.html:22
+msgid "Idc Manage"
+msgstr "机房管理"
+
+#: asset/models.py:138 templates/asset/asset-detail.html:86
+#: templates/asset/asset-list.html:99 templates/asset/product-list.html:87
+#: templates/jobs/batch_files_list.html:151
+#: templates/jobs/batch_files_list.html:225
+#: templates/jobs/batch_scripts.html:133 templates/jobs/batch_scripts.html:244
+#: templates/jobs/cmd.html:118
+
+#| msgid "Project Name"
+msgid "Product Name"
+msgstr "项目名称"
+
+#: asset/models.py:139 templates/asset/product-list.html:88
+msgid "Product Short Name"
+msgstr "产品简称"
+
+#: asset/models.py:143 asset/models.py:144 templates/admin.html:23
+#: templates/nav_users.html:25
+msgid "Product Manage"
+msgstr "产品管理"
+
+#: asset/views/area.py:124 asset/views/asset.py:169 asset/views/idc.py:124
+#: asset/views/product.py:124 asset/views/use.py:124 asset/views/users.py:166
+#: asset/views/workenv.py:124 jobs/views/crontab.py:95
+#: jobs/views/crontab.py:176 jobs/views/crontab.py:357
+#: jobs/views/scripts.py:286 users/views/groups.py:145 users/views/keys.py:151
+#: users/views/permission.py:144 users/views/project.py:125
+#: users/views/role.py:122 users/views/role.py:146 users/views/users.py:166
+#: users/views/users.py:187
+msgid "Deletion error，{}"
+msgstr "删除错误，{}"
+
+#: asset/views/asset.py:204
+msgid "Please Select Project"
+msgstr "请先选择项目"
+
+#: asset/views/asset.py:207 templates/users/project-add-update.html:3
+#: templates/users/project-list.html:9
+msgid "Project"
+msgstr "项目"
+
+#: audit/models.py:15 templates/users/users-detail.html:78
+#: templates/users/users-list.html:84 users/models.py:147
+msgid "UserName"
+msgstr "用户名"
+
+#: audit/models.py:17
+msgid "Client Address"
+msgstr "客户端地址"
+
+#: audit/models.py:18
+#| msgid "Request Type"
+msgid "Request Date Time"
+msgstr "请求类型"
+
+#: audit/models.py:19
+msgid "Request Type"
+msgstr "请求类型"
+
+#: audit/models.py:20
+msgid "Request Full Path"
+msgstr "请求路径"
+
+#: audit/models.py:21 templates/audit/request-log.html:86
+#| msgid "Request Full Path"
+msgid "Request Post Body"
+msgstr "请求路径"
+
+#: audit/models.py:25 audit/models.py:26
+msgid "Request Record"
+msgstr "请求记录"
+
+#: audit/models.py:32
+
+#| msgid "Batch CMD"
+msgid "Batch Cmd"
+msgstr "批量命令"
+
+#: audit/models.py:33 templates/admin.html:54 templates/jobs/batch_files.html:6
+#: templates/jobs/batch_files_list.html:6 templates/jobs/batch_scripts.html:6
+#: templates/jobs/batch_scripts.html:14 templates/jobs/batch_scripts.html:39
+#: templates/jobs/batch_scripts.html:111
+#: templates/jobs/batch_scripts_process.html:15
+#: templates/jobs/batch_scripts_process.html:39 templates/nav_users.html:60
+msgid "Batch Scripts"
+msgstr "批量脚本"
+
+#: audit/models.py:34 jobs/views/batchfiles.py:123 templates/admin.html:52
+#: templates/jobs/batch_files.html:14 templates/jobs/batch_files.html:23
+#: templates/jobs/batch_files.html:39 templates/jobs/batch_files_list.html:14
+#: templates/jobs/batch_files_list.html:23
+#: templates/jobs/batch_files_list.html:39
+#: templates/jobs/batch_files_list.html:129
+#: templates/jobs/batch_files_process.html:15
+#: templates/jobs/batch_files_process.html:39
+msgid "File Distribution"
+msgstr "文件分发"
+
+#: audit/models.py:35
+#| msgid "Batch Tasks"
+msgid "Batch Task"
+msgstr "批量任务"
+
+#: audit/models.py:36
+msgid "Crontab Task"
+msgstr "计划任务"
+
+#: audit/models.py:44
+#| msgid "CPU Type"
+msgid "Jobs Type"
+msgstr "CPU型号"
+
+#: audit/models.py:45 audit/models.py:72
+msgid "Start Time"
+msgstr "开始时间"
+
+#: audit/models.py:46
+#| msgid "HostName"
+msgid "Job Name"
+msgstr "作业名"
+
+#: audit/models.py:47 templates/jobs/batch_files_list.html:119
+#: templates/jobs/batch_files_list.html:121
+#: templates/jobs/batch_files_process.html:65
+msgid "Remote Path"
+msgstr "远程路径"
+
+#: audit/models.py:50
+msgid "Jobs Schedule"
+msgstr "任务清单"
+
+#: audit/models.py:54 audit/models.py:55
+#| msgid "Result"
+msgid "Jobs Results"
+msgstr "返回结果"
+
+#: audit/models.py:70
+msgid "Log Info"
+msgstr "日志信息"
+
+#: audit/models.py:73 templates/jobs/batch_files_process.html:79
+#: templates/jobs/batch_files_process.html:101
+#: templates/jobs/batch_scripts_process.html:86
+#: templates/jobs/batch_scripts_process.html:108
+msgid "Total Time"
+msgstr "耗时"
+
+#: audit/models.py:75 jobs/forms.py:70 jobs/forms.py:151
+msgid "Asset"
+msgstr "资产"
+
+#: audit/models.py:105 audit/models.py:106
+#| msgid "Task Log Table"
+msgid "Task Schedule Table"
+msgstr "作业日志"
+
+#: audit/models.py:113
+msgid "User"
+msgstr "用户信息"
+
+#: audit/models.py:114
+msgid "Change by"
+msgstr "修改人"
+
+#: audit/models.py:115
+msgid "Remote addr"
+msgstr "客户端地址"
+
+#: audit/models.py:120 audit/models.py:121
+msgid "Password Change Log"
+msgstr "密码修改日志"
+
+#: jobs/forms.py:27 jobs/forms.py:85 jobs/forms.py:166
+#| msgid "HostName"
+msgid "Tasks Name"
+msgstr "作业名"
+
+#: jobs/forms.py:37 templates/jobs/crontab-list.html:77
+msgid "minute"
+msgstr "分"
+
+#: jobs/forms.py:38 templates/jobs/crontab-list.html:78
+msgid "hour"
+msgstr "时"
+
+#: jobs/forms.py:39 templates/jobs/crontab-list.html:79
+msgid "week"
+msgstr "周"
+
+#: jobs/forms.py:40 templates/jobs/crontab-list.html:80
+msgid "month"
+msgstr "月"
+
+#: jobs/forms.py:41 templates/jobs/crontab-list.html:81
+msgid "year"
+msgstr "年"
+
+#: jobs/forms.py:62 jobs/forms.py:143 templates/jobs/periodictask-list.html:61
+#: templates/jobs/scripts-diff-list.html:66 templates/jobs/scripts-list.html:61
+msgid "Scripts Name"
+msgstr "脚本名称"
+
+#: jobs/forms.py:79 jobs/forms.py:160 templates/users/keys-list.html:61
+#: templates/users/keys-list.html:79 templates/users/project-list.html:87
+#: users/models.py:86
+msgid "Key Name"
+msgstr "密钥名称"
+
+#: jobs/forms.py:124
+msgid "Use one of interval/crontab"
+msgstr "只能选择(interval / crontab)中的一个"
+
+#: jobs/models.py:17 templates/jobs/periodictask-list.html:82
+#: templates/jobs/scripts-list.html:80
+msgid "Script Name"
+msgstr "脚本名称"
+
+#: jobs/models.py:18
+msgid "Script Type"
+msgstr "系统类型"
+
+#: jobs/models.py:19
+msgid "Script Args"
+msgstr "脚本参数"
+
+#: jobs/models.py:20
+msgid "Script Content"
+msgstr "脚本内容"
+
+#: jobs/models.py:21
+msgid "Script Comment"
+msgstr "脚本备注"
+
+#: jobs/models.py:23 jobs/models.py:57 templates/jobs/periodictask-list.html:84
+#: templates/jobs/scripts-list.html:84
+msgid "Create User"
+msgstr "创建人"
+
+#: jobs/models.py:24 templates/asset/asset-detail.html:82
+#: templates/asset/asset-list.html:98 templates/jobs/cmd.html:117
+#: templates/jobs/execution-result.html:66
+#: templates/jobs/periodictask-list.html:79 templates/jobs/scripts-list.html:82
+#: templates/users/keys-list.html:81 templates/users/project-list.html:84
+#: templates/users/users-list.html:87 users/models.py:62
+msgid "Project Name"
+msgstr "项目名称"
+
+#: jobs/models.py:25
+msgid "Update Log"
+msgstr "更新日志"
+
+#: jobs/models.py:29 jobs/models.py:30 templates/admin.html:41
+#: templates/jobs/execution-result.html:6 templates/jobs/scripts-add.html:6
+#: templates/jobs/scripts-add.html:13 templates/jobs/scripts-add.html:22
+#: templates/jobs/scripts-add.html:38 templates/jobs/scripts-edit.html:6
+#: templates/jobs/scripts-edit.html:13 templates/jobs/scripts-edit.html:22
+#: templates/jobs/scripts-edit.html:38 templates/jobs/scripts-list.html:6
+#: templates/jobs/scripts-list.html:11 templates/jobs/scripts-list.html:20
+#: templates/jobs/scripts-list.html:36 templates/nav_users.html:47
+msgid "Scripts Manage"
+msgstr "脚本管理"
+
+#: jobs/models.py:37 templates/jobs/scripts-diff-list.html:79
+msgid "Config Type"
+msgstr "配置类型"
+
+#: jobs/models.py:38
+msgid "Config Histroy Content"
+msgstr "配置历史内容"
+
+#: jobs/models.py:41 templates/jobs/scripts-diff-list.html:81
+msgid "Update User"
+msgstr "修改人"
+
+#: jobs/models.py:44 jobs/models.py:45
+msgid "Update Config Log"
+msgstr "配置更新日志"
+
+#: jobs/models.py:54
+#| msgid "Scripts Name"
+msgid "Scritps Name"
+msgstr "脚本名称"
+
+#: jobs/models.py:59 jobs/models.py:61
+#| msgid "Scheduled Tasks"
+msgid "Scheduled Name"
+msgstr "计划任务"
+
+#: jobs/models.py:65 templates/admin.html:44 templates/nav_users.html:50
+msgid "Scheduled Tasks"
+msgstr "计划任务"
+
+#: jobs/views/batchfiles.py:66
+msgid "Upload File failed"
+msgstr "上传文件失败"
+
+#: jobs/views/scripts.py:104
+msgid "Please Choice Your Project!"
+msgstr "选择项目"
+
+#: opensa/settings.py:191
+msgid "Simple Chinese"
+msgstr "简体中文"
+
+#: opensa/settings.py:192
+msgid "English"
+msgstr "英文"
+
+#: templates/404.html:10
+msgid "404 Error"
+msgstr "404 错误"
+
+#: templates/admin.html:10 templates/nav_users.html:10
+msgid "Dashboard"
+msgstr "仪表盘"
+
+#: templates/admin.html:14 templates/asset/area-add-update.html:24
+#: templates/asset/area-list.html:25 templates/asset/asset-add-update.html:24
+#: templates/asset/asset-detail.html:21 templates/asset/asset-list.html:22
+#: templates/asset/idc-list.html:25 templates/asset/product-add-update.html:24
+#: templates/asset/product-list.html:25 templates/asset/use-add-update.html:24
+#: templates/asset/use-list.html:25 templates/asset/workenv-add-update.html:24
+#: templates/asset/workenv-list.html:25 templates/nav_users.html:16
+#: users/management/commands/permission_data.py:29
+msgid "Service Manage"
+msgstr "服务器管理"
+
+#: templates/admin.html:17 templates/nav_users.html:19
+msgid "Server Manage"
+msgstr "资产管理"
+
+#: templates/admin.html:29 templates/jobs/batch_files_list.html:153
+#: templates/jobs/batch_files_list.html:225
+#: templates/jobs/batch_scripts.html:135 templates/jobs/batch_scripts.html:244
+#: templates/nav_users.html:31
+msgid "Work Env"
+msgstr "工作环境"
+
+#: templates/admin.html:32 templates/nav_users.html:34
+msgid "Area Manage"
+msgstr "地区管理"
+
+#: templates/admin.html:38 templates/jobs/batch_files.html:20
+#: templates/jobs/batch_files_list.html:20
+#: templates/jobs/batch_files_process.html:21
+#: templates/jobs/batch_scripts.html:20
+#: templates/jobs/batch_scripts_process.html:21 templates/jobs/cmd.html:22
+#: templates/jobs/crontab-add-update.html:19
+#: templates/jobs/crontab-list.html:17 templates/jobs/execution-result.html:17
+#: templates/jobs/intervals-add-update.html:19
+#: templates/jobs/intervals-list.html:17
+#: templates/jobs/periodictask-list.html:17
+#: templates/jobs/periodicttasks-add-update.html:22
+#: templates/jobs/scripts-add.html:19 templates/jobs/scripts-diff-list.html:19
+#: templates/jobs/scripts-edit.html:19 templates/jobs/scripts-list.html:17
+#: templates/nav_users.html:44 users/management/commands/permission_data.py:34
+msgid "Jobs Manage"
+msgstr "作业管理"
+
+#: templates/admin.html:47 templates/nav_users.html:53
+msgid "Task scheduling"
+msgstr "任务编排"
+
+#: templates/admin.html:50 templates/admin.html:55
+#: templates/jobs/batch_files_process.html:24
+#: templates/jobs/batch_scripts.html:23
+#: templates/jobs/batch_scripts_process.html:24 templates/nav_users.html:56
+#: templates/nav_users.html:61
+msgid "Batch Tasks"
+msgstr "批量任务"
+
+#: templates/admin.html:53 templates/nav_users.html:59
+msgid "Batch CMD"
+msgstr "批量命令"
+
+#: templates/admin.html:59 templates/jobs/crontab-list.html:6
+#: templates/jobs/crontab-list.html:11 templates/jobs/crontab-list.html:20
+#: templates/jobs/crontab-list.html:36
+#: templates/jobs/intervals-add-update.html:6
+#: templates/jobs/intervals-add-update.html:13
+#: templates/jobs/intervals-add-update.html:22
+#: templates/jobs/intervals-add-update.html:38
+#: templates/jobs/periodictask-list.html:83 templates/nav_users.html:65
+msgid "Crontab"
+msgstr "计划任务"
+
+#: templates/admin.html:62 templates/jobs/intervals-list.html:77
+#: templates/nav_users.html:68
+msgid "Interval"
+msgstr "周期"
+
+#: templates/admin.html:68 templates/audit/login-log.html:6
+#: templates/audit/login-log.html:11 templates/audit/login-log.html:17
+#: templates/audit/login-log.html:36 templates/audit/request-log.html:6
+#: templates/audit/request-log.html:11 templates/audit/request-log.html:17
+#: templates/audit/request-log.html:36
+msgid "Audits"
+msgstr "日志审计"
+
+#: templates/admin.html:70 templates/audit/login-log.html:20
+msgid "Login Log"
+msgstr "登录日志"
+
+#: templates/admin.html:71 templates/audit/request-log.html:20
+msgid "Request Log"
+msgstr "请求记录"
+
+#: templates/admin.html:72
+msgid "Jobs Log"
+msgstr "作业日志"
+
+#: templates/admin.html:73
+msgid "Password Log"
+msgstr "改密日志"
+
+#: templates/admin.html:78 templates/asset/idc-add-update.html:24
+#: templates/nav_users.html:77 templates/users/groups-add-update.html:20
+#: templates/users/groups-list.html:17 templates/users/keys-add-update.html:16
+#: templates/users/keys-list.html:17
+#: templates/users/permission-add-update.html:16
+#: templates/users/permission-list.html:17
+#: templates/users/project-add-update.html:22
+#: templates/users/project-list.html:22 templates/users/role-edit.html:17
+#: templates/users/role-list.html:17 templates/users/users-add-update.html:24
+#: templates/users/users-detail.html:21 templates/users/users-list.html:22
+#: users/management/commands/permission_data.py:24
+msgid "System Setup"
+msgstr "系统设置"
+
+#: templates/admin.html:81 templates/nav_users.html:80 users/models.py:170
+#: users/models.py:171
+msgid "User Manage"
+msgstr "用户管理"
+
+#: templates/admin.html:84 templates/nav_users.html:83
+#: templates/users/groups-add-update.html:14
+#: templates/users/groups-add-update.html:23 templates/users/groups-list.html:6
+#: templates/users/groups-list.html:11 templates/users/groups-list.html:20
+#: templates/users/groups-list.html:36 templates/users/permission-list.html:6
+#: users/models.py:50 users/models.py:51
+msgid "DepartMent Manage"
+msgstr "部门管理"
+
+#: templates/admin.html:87 templates/nav_users.html:86 users/models.py:70
+#: users/models.py:71
+msgid "Project Manage"
+msgstr "项目管理"
+
+#: templates/admin.html:90 templates/users/keys-add-update.html:10
+#: templates/users/keys-add-update.html:19 templates/users/keys-list.html:6
+#: templates/users/keys-list.html:11 templates/users/keys-list.html:20
+#: templates/users/keys-list.html:36 users/models.py:95 users/models.py:96
+msgid "Key Manage"
+msgstr "密钥管理"
+
+#: templates/admin.html:93 templates/nav_users.html:89
+#: templates/users/role-edit.html:6 templates/users/role-edit.html:11
+#: templates/users/role-edit.html:20 templates/users/role-edit.html:37
+#: templates/users/role-list.html:6 templates/users/role-list.html:11
+#: templates/users/role-list.html:20 templates/users/role-list.html:36
+#: users/models.py:127 users/models.py:128
+msgid "Role Manage"
+msgstr "角色管理"
+
+#: templates/admin.html:96 templates/nav_users.html:92 users/models.py:123
+msgid "Permission List"
+msgstr "权限列表"
+
+#: templates/asset/area-add-update.html:3
+#: templates/asset/area-add-update.html:18
+#: templates/asset/area-add-update.html:42 templates/asset/area-list.html:12
+#: templates/asset/area-list.html:19 templates/asset/area-list.html:28
+#: templates/asset/area-list.html:44
+msgid "Area List"
+msgstr "地区列表"
+
+#: templates/asset/area-add-update.html:21 templates/asset/area-list.html:22
+#: templates/asset/asset-add-update.html:21
+#: templates/asset/asset-detail.html:18 templates/asset/asset-list.html:19
+#: templates/asset/asset-list.html:136 templates/asset/asset-list.html:139
+#: templates/asset/idc-add-update.html:21 templates/asset/idc-list.html:22
+#: templates/asset/product-add-update.html:21
+#: templates/asset/product-list.html:22 templates/asset/use-add-update.html:21
+#: templates/asset/use-list.html:22 templates/asset/workenv-add-update.html:21
+#: templates/asset/workenv-list.html:22 templates/audit/login-log.html:14
+#: templates/audit/login-log.html:99 templates/audit/login-log.html:102
+#: templates/audit/request-log.html:14 templates/audit/request-log.html:108
+#: templates/audit/request-log.html:110 templates/jobs/batch_files.html:17
+#: templates/jobs/batch_files_list.html:17
+#: templates/jobs/batch_files_process.html:18
+#: templates/jobs/batch_scripts.html:17
+#: templates/jobs/batch_scripts_process.html:18 templates/jobs/cmd.html:19
+#: templates/jobs/cmd.html:146 templates/jobs/cmd.html:149
+#: templates/jobs/crontab-add-update.html:16
+#: templates/jobs/crontab-list.html:14 templates/jobs/execution-result.html:14
+#: templates/jobs/intervals-add-update.html:16
+#: templates/jobs/intervals-list.html:14
+#: templates/jobs/periodictask-list.html:14
+#: templates/jobs/periodictask-list.html:120
+#: templates/jobs/periodictask-list.html:122
+#: templates/jobs/periodicttasks-add-update.html:19
+#: templates/jobs/scripts-add.html:16 templates/jobs/scripts-diff-list.html:16
+#: templates/jobs/scripts-diff-list.html:102
+#: templates/jobs/scripts-diff-list.html:104
+#: templates/jobs/scripts-edit.html:16 templates/jobs/scripts-list.html:14
+#: templates/jobs/scripts-list.html:114 templates/jobs/scripts-list.html:116
+#: templates/users/groups-add-update.html:17
+#: templates/users/groups-list.html:14 templates/users/groups-list.html:105
+#: templates/users/groups-list.html:107 templates/users/keys-add-update.html:13
+#: templates/users/keys-list.html:14 templates/users/keys-list.html:109
+#: templates/users/keys-list.html:111
+#: templates/users/permission-add-update.html:13
+#: templates/users/permission-list.html:14
+#: templates/users/permission-list.html:110
+#: templates/users/permission-list.html:112
+#: templates/users/project-add-update.html:19
+#: templates/users/project-list.html:19 templates/users/role-edit.html:14
+#: templates/users/role-list.html:14 templates/users/role-list.html:104
+#: templates/users/role-list.html:106 templates/users/users-add-update.html:21
+#: templates/users/users-detail.html:18 templates/users/users-list.html:19
+#: templates/users/users-list.html:122 templates/users/users-list.html:124
+msgid "Home"
+msgstr "首页"
+
+#: templates/asset/area-add-update.html:27
+#: templates/asset/use-add-update.html:3 templates/asset/use-add-update.html:18
+#: templates/asset/use-add-update.html:27
+#: templates/asset/use-add-update.html:42 templates/asset/use-list.html:12
+#: templates/asset/use-list.html:19 templates/asset/use-list.html:28
+#: templates/asset/use-list.html:44
+msgid "Server Use List"
+msgstr "用途列表"
+
+#: templates/asset/area-add-update.html:51 templates/asset/area-list.html:53
+#: templates/asset/asset-add-update.html:51 templates/asset/asset-list.html:63
+#: templates/asset/idc-add-update.html:51 templates/asset/idc-list.html:53
+#: templates/asset/product-add-update.html:51
+#: templates/asset/product-list.html:53 templates/asset/use-add-update.html:51
+#: templates/asset/use-list.html:53 templates/asset/workenv-add-update.html:51
+#: templates/asset/workenv-list.html:53 templates/audit/login-log.html:45
+#: templates/audit/request-log.html:45 templates/jobs/batch_files.html:48
+#: templates/jobs/batch_files_list.html:48
+#: templates/jobs/batch_files_process.html:48
+#: templates/jobs/batch_scripts.html:48
+#: templates/jobs/batch_scripts_process.html:48 templates/jobs/cmd.html:85
+#: templates/jobs/crontab-add-update.html:47
+#: templates/jobs/crontab-list.html:45 templates/jobs/execution-result.html:45
+#: templates/jobs/execution-result.html:97
+#: templates/jobs/intervals-add-update.html:47
+#: templates/jobs/intervals-list.html:45
+#: templates/jobs/periodictask-list.html:45
+#: templates/jobs/periodicttasks-add-update.html:49
+#: templates/jobs/scripts-add.html:47 templates/jobs/scripts-diff-list.html:47
+#: templates/jobs/scripts-edit.html:47 templates/jobs/scripts-list.html:45
+#: templates/users/groups-add-update.html:47
+#: templates/users/groups-list.html:45 templates/users/keys-add-update.html:43
+#: templates/users/keys-list.html:45
+#: templates/users/permission-add-update.html:43
+#: templates/users/permission-list.html:45
+#: templates/users/project-add-update.html:49
+#: templates/users/project-list.html:50 templates/users/role-edit.html:46
+#: templates/users/role-list.html:45 templates/users/users-add-update.html:51
+#: templates/users/users-list.html:50
+msgid "Config Option 1"
+msgstr "配置选项 1"
+
+#: templates/asset/area-add-update.html:53 templates/asset/area-list.html:55
+#: templates/asset/asset-add-update.html:53 templates/asset/asset-list.html:65
+#: templates/asset/idc-add-update.html:53 templates/asset/idc-list.html:55
+#: templates/asset/product-add-update.html:53
+#: templates/asset/product-list.html:55 templates/asset/use-add-update.html:53
+#: templates/asset/use-list.html:55 templates/asset/workenv-add-update.html:53
+#: templates/asset/workenv-list.html:55 templates/audit/login-log.html:47
+#: templates/audit/request-log.html:47 templates/jobs/batch_files.html:50
+#: templates/jobs/batch_files_list.html:50
+#: templates/jobs/batch_files_process.html:50
+#: templates/jobs/batch_scripts.html:50
+#: templates/jobs/batch_scripts_process.html:50 templates/jobs/cmd.html:87
+#: templates/jobs/crontab-add-update.html:49
+#: templates/jobs/crontab-list.html:47 templates/jobs/execution-result.html:47
+#: templates/jobs/execution-result.html:99
+#: templates/jobs/intervals-add-update.html:49
+#: templates/jobs/intervals-list.html:47
+#: templates/jobs/periodictask-list.html:47
+#: templates/jobs/periodicttasks-add-update.html:51
+#: templates/jobs/scripts-add.html:49 templates/jobs/scripts-diff-list.html:49
+#: templates/jobs/scripts-edit.html:49 templates/jobs/scripts-list.html:47
+#: templates/users/groups-add-update.html:49
+#: templates/users/groups-list.html:47 templates/users/keys-add-update.html:45
+#: templates/users/keys-list.html:47
+#: templates/users/permission-add-update.html:45
+#: templates/users/permission-list.html:47
+#: templates/users/project-add-update.html:51
+#: templates/users/project-list.html:52 templates/users/role-edit.html:48
+#: templates/users/role-list.html:47 templates/users/users-add-update.html:53
+#: templates/users/users-list.html:52
+msgid "Config Option 2"
+msgstr "配置选项 2"
+
+#: templates/asset/area-add-update.html:73
+#: templates/asset/asset-add-update.html:73
+#: templates/asset/idc-add-update.html:73
+#: templates/asset/product-add-update.html:73
+#: templates/asset/use-add-update.html:73
+#: templates/asset/workenv-add-update.html:73
+#: templates/users/project-add-update.html:71
+#: templates/users/users-add-update.html:73
+msgid "basic"
+msgstr "基础"
+
+#: templates/asset/area-list.html:73 templates/asset/asset-list.html:83
+#: templates/asset/idc-list.html:73 templates/asset/product-list.html:73
+#: templates/asset/use-list.html:73 templates/asset/workenv-list.html:73
+#: templates/jobs/crontab-list.html:65 templates/jobs/intervals-list.html:65
+#: templates/jobs/periodictask-list.html:65 templates/jobs/scripts-list.html:65
+#: templates/users/groups-list.html:65 templates/users/keys-list.html:65
+#: templates/users/permission-list.html:65 templates/users/project-list.html:70
+#: templates/users/role-list.html:68 templates/users/users-list.html:68
+msgid "Append"
+msgstr "添加"
+
+#: templates/asset/area-list.html:75 templates/asset/asset-list.html:85
+#: templates/asset/idc-list.html:75 templates/asset/product-list.html:75
+#: templates/asset/use-list.html:75 templates/asset/workenv-list.html:75
+#: templates/jobs/crontab-list.html:67 templates/jobs/intervals-list.html:67
+#: templates/jobs/periodictask-list.html:67 templates/jobs/scripts-list.html:66
+#: templates/users/groups-list.html:67 templates/users/keys-list.html:67
+#: templates/users/permission-list.html:67 templates/users/project-list.html:72
+#: templates/users/role-list.html:70 templates/users/users-list.html:70
+msgid "Batch Remove"
+msgstr "批量删除"
+
+#: templates/asset/area-list.html:89 templates/asset/asset-list.html:106
+#: templates/asset/idc-list.html:96 templates/asset/product-list.html:89
+#: templates/asset/use-list.html:89 templates/asset/workenv-list.html:89
+#: templates/audit/login-log.html:76 templates/jobs/crontab-list.html:82
+#: templates/jobs/intervals-list.html:79
+#: templates/jobs/periodictask-list.html:89 templates/jobs/scripts-list.html:85
+#: templates/users/groups-list.html:82 templates/users/keys-list.html:84
+#: templates/users/permission-list.html:82 templates/users/project-list.html:90
+#: templates/users/role-list.html:83 templates/users/users-list.html:92
+msgid "Action"
+msgstr "操作"
+
+#: templates/asset/area-list.html:102 templates/asset/asset-detail.html:44
+#: templates/asset/asset-list.html:126 templates/asset/idc-list.html:117
+#: templates/asset/product-list.html:102 templates/asset/use-list.html:102
+#: templates/asset/workenv-list.html:102 templates/jobs/crontab-list.html:96
+#: templates/jobs/intervals-list.html:90
+#: templates/jobs/periodictask-list.html:110
+#: templates/jobs/scripts-edit.html:111 templates/jobs/scripts-list.html:101
+#: templates/users/groups-list.html:94 templates/users/keys-list.html:98
+#: templates/users/permission-list.html:95
+#: templates/users/project-list.html:108 templates/users/role-edit.html:175
+#: templates/users/role-list.html:93 templates/users/users-detail.html:44
+#: templates/users/users-list.html:111
+msgid "Update"
+msgstr "更新"
+
+#: templates/asset/area-list.html:103 templates/asset/area-list.html:182
+#: templates/asset/area-list.html:215 templates/asset/asset-detail.html:48
+#: templates/asset/asset-detail.html:276 templates/asset/asset-list.html:127
+#: templates/asset/asset-list.html:253 templates/asset/asset-list.html:286
+#: templates/asset/idc-list.html:118 templates/asset/idc-list.html:197
+#: templates/asset/idc-list.html:230 templates/asset/product-list.html:103
+#: templates/asset/product-list.html:182 templates/asset/product-list.html:215
+#: templates/asset/use-list.html:103 templates/asset/use-list.html:182
+#: templates/asset/use-list.html:215 templates/asset/workenv-list.html:103
+#: templates/asset/workenv-list.html:182 templates/asset/workenv-list.html:215
+#: templates/jobs/crontab-list.html:97 templates/jobs/crontab-list.html:168
+#: templates/jobs/crontab-list.html:201 templates/jobs/intervals-list.html:91
+#: templates/jobs/intervals-list.html:162
+#: templates/jobs/intervals-list.html:195
+#: templates/jobs/periodictask-list.html:111
+#: templates/jobs/periodictask-list.html:182
+#: templates/jobs/periodictask-list.html:215
+#: templates/jobs/scripts-list.html:102 templates/jobs/scripts-list.html:177
+#: templates/jobs/scripts-list.html:210 templates/users/groups-list.html:95
+#: templates/users/groups-list.html:171 templates/users/groups-list.html:204
+#: templates/users/keys-list.html:99 templates/users/keys-list.html:170
+#: templates/users/keys-list.html:203 templates/users/permission-list.html:96
+#: templates/users/permission-list.html:171
+#: templates/users/permission-list.html:204
+#: templates/users/project-list.html:109 templates/users/project-list.html:182
+#: templates/users/project-list.html:215 templates/users/role-list.html:94
+#: templates/users/role-list.html:190 templates/users/role-list.html:223
+#: templates/users/users-detail.html:48 templates/users/users-detail.html:202
+#: templates/users/users-list.html:112 templates/users/users-list.html:183
+#: templates/users/users-list.html:216 users/models.py:136
+msgid "Delete"
+msgstr "删除"
+
+#: templates/asset/area-list.html:105 templates/asset/idc-list.html:120
+#: templates/asset/product-list.html:105 templates/asset/use-list.html:105
+#: templates/asset/workenv-list.html:105
+#: templates/users/permission-list.html:98
+#: templates/users/project-list.html:111
+#| msgid "Permission Url"
+msgid "No Permission"
+msgstr "路由地址"
+
+#: templates/asset/area-list.html:165 templates/asset/area-list.html:198
+#: templates/asset/asset-detail.html:260 templates/asset/asset-list.html:236
+#: templates/asset/asset-list.html:269 templates/asset/idc-list.html:180
+#: templates/asset/idc-list.html:213 templates/asset/product-list.html:165
+#: templates/asset/product-list.html:198 templates/asset/use-list.html:165
+#: templates/asset/use-list.html:198 templates/asset/workenv-list.html:165
+#: templates/asset/workenv-list.html:198 templates/jobs/crontab-list.html:152
+#: templates/jobs/crontab-list.html:184 templates/jobs/intervals-list.html:146
+#: templates/jobs/intervals-list.html:178
+#: templates/jobs/periodictask-list.html:165
+#: templates/jobs/periodictask-list.html:198
+#: templates/jobs/scripts-list.html:160 templates/jobs/scripts-list.html:193
+#: templates/users/groups-list.html:154 templates/users/groups-list.html:187
+#: templates/users/keys-list.html:153 templates/users/keys-list.html:186
+#: templates/users/permission-list.html:154
+#: templates/users/permission-list.html:187
+#: templates/users/project-list.html:166 templates/users/project-list.html:198
+#: templates/users/role-list.html:173 templates/users/role-list.html:206
+#: templates/users/users-detail.html:185 templates/users/users-list.html:166
+#: templates/users/users-list.html:199 templates/users/users-list.html:244
+msgid "You Are Sure To Delete"
+msgstr "你确定删除吗？"
+
+#: templates/asset/area-list.html:166 templates/asset/area-list.html:199
+#: templates/asset/asset-detail.html:261 templates/asset/asset-list.html:237
+#: templates/asset/asset-list.html:270 templates/asset/idc-list.html:181
+#: templates/asset/idc-list.html:214 templates/asset/product-list.html:166
+#: templates/asset/product-list.html:199 templates/asset/use-list.html:166
+#: templates/asset/use-list.html:199 templates/asset/workenv-list.html:166
+#: templates/asset/workenv-list.html:199
+#: templates/jobs/batch_files_list.html:255
+#: templates/jobs/batch_scripts.html:273 templates/jobs/crontab-list.html:153
+#: templates/jobs/crontab-list.html:185 templates/jobs/intervals-list.html:147
+#: templates/jobs/intervals-list.html:179
+#: templates/jobs/periodictask-list.html:166
+#: templates/jobs/periodictask-list.html:199
+#: templates/jobs/scripts-list.html:161 templates/jobs/scripts-list.html:194
+#: templates/users/groups-list.html:155 templates/users/groups-list.html:188
+#: templates/users/keys-list.html:154 templates/users/keys-list.html:187
+#: templates/users/permission-list.html:155
+#: templates/users/permission-list.html:188
+#: templates/users/project-list.html:167 templates/users/project-list.html:199
+#: templates/users/role-edit.html:159 templates/users/role-list.html:174
+#: templates/users/role-list.html:207 templates/users/users-detail.html:186
+#: templates/users/users-list.html:167 templates/users/users-list.html:200
+msgid "You Will Never Recover"
+msgstr "你将永远无法恢复"
+
+#: templates/asset/area-list.html:170 templates/asset/area-list.html:203
+#: templates/asset/asset-detail.html:265 templates/asset/asset-list.html:241
+#: templates/asset/asset-list.html:274 templates/asset/idc-list.html:185
+#: templates/asset/idc-list.html:218 templates/asset/product-list.html:170
+#: templates/asset/product-list.html:203 templates/asset/use-list.html:170
+#: templates/asset/use-list.html:203 templates/asset/workenv-list.html:170
+#: templates/asset/workenv-list.html:203
+#: templates/jobs/batch_files_list.html:184
+#: templates/jobs/batch_files_list.html:259
+#: templates/jobs/batch_scripts.html:166 templates/jobs/batch_scripts.html:277
+#: templates/jobs/cmd.html:200 templates/jobs/crontab-add-update.html:84
+#: templates/jobs/crontab-list.html:157 templates/jobs/crontab-list.html:189
+#: templates/jobs/intervals-list.html:151
+#: templates/jobs/intervals-list.html:183
+#: templates/jobs/periodictask-list.html:170
+#: templates/jobs/periodictask-list.html:203
+#: templates/jobs/scripts-list.html:165 templates/jobs/scripts-list.html:198
+#: templates/users/groups-list.html:159 templates/users/groups-list.html:192
+#: templates/users/keys-list.html:158 templates/users/keys-list.html:191
+#: templates/users/permission-list.html:159
+#: templates/users/permission-list.html:192
+#: templates/users/project-list.html:171 templates/users/project-list.html:203
+#: templates/users/role-edit.html:163 templates/users/role-list.html:178
+#: templates/users/role-list.html:211 templates/users/users-detail.html:190
+#: templates/users/users-list.html:171 templates/users/users-list.html:204
+#: templates/users/users-list.html:251
+msgid "confirm"
+msgstr "确认"
+
+#: templates/asset/area-list.html:171 templates/asset/area-list.html:204
+#: templates/asset/asset-list.html:242 templates/asset/asset-list.html:275
+#: templates/asset/idc-list.html:186 templates/asset/idc-list.html:219
+#: templates/asset/product-list.html:171 templates/asset/product-list.html:204
+#: templates/asset/use-list.html:171 templates/asset/use-list.html:204
+#: templates/asset/workenv-list.html:171 templates/asset/workenv-list.html:204
+#: templates/jobs/batch_files_list.html:185
+#: templates/jobs/batch_files_list.html:260
+#: templates/jobs/batch_scripts.html:167 templates/jobs/batch_scripts.html:278
+#: templates/jobs/cmd.html:201 templates/jobs/crontab-list.html:190
+#: templates/jobs/intervals-list.html:184
+#: templates/jobs/periodictask-list.html:171
+#: templates/jobs/periodictask-list.html:204
+#: templates/jobs/scripts-list.html:166 templates/jobs/scripts-list.html:199
+#: templates/users/groups-list.html:160 templates/users/groups-list.html:193
+#: templates/users/keys-list.html:159 templates/users/keys-list.html:192
+#: templates/users/permission-list.html:160
+#: templates/users/permission-list.html:193
+#: templates/users/project-list.html:204 templates/users/role-edit.html:164
+#: templates/users/role-list.html:179 templates/users/role-list.html:212
+#: templates/users/users-detail.html:191 templates/users/users-list.html:172
+#: templates/users/users-list.html:205 templates/users/users-list.html:252
+msgid "cancel"
+msgstr "取消"
+
+#: templates/asset/area-list.html:182 templates/asset/area-list.html:215
+#: templates/asset/asset-detail.html:276 templates/asset/asset-list.html:253
+#: templates/asset/asset-list.html:286 templates/asset/idc-list.html:197
+#: templates/asset/idc-list.html:230 templates/asset/product-list.html:182
+#: templates/asset/product-list.html:215 templates/asset/use-list.html:182
+#: templates/asset/use-list.html:215 templates/asset/workenv-list.html:182
+#: templates/asset/workenv-list.html:215 templates/jobs/crontab-list.html:168
+#: templates/jobs/crontab-list.html:201 templates/jobs/intervals-list.html:162
+#: templates/jobs/intervals-list.html:195
+#: templates/jobs/periodictask-list.html:182
+#: templates/jobs/periodictask-list.html:215
+#: templates/jobs/scripts-list.html:177 templates/jobs/scripts-list.html:210
+#: templates/users/groups-list.html:171 templates/users/groups-list.html:204
+#: templates/users/keys-list.html:170 templates/users/keys-list.html:203
+#: templates/users/permission-list.html:171
+#: templates/users/permission-list.html:204
+#: templates/users/project-list.html:182 templates/users/project-list.html:215
+#: templates/users/role-edit.html:175 templates/users/role-list.html:190
+#: templates/users/role-list.html:223 templates/users/users-detail.html:202
+#: templates/users/users-list.html:183 templates/users/users-list.html:216
+msgid "Deleted Successfully"
+msgstr "已经删除成功"
+
+#: templates/asset/area-list.html:186 templates/asset/area-list.html:219
+#: templates/asset/asset-detail.html:280 templates/asset/asset-list.html:257
+#: templates/asset/asset-list.html:290 templates/asset/idc-list.html:201
+#: templates/asset/idc-list.html:234 templates/asset/product-list.html:186
+#: templates/asset/product-list.html:219 templates/asset/use-list.html:186
+#: templates/asset/use-list.html:219 templates/asset/workenv-list.html:186
+#: templates/asset/workenv-list.html:219 templates/jobs/crontab-list.html:172
+#: templates/jobs/crontab-list.html:205 templates/jobs/intervals-list.html:166
+#: templates/jobs/intervals-list.html:199
+#: templates/jobs/periodictask-list.html:186
+#: templates/jobs/periodictask-list.html:219
+#: templates/jobs/scripts-list.html:181 templates/jobs/scripts-list.html:214
+#: templates/users/groups-list.html:175 templates/users/groups-list.html:208
+#: templates/users/keys-list.html:174 templates/users/keys-list.html:207
+#: templates/users/permission-list.html:175
+#: templates/users/permission-list.html:208
+#: templates/users/project-list.html:186 templates/users/project-list.html:219
+#: templates/users/role-edit.html:179 templates/users/role-list.html:194
+#: templates/users/role-list.html:227 templates/users/users-detail.html:206
+#: templates/users/users-list.html:187 templates/users/users-list.html:220
+#: templates/users/users-list.html:271
+msgid "Delete Error"
+msgstr "删除错误"
+
+#: templates/asset/area-list.html:186 templates/asset/area-list.html:219
+#: templates/asset/asset-detail.html:280 templates/asset/asset-list.html:257
+#: templates/asset/asset-list.html:290 templates/asset/idc-list.html:201
+#: templates/asset/idc-list.html:234 templates/asset/product-list.html:186
+#: templates/asset/product-list.html:219 templates/asset/use-list.html:186
+#: templates/asset/use-list.html:219 templates/asset/workenv-list.html:186
+#: templates/asset/workenv-list.html:219 templates/jobs/cmd.html:226
+#: templates/jobs/crontab-list.html:172 templates/jobs/crontab-list.html:205
+#: templates/jobs/intervals-list.html:166
+#: templates/jobs/intervals-list.html:199
+#: templates/jobs/periodictask-list.html:186
+#: templates/jobs/periodictask-list.html:219
+#: templates/jobs/scripts-list.html:181 templates/jobs/scripts-list.html:214
+#: templates/users/groups-list.html:175 templates/users/groups-list.html:208
+#: templates/users/keys-list.html:174 templates/users/keys-list.html:207
+#: templates/users/permission-list.html:175
+#: templates/users/permission-list.html:208
+#: templates/users/project-list.html:186 templates/users/project-list.html:219
+#: templates/users/role-edit.html:179 templates/users/role-list.html:194
+#: templates/users/role-list.html:227 templates/users/users-detail.html:206
+#: templates/users/users-list.html:187 templates/users/users-list.html:220
+#: templates/users/users-list.html:271
+msgid "Error"
+msgstr "错误"
+
+#: templates/asset/asset-add-update.html:3
+#: templates/asset/asset-add-update.html:18
+#: templates/asset/asset-add-update.html:27
+#: templates/asset/asset-add-update.html:42 templates/asset/asset-detail.html:4
+#: templates/asset/asset-detail.html:15 templates/asset/asset-detail.html:24
+#: templates/asset/asset-detail.html:40 templates/asset/asset-list.html:9
+#: templates/asset/asset-list.html:16 templates/asset/asset-list.html:25
+#: templates/asset/asset-list.html:54
+msgid "Server List"
+msgstr "服务器列表"
+
+#: templates/asset/asset-detail.html:94 templates/asset/asset-list.html:101
+#: templates/jobs/cmd.html:120
+msgid "Working Environment Name"
+msgstr "工作环境名称"
+
+#: templates/asset/asset-detail.html:98 templates/asset/asset-list.html:102
+#: templates/asset/idc-list.html:87
+msgid "IDC Name"
+msgstr "项目名称"
+
+#: templates/asset/asset-detail.html:177
+msgid "Server Type"
+msgstr "用途类型"
+
+#: templates/asset/asset-list.html:79 templates/jobs/batch_files_list.html:154
+#: templates/jobs/batch_files_list.html:225
+#: templates/jobs/batch_files_process.html:98
+#: templates/jobs/batch_scripts.html:136 templates/jobs/batch_scripts.html:244
+#: templates/jobs/batch_scripts_process.html:105 templates/jobs/cmd.html:101
+msgid "Hostname"
+msgstr "用户名"
+
+#: templates/asset/asset-list.html:81 templates/audit/login-log.html:63
+#: templates/jobs/cmd.html:103 templates/jobs/periodictask-list.html:63
+#: templates/jobs/scripts-diff-list.html:68 templates/jobs/scripts-list.html:63
+#: templates/users/groups-list.html:63 templates/users/keys-list.html:63
+#: templates/users/permission-list.html:63 templates/users/role-list.html:66
+#: templates/users/users-list.html:66
+msgid "Query"
+msgstr "搜索"
+
+#: templates/asset/asset-list.html:154 templates/audit/login-log.html:117
+#: templates/audit/request-log.html:125 templates/jobs/cmd.html:164
+#: templates/jobs/periodictask-list.html:138
+#: templates/jobs/scripts-diff-list.html:120
+#: templates/jobs/scripts-list.html:132 templates/users/groups-list.html:122
+#: templates/users/keys-list.html:126 templates/users/permission-list.html:127
+#: templates/users/role-list.html:121 templates/users/users-list.html:139
+msgid "Next"
+msgstr "下一页"
+
+#: templates/asset/asset-list.html:157 templates/audit/login-log.html:120
+#: templates/audit/request-log.html:128 templates/jobs/cmd.html:167
+#: templates/jobs/periodictask-list.html:141
+#: templates/jobs/scripts-diff-list.html:123
+#: templates/jobs/scripts-list.html:135 templates/users/groups-list.html:125
+#: templates/users/keys-list.html:129 templates/users/permission-list.html:130
+#: templates/users/role-list.html:124 templates/users/users-list.html:142
+msgid "Trailer"
+msgstr "尾页"
+
+#: templates/asset/asset-list.html:159 templates/audit/login-log.html:122
+#: templates/audit/request-log.html:130 templates/jobs/cmd.html:169
+#: templates/jobs/periodictask-list.html:143
+#: templates/jobs/scripts-diff-list.html:125
+#: templates/jobs/scripts-list.html:137 templates/users/groups-list.html:127
+#: templates/users/keys-list.html:131 templates/users/permission-list.html:132
+#: templates/users/role-list.html:126 templates/users/users-list.html:144
+msgid "Total"
+msgstr "总计"
+
+#: templates/asset/asset-list.html:159 templates/audit/login-log.html:122
+#: templates/audit/request-log.html:130 templates/jobs/cmd.html:169
+#: templates/jobs/periodictask-list.html:143
+#: templates/jobs/scripts-diff-list.html:125
+#: templates/jobs/scripts-list.html:137 templates/users/groups-list.html:127
+#: templates/users/keys-list.html:131 templates/users/permission-list.html:132
+#: templates/users/role-list.html:126 templates/users/users-list.html:144
+msgid "Page"
+msgstr "页"
+
+#: templates/asset/idc-add-update.html:3 templates/asset/idc-add-update.html:18
+#: templates/asset/idc-add-update.html:42 templates/asset/idc-list.html:12
+#: templates/asset/idc-list.html:19 templates/asset/idc-list.html:28
+#: templates/asset/idc-list.html:44
+msgid "IDC List"
+msgstr "机房列表"
+
+#: templates/asset/idc-add-update.html:27
+#: templates/users/project-add-update.html:16
+#: templates/users/project-add-update.html:25
+#: templates/users/project-add-update.html:40
+#: templates/users/project-list.html:16 templates/users/project-list.html:25
+#: templates/users/project-list.html:41
+msgid "Item InforMation"
+msgstr "项目信息"
+
+#: templates/asset/product-add-update.html:3
+#: templates/asset/product-add-update.html:18
+#: templates/asset/product-add-update.html:27
+#: templates/asset/product-add-update.html:42
+#: templates/asset/product-list.html:12 templates/asset/product-list.html:19
+#: templates/asset/product-list.html:28 templates/asset/product-list.html:44
+msgid "Product List"
+msgstr "项目列表"
+
+#: templates/asset/workenv-add-update.html:3
+#: templates/asset/workenv-add-update.html:18
+#: templates/asset/workenv-add-update.html:27
+#: templates/asset/workenv-add-update.html:42
+#: templates/asset/workenv-list.html:12 templates/asset/workenv-list.html:19
+#: templates/asset/workenv-list.html:28 templates/asset/workenv-list.html:44
+msgid "Work Environment List"
+msgstr "工作环境列表"
+
+#: templates/asset/workenv-list.html:87
+msgid "Work Env Name"
+msgstr "工作环境名称"
+
+#: templates/asset/workenv-list.html:88
+msgid "Work Env Short Name"
+msgstr "工作环境简称"
+
+#: templates/audit/login-log.html:61 templates/audit/login-log.html:73
+#: templates/audit/request-log.html:61 templates/audit/request-log.html:81
+#: templates/users/project-list.html:86
+msgid "User Name"
+msgstr "关联用户"
+
+#: templates/audit/login-log.html:72 templates/audit/request-log.html:80
+
+#| msgid "Number of CPUs"
+msgid "Number"
+msgstr "CPU核数"
+
+#: templates/audit/login-log.html:74 templates/audit/request-log.html:82
+#| msgid "Remote addr"
+msgid "Remote ipaddr"
+msgstr "客户端地址"
+
+#: templates/audit/login-log.html:75 templates/audit/request-log.html:83
+
+#| msgid "Create Time"
+msgid "DateTime"
+msgstr "创建时间"
+
+#: templates/audit/login-log.html:88 templates/users/login.html:35
+msgid "Login"
+msgstr "登录"
+
+#: templates/audit/login-log.html:90 templates/nav_bar_header.html:83
+#: templates/nav_li_profile.html:23
+msgid "Logout"
+msgstr "登出"
+
+#: templates/audit/request-log.html:84
+
+#| msgid "Request Type"
+msgid "Request Meta"
+msgstr "请求类型"
+
+#: templates/audit/request-log.html:85
+#| msgid "Request Full Path"
+msgid "Request Path"
+msgstr "请求路径"
+
+#: templates/base.html:11 templates/jobs/scripts-diff.html:11
+msgid "OpenSa"
+msgstr "OpenSa"
+
+#: templates/footer.html:7
+msgid "Languages"
+msgstr "语言"
+
+#: templates/jobs/batch_files.html:59
+msgid "Upload Flie"
+msgstr "上传文件"
+
+#: templates/jobs/batch_files.html:61
+msgid "Upload is successful, please select the distribution server!"
+msgstr "上传文件成功，请选择分发服务器"
+
+#: templates/jobs/batch_files.html:69
+msgid "Drag and drop files or packaged code here."
+msgstr "此处拖放文件或打包的代码."
+
+#: templates/jobs/batch_files.html:70
+msgid "Maximum upload 10M, the compressed package must be ZIP!"
+msgstr "最大上传10M，压缩包必须是ZIP！"
+
+#: templates/jobs/batch_files.html:73
+#| msgid "Upload File failed"
+msgid "Upload all"
+msgstr "上传文件失败"
+
+#: templates/jobs/batch_files.html:74 templates/jobs/batch_files_list.html:93
+#: templates/jobs/batch_scripts.html:71
+#| msgid "Choice Project"
+msgid "Choice Server"
+msgstr "选择项目"
+
+#: templates/jobs/batch_files_list.html:65 templates/jobs/batch_scripts.html:65
+msgid "This From is not None"
+msgstr ""
+
+#: templates/jobs/batch_files_list.html:69
+msgid "File or directory to be sent"
+msgstr ""
+
+#: templates/jobs/batch_files_list.html:91
+#| msgid "Current server"
+msgid "Target Server"
+msgstr "当前服务器"
+
+#: templates/jobs/batch_files_list.html:100
+#: templates/jobs/batch_scripts.html:78
+#| msgid "Choice Project"
+msgid "Choice Key"
+msgstr "选择项目"
+
+#: templates/jobs/batch_files_list.html:112
+#: templates/jobs/batch_scripts.html:90
+#| msgid "Timeout"
+msgid "Timeout(s)"
+msgstr "超时时间"
+
+#: templates/jobs/batch_files_list.html:122
+msgid "Must be an absolute path"
+msgstr "必须填写绝对路径"
+
+#: templates/jobs/batch_files_list.html:143
+#: templates/jobs/batch_scripts.html:125
+#| msgid "Choice Project"
+msgid "Choice Assets"
+msgstr "选择项目"
+
+#: templates/jobs/batch_files_list.html:155
+#: templates/jobs/batch_files_list.html:225
+#: templates/jobs/batch_scripts.html:137 templates/jobs/batch_scripts.html:244
+#| msgid "email address"
+msgid "Ip Address"
+msgstr "邮件地址"
+
+#: templates/jobs/batch_files_list.html:156
+#: templates/jobs/batch_scripts.html:138
+msgid "Other Ipaddress"
+msgstr "其他IP地址"
+
+#: templates/jobs/batch_files_list.html:157
+#: templates/jobs/batch_scripts.html:139
+#| msgid "Area List"
+msgid "Use List"
+msgstr "地区列表"
+
+#: templates/jobs/batch_files_list.html:158
+#: templates/jobs/batch_scripts.html:140
+msgid "Os Type"
+msgstr "系统类型"
+
+#: templates/jobs/batch_files_list.html:254
+msgid "You Are Sure To File Distribution"
+msgstr "你确定分发文件吗？"
+
+#: templates/jobs/batch_files_process.html:62
+#: templates/jobs/batch_scripts_process.html:62
+msgid "Job ID"
+msgstr "任务ID"
+
+#: templates/jobs/batch_files_process.html:63
+#: templates/jobs/batch_scripts_process.html:63
+msgid "Executive User"
+msgstr "创建人"
+
+#: templates/jobs/batch_files_process.html:64
+msgid "All Files or Dirs"
+msgstr "所有的文件或者目录"
+
+#: templates/jobs/batch_files_process.html:66
+#: templates/jobs/batch_scripts_process.html:73
+msgid "Job Status"
+msgstr "任务状态"
+
+#: templates/jobs/batch_files_process.html:68
+#: templates/jobs/batch_scripts_process.html:75
+msgid "Executing"
+msgstr "执行中"
+
+#: templates/jobs/batch_files_process.html:70
+#: templates/jobs/batch_scripts_process.html:77
+#| msgid "Choice Project"
+msgid "Total Assets"
+msgstr "总任务数"
+
+#: templates/jobs/batch_files_process.html:75
+#: templates/jobs/batch_scripts_process.html:82
+msgid "Create by"
+msgstr "创建时间"
+
+#: templates/jobs/batch_files_process.html:76
+#: templates/jobs/batch_scripts_process.html:83
+msgid "Timeout"
+msgstr "超时时间"
+
+#: templates/jobs/batch_files_process.html:77
+#: templates/jobs/batch_scripts_process.html:84
+msgid "Operate"
+msgstr "操作人"
+
+#: templates/jobs/batch_files_process.html:78
+#: templates/jobs/batch_scripts_process.html:85
+msgid "Task Type"
+msgstr "任务类型"
+
+#: templates/jobs/batch_files_process.html:80
+#: templates/jobs/batch_scripts_process.html:87
+#| msgid "Choice Project"
+msgid "Completed Assets"
+msgstr "完成的任务数"
+
+#: templates/jobs/batch_files_process.html:86
+#: templates/jobs/batch_scripts_process.html:93
+msgid "Task Progress"
+msgstr "任务进度"
+
+#: templates/jobs/batch_files_process.html:97
+#: templates/jobs/batch_scripts_process.html:104
+msgid "Task ID"
+msgstr "任务ID"
+
+#: templates/jobs/batch_files_process.html:100
+#: templates/jobs/batch_scripts_process.html:107
+#: templates/jobs/execution-result.html:69
+#: templates/users/users-detail.html:106 templates/users/users-list.html:91
+msgid "Status"
+msgstr "状态"
+
+#: templates/jobs/batch_files_process.html:107
+#: templates/jobs/batch_scripts_process.html:114
+msgid "Current server"
+msgstr "当前服务器"
+
+#: templates/jobs/batch_files_process.html:111
+#: templates/jobs/batch_scripts_process.html:118
+msgid "Console"
+msgstr "控制台"
+
+#: templates/jobs/batch_files_process.html:201
+#: templates/jobs/batch_scripts_process.html:208
+msgid "Execution Succeed"
+msgstr "执行成功"
+
+#: templates/jobs/batch_files_process.html:223
+#: templates/jobs/batch_scripts_process.html:230
+msgid "An exception occurs"
+msgstr "出现异常"
+
+#: templates/jobs/batch_scripts.html:69
+msgid "Target Host"
+msgstr "目标服务器"
+
+#: templates/jobs/batch_scripts.html:97
+#| msgid "Batch Scripts"
+msgid "Choice Scripts"
+msgstr "批量脚本"
+
+#: templates/jobs/batch_scripts.html:272
+msgid "You Are Sure To Batch Scripts"
+msgstr "你确定批量执行脚本吗？"
+
+#: templates/jobs/batch_scripts_process.html:64
+msgid "Task Script"
+msgstr "任务脚本"
+
+#: templates/jobs/batch_scripts_process.html:65
+msgid "Script args"
+msgstr "脚本参数"
+
+#: templates/jobs/batch_scripts_process.html:68
+msgid "no args"
+msgstr "无参数"
+
+#: templates/jobs/cmd.html:9 templates/jobs/cmd.html:16
+#: templates/jobs/cmd.html:25 templates/jobs/cmd.html:76
+msgid "Server CMD"
+msgstr "命令"
+
+#: templates/jobs/cmd.html:37
+msgid "Note: Please enter the dangerous instructions incorrectly."
+msgstr "请不要输入危险命令"
+
+#: templates/jobs/cmd.html:40
+msgid "Please enter the BASH command"
+msgstr "请输入Bash命令"
+
+#: templates/jobs/cmd.html:54
+msgid "Begin execution"
+msgstr "开始执行"
+
+#: templates/jobs/cmd.html:195
+msgid "You Are Sure To execution"
+msgstr "你确定执行吗？"
+
+#: templates/jobs/cmd.html:196
+msgid "Cannot cancel after execution"
+msgstr "执行后将不能取消"
+
+#: templates/jobs/cmd.html:226
+msgid "execution Error"
+msgstr "执行出错"
+
+#: templates/jobs/crontab-add-update.html:6
+#: templates/jobs/crontab-add-update.html:13
+#: templates/jobs/crontab-add-update.html:22
+#: templates/jobs/crontab-add-update.html:38
+#: templates/jobs/intervals-list.html:6 templates/jobs/intervals-list.html:11
+#: templates/jobs/intervals-list.html:20 templates/jobs/intervals-list.html:36
+msgid "Intervals"
+msgstr "间隔"
+
+#: templates/jobs/crontab-add-update.html:68
+#: templates/jobs/intervals-add-update.html:68
+#: templates/jobs/periodicttasks-add-update.html:71
+#: templates/users/groups-add-update.html:68
+msgid "Group Basic Info"
+msgstr "部门基本信息"
+
+#: templates/jobs/crontab-add-update.html:85
+#| msgid "cancel"
+msgid "Cancel"
+msgstr "取消"
+
+#: templates/jobs/execution-result.html:11
+#: templates/jobs/execution-result.html:20
+#: templates/jobs/execution-result.html:36
+#: templates/jobs/execution-result.html:88
+msgid "Server CMD Result"
+msgstr "命令执行结果"
+
+#: templates/jobs/execution-result.html:65
+msgid "serial number"
+msgstr "序号"
+
+#: templates/jobs/execution-result.html:68
+msgid "CMD"
+msgstr "命令"
+
+#: templates/jobs/execution-result.html:70
+msgid "Server Progress"
+msgstr "用途列表"
+
+#: templates/jobs/execution-result.html:71
+msgid "Time Consuming"
+msgstr "消耗时间"
+
+#: templates/jobs/execution-result.html:72
+msgid "Operator"
+msgstr "操作人"
+
+#: templates/jobs/execution-result.html:189
+#: templates/jobs/execution-result.html:191
+#: templates/jobs/execution-result.html:212
+msgid "Log Information"
+msgstr "日志信息"
+
+#: templates/jobs/execution-result.html:189
+#: templates/jobs/execution-result.html:191
+#: templates/jobs/execution-result.html:212
+msgid "Return Result"
+msgstr "返回结果"
+
+#: templates/jobs/execution-result.html:189
+msgid "Please Wait While in Progress ..."
+msgstr "任务进行中，请等待"
+
+#: templates/jobs/intervals-list.html:78
+msgid "Hourly Basis"
+msgstr "每小时"
+
+#: templates/jobs/periodictask-list.html:6
+#: templates/jobs/periodictask-list.html:11
+#: templates/jobs/periodictask-list.html:20
+#: templates/jobs/periodictask-list.html:36
+#: templates/jobs/periodicttasks-add-update.html:3
+#: templates/jobs/periodicttasks-add-update.html:16
+#: templates/jobs/periodicttasks-add-update.html:25
+#: templates/jobs/periodicttasks-add-update.html:40
+msgid "Periodic Task"
+msgstr "定时任务"
+
+#: templates/jobs/periodictask-list.html:80
+msgid "Task Name"
+msgstr "地区名称"
+
+#: templates/jobs/periodictask-list.html:81
+msgid "Server IP"
+msgstr "服务器IP"
+
+#: templates/jobs/periodictask-list.html:85
+msgid "Number of executions"
+msgstr "总数"
+
+#: templates/jobs/periodictask-list.html:86
+msgid "Task Status"
+msgstr "任务状态"
+
+#: templates/jobs/periodictask-list.html:87
+msgid "Expire Date"
+msgstr "过期时间"
+
+#: templates/jobs/scripts-add.html:105
+msgid "Commit"
+msgstr "提交"
+
+#: templates/jobs/scripts-add.html:107 templates/jobs/scripts-edit.html:113
+msgid "Back"
+msgstr "返回"
+
+#: templates/jobs/scripts-diff-list.html:6
+#: templates/jobs/scripts-diff-list.html:13
+#: templates/jobs/scripts-diff-list.html:22
+#: templates/jobs/scripts-list.html:100
+msgid "Scripts Diff"
+msgstr "脚本名称"
+
+#: templates/jobs/scripts-diff-list.html:38
+msgid "Scripts Diff "
+msgstr "脚本名称"
+
+#: templates/jobs/scripts-diff-list.html:38
+msgid "Name"
+msgstr "主机名"
+
+#: templates/jobs/scripts-diff-list.html:64
+msgid "You cannot choose more than two"
+msgstr "你只能对比两个文件"
+
+#: templates/jobs/scripts-diff-list.html:97
+msgid "Diff"
+msgstr "对比"
+
+#: templates/jobs/scripts-list.html:81
+msgid "Script type"
+msgstr "脚本类型"
+
+#: templates/nav_bar_header.html:19
+msgid "Choice Project"
+msgstr "选择项目"
+
+#: templates/nav_bar_header.html:37
+msgid "Back index"
+msgstr "返回首页"
+
+#: templates/nav_bar_header.html:37
+msgid "Welcome to login OpenSA"
+msgstr "欢迎登陆运维平台"
+
+#: templates/nav_bar_header.html:78
+msgid "Knowledge"
+msgstr "知识"
+
+#: templates/nav_li_profile.html:14
+msgid "UserProfile"
+msgstr "个人信息"
+
+#: templates/nav_li_profile.html:19
+msgid "Backend"
+msgstr "后台"
+
+#: templates/nav_li_profile.html:20
+msgid "MyProfile"
+msgstr "我的信息"
+
+#: templates/nav_li_profile.html:21 templates/users/users-list.html:72
+#: templates/users/users-list.html:267
+msgid "Change Password"
+msgstr "修改密码"
+
+#: templates/nav_users.html:58
+msgid "File distribution"
+msgstr "文件分发"
+
+#: templates/users/groups-add-update.html:38
+#: templates/users/users-add-update.html:3
+#: templates/users/users-add-update.html:18
+#: templates/users/users-add-update.html:27
+#: templates/users/users-add-update.html:42 templates/users/users-detail.html:4
+#: templates/users/users-detail.html:15 templates/users/users-detail.html:24
+#: templates/users/users-detail.html:40 templates/users/users-list.html:11
+#: templates/users/users-list.html:16 templates/users/users-list.html:25
+#: templates/users/users-list.html:41
+msgid "UserInfo"
+msgstr "用户信息"
+
+#: templates/users/groups-list.html:61 templates/users/groups-list.html:79
+#: users/models.py:45
+msgid "DepartMent Name"
+msgstr "部门名称"
+
+#: templates/users/groups-list.html:80
+msgid "DepartMent Users"
+msgstr "部门关联用户"
+
+#: templates/users/groups-list.html:81 users/models.py:46
+msgid "DepartMent Comment"
+msgstr "部门备注"
+
+#: templates/users/keys-add-update.html:34
+msgid "KeyInfo"
+msgstr "密钥信息"
+
+#: templates/users/keys-add-update.html:64
+msgid "KeyFile Basic Info"
+msgstr "密钥基础信息"
+
+#: templates/users/keys-list.html:80 users/models.py:87
+#| msgid "Asset User"
+msgid "Key User"
+msgstr "服务器管理用户"
+
+#: templates/users/keys-list.html:82 users/models.py:88
+msgid "Key Password"
+msgstr "密钥密码"
+
+#: templates/users/login.html:9
+msgid "Login Page"
+msgstr "登录页面"
+
+#: templates/users/login.html:32
+msgid "Update Code"
+msgstr "更新验证码"
+
+#: templates/users/permission-add-update.html:10
+#: templates/users/permission-add-update.html:19
+#: templates/users/permission-add-update.html:34
+#: templates/users/permission-list.html:11
+#: templates/users/permission-list.html:20
+#: templates/users/permission-list.html:36 users/models.py:114
+#: users/models.py:115
+msgid "Permission Manage"
+msgstr "权限管理"
+
+#: templates/users/permission-add-update.html:64
+msgid "Permission Basic Info"
+msgstr "权限基础信息"
+
+#: templates/users/permission-list.html:61
+#: templates/users/permission-list.html:79 users/models.py:108
+msgid "Permission Name"
+msgstr "权限名称"
+
+#: templates/users/permission-list.html:80
+msgid "Permission Lable Name"
+msgstr "权限标签名称"
+
+#: templates/users/permission-list.html:81 users/models.py:110
+msgid "Permission Url"
+msgstr "路由地址"
+
+#: templates/users/project-list.html:85
+msgid "Project Short Name"
+msgstr "项目简称"
+
+#: templates/users/project-list.html:88
+msgid "Create Time"
+msgstr "创建时间"
+
+#: templates/users/project-list.html:89 templates/users/users-detail.html:118
+msgid "Comment"
+msgstr "用户备注"
+
+#: templates/users/role-edit.html:74
+msgid "Role Permission update success"
+msgstr "角色权限更新成功"
+
+#: templates/users/role-edit.html:158
+msgid "You Are Sure To Update"
+msgstr "你确定更新吗？"
+
+#: templates/users/role-list.html:59
+msgid "Duplicate entry for key"
+msgstr "角色名重复"
+
+#: templates/users/role-list.html:64
+msgid "Role Name"
+msgstr "角色名称"
+
+#: templates/users/role-list.html:82
+msgid "role Name"
+msgstr "角色名称"
+
+#: templates/users/users-detail.html:82 templates/users/users-list.html:85
+#: users/models.py:142
+msgid "Email Address"
+msgstr "邮件地址"
+
+#: templates/users/users-detail.html:86 templates/users/users-list.html:86
+#: users/models.py:150
+msgid "User Department"
+msgstr "用户关联部门"
+
+#: templates/users/users-detail.html:90 users/models.py:151
+msgid "Mobile Phone"
+msgstr "手机"
+
+#: templates/users/users-detail.html:98 users/models.py:153
+msgid "User Level"
+msgstr "用户权限"
+
+#: templates/users/users-detail.html:102 templates/users/users-list.html:89
+#: users/models.py:155
+msgid "User Role"
+msgstr "用户角色"
+
+#: templates/users/users-detail.html:110 templates/users/users-list.html:88
+#: users/models.py:158
+msgid "User Type"
+msgstr "用户类型"
+
+#: templates/users/users-detail.html:111 templates/users/users-list.html:105
+#: users/forms.py:82 users/forms.py:115
+msgid "Superuser"
+msgstr "超级用户"
+
+#: templates/users/users-detail.html:111 templates/users/users-list.html:64
+#: templates/users/users-list.html:105 users/forms.py:10 users/forms.py:82
+#: users/forms.py:115 users/forms.py:134 users/forms.py:199 users/forms.py:246
+msgid "Username"
+msgstr "用户名"
+
+#: templates/users/users-detail.html:114 users/models.py:161
+msgid "Login By"
+msgstr "登录时间"
+
+#: templates/users/users-detail.html:126 users/models.py:159
+msgid "Login Limit"
+msgstr "登录次数"
+
+#: templates/users/users-detail.html:130 users/models.py:162
+msgid "Valid Date"
+msgstr "过期时间"
+
+#: templates/users/users-list.html:90
+msgid "Login Date Time"
+msgstr "登录时间"
+
+#: templates/users/users-list.html:240 templates/users/users-list.html:271
+#: templates/users/users-list.html:276
+msgid "Change Password Error"
+msgstr "修改密码错误"
+
+#: templates/users/users-list.html:240
+msgid "Your must choose only one user"
+msgstr "你必须选择一个用户"
+
+#: templates/users/users-list.html:245
+msgid "Input Password"
+msgstr "输入错误"
+
+#: templates/users/users-list.html:246
+msgid "Input Password Too"
+msgstr "再次输入密码"
+
+#: templates/users/users-list.html:267
+msgid "Change Password Successfully"
+msgstr "修改密码成功"
+
+#: templates/users/users-list.html:276
+msgid ""
+"You must select a user and the password length is greater than or equal to 6!"
+msgstr "你只能选择一个用户，并且密码长度大于等于6！"
+
+#: users/forms.py:12 users/forms.py:26
+msgid "Password"
+msgstr "密码"
+
+#: users/forms.py:37
+msgid "Please repeat the new password"
+msgstr "请重复新的密码"
+
+#: users/forms.py:38
+msgid "Input password error"
+msgstr "密码输入错误"
+
+#: users/forms.py:57
+msgid "Enter a different password twice"
+msgstr "输入不同的密码两次"
+
+#: users/forms.py:78 users/forms.py:110
+msgid "Account to Start"
+msgstr "激活账号"
+
+#: users/forms.py:78 users/forms.py:110
+msgid "Account Closed"
+msgstr "禁用账号"
+
+#: users/forms.py:93
+msgid "* The password is too short"
+msgstr "* 密码太短"
+
+#: users/forms.py:173
+msgid "Url format error"
+msgstr "路由箱式错误"
+
+#: users/models.py:18
+msgid "Users must have an email address"
+msgstr "用户名必须使用邮箱地址"
+
+#: users/models.py:63
+msgid "Project MiniName"
+msgstr "项目简称"
+
+#: users/models.py:65
+msgid "Project Comment"
+msgstr "项目备注"
+
+#: users/models.py:66
+msgid "Project Keyfile"
+msgstr "项目密钥"
+
+#: users/models.py:89
+msgid "Private Key"
+msgstr "私钥"
+
+#: users/models.py:90
+msgid "Public Key"
+msgstr "公钥"
+
+#: users/models.py:109
+msgid "Permission Lable"
+msgstr "权限标签"
+
+#: users/models.py:122
+msgid "RoleName"
+msgstr "角色名称"
+
+#: users/models.py:134
+msgid "View"
+msgstr "查看"
+
+#: users/models.py:135
+msgid "Exec"
+msgstr "执行"
+
+#: users/models.py:148
+msgid "Token"
+msgstr "令牌"
+
+#: users/models.py:156
+msgid "User Avatar"
+msgstr "用户头像"
+
+#: users/models.py:157
+msgid "Active"
+msgstr "激活"
+
+#: users/views/login.py:51
+msgid "Did you slip the wrong hand? try again"
+msgstr "你输入错了吗？ 再试一次"
+
+#: users/views/login.py:55
+msgid "Warning, {} has been disabled"
+msgstr "警告，{} 已被禁用"
+
+#: users/views/login.py:73
+msgid "Warning: {} has been disabled, please contact the administrator"
+msgstr "警告：{} 已被禁用请联系管理员"
+
+#: users/views/login.py:76
+msgid "Warning: {} remaining attempts are {}"
+msgstr "警告：{} 剩下的尝试次数为 {}"
+
+#: users/views/login.py:78
+msgid "Verification failed? Think again ^.^"
+msgstr "认证失败？再想想 ^.^ "
+
+#~ msgid "Product Line"
+#~ msgstr "业务线"
+
+#~ msgid "Work env"
+#~ msgstr "工作环境"
+
+#~ msgid "IDC Area"
+#~ msgstr "机房地区"

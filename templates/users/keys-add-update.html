@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block  title %}用户信息{% endblock %}
+{% load bootstrap3 %}
+{% load static %}
+{% load i18n %}
+
+{% block page-content %}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>{% trans 'Key Manage' %}</h2>
+        <ol class="breadcrumb">
+            <li>
+                 <a href="/">{% trans 'Home' %}</a>
+            </li>
+            <li>
+                <a>{% trans 'System Setup' %}</a>
+            </li>
+            <li class="active">
+                <strong>{% trans 'Key Manage' %}</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+
+    </div>
+</div>
+
+
+<div class="wrapper wrapper-content animated fadeInRight   ">
+    <div class="row">
+        <div class="col-lg-12" id="split-right">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>{% trans 'KeyInfo' %}</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#" >{% trans 'Config Option 1' %}</a>
+                            </li>
+                            <li><a href="#" >{% trans 'Config Option 2' %}</a>
+                            </li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+
+                    <form enctype="multipart/form-data" method="post" class="form-horizontal" action="">
+                        {% csrf_token %}
+                        {% if form.errors %}
+                            <div class="alert alert-danger" style="margin: 20px auto 0px">
+                                {{ form.errors }}
+                            </div>
+                        {% endif %}
+                        <div class="form-group">
+                            <div class="col-sm-10 col-sm-offset-0">
+                                <h3>{% trans 'KeyFile Basic Info' %}</h3>
+                                {% bootstrap_field form.name layout="horizontal" %}
+                                {% bootstrap_field form.user layout="horizontal" %}
+                                {% bootstrap_field form.password layout="horizontal" %}
+                                {% bootstrap_field form.private layout="horizontal" %}
+                                {% bootstrap_field form.public layout="horizontal" %}
+                            </div>
+                        </div>
+                        <input type="hidden" name="__next__" value="{{ i__next__ }}">
+
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-3">
+                                {% bootstrap_button "保存" id="submit_button" button_type="submit" button_class="btn-primary" %}
+                                <a class="btn btn-white" href="{{ i__next__ }}">取消</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+

@@ -1,0 +1,298 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block  title %}{% trans 'Server List' %}{% endblock %}
+{% block header-css %}
+
+{% load bootstrap3 %}
+{% endblock %}
+
+
+{% block  page-content %}
+
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>{% trans 'Server List' %}</h2>
+            <ol class="breadcrumb">
+                <li>
+                     <a href="/">{% trans 'Home' %}</a>
+                </li>
+                <li>
+                    <a href="{% url "asset:asset_list" %}">{% trans 'Service Manage' %}</a>
+                </li>
+                <li class="active">
+                    <strong>{% trans 'Server List' %}</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="panel-options">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a class="text-center"><i class="fa fa-laptop"></i>{% trans 'Server List' %}</a>
+                            </li>
+                            <li class="pull-right">
+                                <a class="btn btn-outline btn-default" href="{% url 'asset:asset_update'  nid %}"><i
+                                        class="fa fa-edit"></i>{% trans 'Update' %}</a>
+                            </li>
+                            <li class="pull-right">
+                                <a class="btn btn-outline btn-danger  asset_del">
+                                    <i class="fa fa-edit"></i>{% trans 'Delete' %}
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <div class="col-sm-7" style="padding-left: 0">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <span class="label"><b>{{ asset.hostname }}</b></span>
+                                    <div class="ibox-tools">
+                                        <a class="collapse-link">
+                                            <i class="fa fa-chevron-up"></i>
+                                        </a>
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                            <i class="fa fa-wrench"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-user">
+                                        </ul>
+                                        <a class="close-link">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="ibox-content">
+
+                                    <table class="table">
+                                        <tbody>
+                                        <tr>
+                                            <td style=" border-top: none !important;" width="20%">{% trans 'HostName' %}:</td>
+                                            <td style=" border-top: none !important;"><b>{{ asset.hostname }}</b></td>
+                                        </tr>
+										<tr>
+                                            <td width="20%">{% trans 'Project Name' %}:</td>
+                                            <td ><b>{{ asset.project.name }}</b></td>
+                                        </tr>
+										<tr>
+                                            <td  width="20%">{% trans 'Product Name' %}:</td>
+                                            <td ><b>{{ asset.product.name }}</b></td>
+                                        </tr>
+										<tr>
+                                            <td  width="20%">{% trans 'Server Use Name' %}:</td>
+                                            <td ><b>{% for i in asset.use_list %}{{ i.name }} {% endfor %}</b></td>
+                                        </tr>
+										<tr>
+                                            <td  width="20%">{% trans 'Working Environment Name' %}:</td>
+                                            <td ><b>{{ asset.work_env.name }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td  width="20%">{% trans 'IDC Name' %}:</td>
+                                            <td ><b>{{ asset.idc.name }}</b></td>
+                                        </tr>
+										<tr>
+                                            <td  width="20%">{% trans 'IP' %}:</td>
+                                            <td ><b>{{ asset.ip }}</b></td>
+                                        </tr>
+										<tr>
+                                            <td  width="20%">{% trans 'Other_IP' %}:</td>
+                                            <td ><b>{{ asset.other_ip }}</b></td>
+                                        </tr>
+										<tr>
+                                            <td  width="20%">{% trans 'Port' %}:</td>
+                                            <td ><b>{{ asset.port }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td  width="20%">{% trans "Asset User" %}:</td>
+                                            <td ><b>{{ asset.user }}</b></td>
+                                        </tr>
+										<tr>
+                                            <td  width="20%">{% trans "Asset Type" %}:</td>
+                                            <td ><b>{% if asset.asset_type == 1  %}
+                                                {% trans "Physical Machine" %}
+                                                {% elif asset.asset_type == 2 %}
+                                                {% trans "Virtual Machine" %}
+                                                {% elif asset.asset_type == 3 %}
+                                                {% trans "Switch Board" %}
+                                                {% elif asset.asset_type == 4 %}
+                                                {% trans "Router" %}
+                                                {% elif asset.asset_type == 5 %}
+                                                {% trans "Firewall" %}
+                                                {% elif asset.asset_type == 6 %}
+                                                {% trans "Docker" %}
+                                                {% elif asset.asset_type == 7 %}
+                                                {% trans "Other" %}
+                                                {% endif %}
+                                            </b></td>
+                                        </tr>
+										<tr>
+                                            <td  width="20%">{% trans 'System Type' %}:</td>
+                                            <td ><b>{{ asset.os_type }}</b></td>
+                                        </tr>
+										<tr>
+                                            <td  width="20%">{% trans 'System Version' %}:</td>
+                                            <td ><b>{{ asset.system_version }}</b></td>
+                                        </tr>
+										<tr>
+                                            <td  width="20%">{% trans 'MAC' %}:</td>
+                                            <td ><b>{{ asset.mac }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td  width="20%">{% trans 'CPU Type' %}:</td>
+                                            <td ><b>{{ asset.cpu_type }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td  width="20%">{% trans 'CPU Core Count' %}:</td>
+                                            <td ><b>{{ asset.cpu_core }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td  width="20%">{% trans 'Number of CPUs' %}:</td>
+                                            <td ><b>{{ asset.cpu_total }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td  width="20%">{% trans 'Asset SN Number' %}:</td>
+                                            <td ><b>{{ asset.sn }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td  width="20%">{% trans 'Asset Memory' %}:</td>
+                                            <td ><b>{{ asset.memory }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td  width="20%">{% trans 'Disk Information' %}:</td>
+                                            <td ><b>{{ asset.disk_info }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td  width="20%">{% trans 'Mount Partition' %}:</td>
+                                            <td ><b>{{ asset.disk_mount }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td  width="20%">{% trans 'Server Type' %}:</td>
+                                            <td ><b>{{ asset.server_type }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td  width="20%">{% trans 'System Kernel Version' %}:</td>
+                                            <td ><b>{{ asset.os_kernel }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td  width="20%">{% trans 'System Platform' %}:</td>
+                                            <td ><b>{{ asset.system_arch }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td  width="20%">{% trans 'Equipment Status' %}:</td>
+                                            <td ><b>
+                                                {% if asset.status == 1  %}
+                                                {% trans "Used" %}
+                                                {% elif asset.status == 2 %}
+                                                {% trans "Unused" %}
+                                                {% elif asset.status == 3 %}
+                                                {% trans "Scraped" %}
+                                                {% elif asset.status == 4 %}
+                                                {% trans "SoldOut" %}
+                                                {% endif %}
+                                            </b></td>
+                                        </tr>
+                                        <tr>
+                                            <td  width="20%">{% trans 'Create By' %}:</td>
+                                            <td ><b>{{ asset.create_date }}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td  width="20%">{% trans 'Update By' %}:</td>
+                                            <td ><b>{{ asset.update_date }}</b></td>
+                                        </tr>
+
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-5" style="padding-left: 0;padding-right: 0">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <i class="fa fa-info-circle"></i> 快速修改
+                                </div>
+                                <div class="panel-body">
+                                    <table class="table">
+                                        <tbody>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+{% endblock %}
+{% block footer-js %}
+
+
+        <script>
+
+
+            $(function () {
+                $(document).on('click', '.asset_del', function () {
+                    var id = $(this).parent().parent().attr('id');
+                    swal({
+                        title: {% trans 'You Are Sure To Delete' %},
+                        text: {% trans 'You Will Never Recover' %},
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: {% trans 'confirm' %},
+                        closeOnConfirm: false
+                    }, function () {
+                        $.ajax({
+                            headers: {"X-CSRFToken": '{{ csrf_token }}'},
+                            url: "{% url 'asset:asset_all_del' %}",
+                            type: 'POST',
+                            data: {'nid': id},
+                            success: function (data) {
+                                var obj = JSON.parse(data);
+                                if (obj.status) {
+                                    swal({title: {% trans 'Delete' %}, text: {% trans 'Deleted Successfully' %}"", type: "success"}, function () {
+                                        window.location.reload();
+                                    })
+                                } else {
+                                    swal({% trans 'Delete Error' %}, {% trans 'Delete Error' %} + "[ " + obj.error + " ]" + {% trans 'Error' %}, "error");
+                                }
+                            }
+                        });
+
+
+                    });
+
+                });
+
+
+            });
+
+
+        </script>
+
+
+    {% endblock %}
+

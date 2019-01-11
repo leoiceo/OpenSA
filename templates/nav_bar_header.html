@@ -1,0 +1,87 @@
+{% load static %}
+{% load i18n %}
+<nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
+    <div class="navbar-header">
+        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+        <form role="search" class="navbar-form-custom col-lg-4" method="get">
+            <div class="form-group">
+            <input type="text" placeholder="" class="form-control" name="search" id="top-search">
+            </div>
+        </form>
+    </div>
+    <ul class="nav navbar-top-links navbar-right">
+        <li class="dropdown">
+            <a class="count-info dropdown-toggle" data-toggle="dropdown" href="#" target="_blank" aria-expanded="true">
+                <i class="fa fa-joomla"></i>
+                {% if project %}
+                    <span class="m-r-sm text-muted welcome-message">{{ project }}<b class="caret"></b></span>
+                {% else %}
+                    <span class="m-r-sm text-muted welcome-message">{% trans 'Choice Project' %}<b class="caret"></b></span>
+                {% endif %}
+            </a>
+
+                <ul class="dropdown-menu animated fadeInRight m-t-xs profile-dropdown">
+                    {% for pro in pro_info %}
+                        <li class="choice-project" name="{{ pro.id }}">
+                            <a class="count-info">
+{#                                <i class="fa fa-asterisk"></i>#}
+                                <span  class="m-r-sm text-muted welcome-message">{{ pro.name }}({{ pro.mini_name }})</span>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+        </li>
+
+        <li>
+            <span class="m-r-sm text-muted welcome-message">
+                <a href="/"  title="{% trans 'Back index' %}"><i class="fa fa-home"></i></a>{% trans 'Welcome to login OpenSA' %}
+            </span>
+        </li>
+
+        <li class="dropdown">
+            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
+            </a>
+            <ul class="dropdown-menu dropdown-messages">
+                <li>
+                    <div class="dropdown-messages-box">
+                        <a href="#" class="pull-left">
+                            <img alt="image" class="img-circle" src="{% static 'img/a7.jpg' %}">
+                        </a>
+                        <div class="media-body">
+                            <small class="pull-right">46h ago</small>
+                            <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
+                            <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
+            </a>
+
+            <ul class="dropdown-menu dropdown-alerts">
+                <li>
+                    <a href="#">
+                        <div>
+                            <i class="fa fa-envelope fa-fw"></i> You have 16 messages
+                            <span class="pull-right text-muted small">4 minutes ago</span>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">
+                <i class="glyphicon glyphicon-question-sign"></i>{% trans 'Knowledge' %}
+            </a>
+        </li>
+        <li>
+            <a href="{% url 'users:logout' %}">
+                <i class="fa fa-sign-out"></i>{% trans 'Logout' %}
+            </a>
+        </li>
+    </ul>
+</nav>

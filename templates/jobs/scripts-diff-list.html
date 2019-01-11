@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+{% load	bootstrap3 %}
+{% load i18n %}
+{% load static %}
+
+{% block  title %}{% trans 'Scripts Diff' %}{% endblock %}
+{% block header-css %}
+    <link href="{% static 'layer/theme/default/layer.css' %}" rel="stylesheet">
+{% endblock %}
+{% block page-content %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>{% trans 'Scripts Diff' %}</h2>
+            <ol class="breadcrumb">
+                <li>
+                     <a href="/">{% trans 'Home' %}</a>
+                </li>
+                <li>
+                    <a>{% trans 'Jobs Manage' %}</a>
+                </li>
+                <li class="active">
+                    <strong>{% trans 'Scripts Diff' %}</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+
+            <div class="col-lg-12" id="split-right">
+
+                <div class="ibox float-e-margins">
+
+                    <div class="ibox-title">
+                        <h5>{% trans 'Scripts Diff ' %}{{ script_name }} {% trans 'Name' %}</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="#" >{% trans 'Config Option 1' %}</a>
+                                </li>
+                                <li><a href="#" >{% trans 'Config Option 2' %}</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="table-responsive">
+
+                            <form id="cha" class="form-horizontal" action="" method="GET">
+                                {% csrf_token %}
+                                <div class="alert alert-danger" id="input_choice" style="margin: 20px auto 0px" hidden>
+                                    {% trans 'You cannot choose more than two' %}
+                                </div>
+                                <div class="pull-left"><input type="text" class="form-control" name="name" placeholder="{% trans 'Scripts Name' %}" required></div>
+                                &nbsp;
+                                <button class="btn btn-sm btn-primary" type="submit">{% trans 'Query' %}</button>
+
+                            </form>
+
+                            <div id="del_form_asset_all" class="form-horizontal">
+                                {% csrf_token %}
+                                <table class="table table-striped table-bordered table-hover dataTables-asset">
+                                    <thead>
+                                    <tr>
+                                       <th width="20">
+                                        </th>
+                                        <th>{% trans 'Config Type' %}</th>
+                                        <th>{% trans 'Update By' %}</th>
+                                        <th>{% trans 'Update User' %}</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    {% for row in script_old.object_list %}
+                                        <tr class="gradeA" id="{{ row.id }}">
+                                        <td><input type="checkbox" value="{{ row.id }}" name="diff_id"></td>
+                                        <td>{{ row.type }}</td>
+                                        <td>{{ row.update_date|date:"Y-m-d h:m:s" }}</td>
+                                        <td>{{ row.update_user }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+
+                                </table>
+                                <button class="btn btn-primary btn-xs scripts_diff">{% trans 'Diff' %}</button>
+                                <div class="pull-right">
+                                     <nav class="pagination">
+
+                                        {% if scripts_list.has_previous %}
+                                            <li class="long"><a href="?{{ scripts_list.previous_page_number.querystring }}">{% trans 'Home' %}</a></li>
+                                        {% else %}
+                                            <li><a href="{% url "jobs:scripts_list" %}?page=1">{% trans 'Home' %}</a></li>
+                                        {% endif %}
+
+                                        {% for page in scripts_list.pages %}
+                                        {% if page %}
+                                            {% ifequal page scripts_list.number %}
+                                                <li class="active"><a href="?{{ page.querystring }}">{{ page }}</a></li>
+                                            {% else %}
+                                                 <li><a href="?{{ page.querystring }}" class="page">{{ page }}</a></li>
+                                            {% endifequal %}
+                                        {% else %}
+                                            <li class="none"><a href="">...</a></li>
+                                        {% endif %}
+                                        {% endfor %}
+
+                                        {% if scripts_list.has_next %}
+                                            <li class="long"><a href="?{{ scripts_list.next_page_number.querystring }}">{% trans 'Next' %}</a></li>
+                                        {% endif %}
+                                        <li>
+                                            <a href="{% url "jobs:scripts_list" %}?page={{ scripts_list.paginator.num_pages }}">{% trans 'Trailer' %}</a>
+                                        </li>
+                                        <li><span style="color: #0a0a0a">{% trans 'Total' %}: &nbsp;{{ scripts_list.paginator.num_pages }} {% trans 'Page' %}</span>
+                                        </li>
+                                    </nav>
+                                </div> <!--页码 -->
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block footer-js %}
+        <script src="{% static 'js/plugins/dataTables/datatables.min.js' %}"></script>
+        <script src="{% static 'layer/layer.js' %}"></script>
+
+    <script>
+    $('.scripts_diff').click(function(){
+        var obj = document.getElementsByName("diff_id");
+        tool_id_list = [];
+        for (var i = 0; i < obj.length; i++) {
+            if (obj[i].checked) {
+                    tool_id_list.push((obj[i].value));
+            }
+        }
+        if (tool_id_list.length > 2){
+            $("#input_choice").show();
+        }else {
+            $("#input_choice").hide();
+            var ids = '{{ pk }}';
+            var new_url = '{% url 'jobs:scripts_diff' %}?id='+ ids +'&diff_id='+tool_id_list  ; // webterminal socket url
+            layer.open({
+            type: 2,
+            title: 'Scripts Diff:',
+            shadeClose: true,
+            shade: false,
+            maxmin: true, //开启最大化最小化按钮
+            area: ['893px', '600px'],
+            closeBtn: 1,
+            content: [new_url]
+            });
+        }
+    });
+    </script>
+{% endblock %}

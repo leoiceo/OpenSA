@@ -1,0 +1,249 @@
+{% extends 'base.html' %}
+{% load	bootstrap3 %}
+{% load i18n %}
+{% load static %}
+{% include 'nav_cat_bar.html' %}
+
+    {% block header-css %}
+    <link type="text/css" rel="stylesheet" href="{% static 'termjs/xterm.min.css' %}">
+    <link href="{% static 'css/plugins/dataTables/datatables.min.css' %}" rel="stylesheet">
+    {% endblock %}
+
+{% block page-content %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>{% trans 'Batch Scripts' %}</h2>
+            <ol class="breadcrumb">
+                <li>
+                     <a href="/">{% trans 'Home' %}</a>
+                </li>
+                <li>
+                    <a>{% trans 'Jobs Manage' %}</a>
+                </li>
+                <li class="active">
+                    <strong>{% trans 'Batch Tasks' %}</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-lg-12" id="split-right">
+                <div class="ibox float-e-margins">
+
+                    <div class="ibox-title">
+                        <h5>{% trans 'Batch Scripts' %}</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="#" >{% trans 'Config Option 1' %}</a>
+                                </li>
+                                <li><a href="#" >{% trans 'Config Option 2' %}</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="ibox-content" style="overflow:hidden;zoom:1;">
+                        <div class="col-lg-5">
+                            <dl class="dl-horizontal">
+                                <dt>{% trans 'Job ID' %}:</dt> <dd>{{yet.id}}</dd>
+                                <dt>{% trans 'Executive User' %}:</dt> <dd>{{keymanage_obj.user}}</dd>
+                                <dt>{% trans 'Task Script' %}:</dt> <dd>{{scriptsmanage_obj.project}}-{{scriptsmanage_obj.name}}</dd>
+                                <dt>{% trans 'Script args' %}:</dt>
+                                <dd>
+                                {% ifequal args_list None %}
+                                    {% trans 'no args' %}
+                                {% else %}
+                                    {% for i in args_list %}{% for k,v in i.items %}{{ k }}:{{ v }}|{% endfor %}{% endfor %}
+                                {% endifequal %}
+                                </dd>
+                                <dt>{% trans 'Job Status' %}:</dt>
+                                <dd id="task_status">
+                                        <span class='sandybrown-fonts'>{% trans 'Executing' %}</span>
+                                </dd>
+                                <dt>{% trans 'Total Assets' %}:</dt><dd id="asset_count">{{ asset_count }}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-lg-7">
+                            <dl class="dl-horizontal" >
+                                <dt>{% trans 'Create by' %}:</dt> <dd> <i class="fa fa-clock-o" aria-hidden="true"></i> {{jobs_obj.start_time|date:"Y-m-d H:i:s"}}</dd>
+                                <dt>{% trans 'Timeout' %} :</dt><dd>{{ timeout }}s</dd>
+                                <dt>{% trans 'Operate' %}:</dt><dd>{{ user.username }}</dd>
+                                <dt>{% trans 'Task Type' %}:</dt><dd>{{jobs_obj.get_type_display}}</dd>
+                                <dt>{% trans 'Total Time' %}:</dt><dd id="total_time"></dd>
+                                <dt>{% trans 'Completed Assets' %}:</dt><dd id="completed_count"></dd>
+                            </dl>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <dl class="dl-horizontal">
+                                <dt>{% trans 'Task Progress' %}:</dt>
+                                <dd>
+                                    <div class="progress progress-striped active m-b-sm">
+                                        <div style="width:0%;" class="progress-bar progress-bar-warning" id="process_id"></div>
+                                    </div>
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="col-lg-5">
+                            <table class="table table-striped table-bordered table-hover dataTables-asset" id="dataTables-asset">
+                                <thead>
+                                    <th class="text-center">{% trans "Task ID" %}</th>
+                                    <th class="text-center">{% trans "Hostname" %}</th>
+                                    <th class="text-center">{% trans "IP" %}</th>
+                                    <th class="text-center">{% trans "Status" %}</th>
+                                    <th class="text-center">{% trans "Total Time" %}(s)</th>
+                                </thead>
+                            </table>
+                        </div>
+                        <div class="col-lg-7">
+                            <div>
+                                <h3></i>{% trans 'Current server' %}:<br>
+                                    <span id="current_server" class="fa fa-server"> </span>
+                                </h3>
+                            </div>
+                            <h3>{% trans 'Console' %}:</h3>
+                            <div id="console_div">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{%endblock%}
+
+{% block footer-js %}
+<script src="{% static 'termjs/xterm.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'termjs/addons/attach/attach.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'termjs/addons/fit/fit.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/plugins/dataTables/datatables.min.js' %}"></script>
+
+<script>
+
+    var term = new Terminal({cols: 132, rows: 25, screenKeys: true, useStyle:true});
+    $(document).ready(function() {
+            $("html,body").animate({scrollTop:0}, 100);
+            term.open();
+            $('.terminal').detach().appendTo('#console_div');
+        });
+
+    $(document).ready(function(){
+        createTable();
+    });
+
+    var tables;
+
+    function reloadTable(){
+        tables.fnDestroy();
+        createTable();
+    }
+
+    timer = setInterval("reloadTable()",1000);
+    function  stopUpdate() {
+        clearInterval(timer);
+    }
+
+    function createTable(){
+        tables = $('#dataTables-asset').dataTable({
+            bProcessing: true, // 是否显示取数据时的那个等待提示
+            bServerSide: false,
+            bDeferRender: true,
+            sAjaxSource: "{% url 'jobs:batch_scripts_taskschedule' %}",
+            fnServerData: retrieveData || [],
+            pageLength: 10,
+            bInfo:false,  //显示信息 如 当前x页 共x条数据等
+            bSort:true,  //允许排序
+            bFilter:true,  //检索、筛选框
+            responsive: true,
+            dom: '<"html5buttons"B>lTfgitp',
+            buttons: [],
+            columns: [
+                { "data": "id" },
+                { "data": "hostname" },
+                { "data": "ip" },
+                { "data": "status" },
+                { "data": "total_time" },
+            ]
+        }).off("click").on("click", function(event) {
+            var TaskScheduleID = ($(event.target).closest("tr").attr("id"));
+            get_data(TaskScheduleID);
+
+        });
+    }
+
+    function retrieveData( sSource111,aoData111, fnCallback111) {
+        $.ajax({
+            headers: {"X-CSRFToken": '{{ csrf_token }}'},
+            url : sSource111,//这个就是请求地址对应sAjaxSource
+            data : {"jobid": "{{jobs_obj.id}}" },//这个是把datatable的一些基本数据传给后台,比如起始位置,每页显示的行数
+            type : 'post',
+            dataType : 'json',
+            async : false,
+            success : function(result) {
+                fnCallback111(result);//把返回的数据传给这个方法就可以了,datatable会自动绑定数据的
+                if(result.default){
+                    get_data(result.default);
+                    $('#' + result.default).attr("class","info remove_info");
+                    $("#current_server").html(result.default);
+                }
+                if(result.process == "100.0" && result.jobs_count == "{{ asset_count }}"){
+                    stopUpdate();
+                    $("#process_id").removeClass("progress-bar-success").addClass("progress-bar-info");
+                    $("#process_id").css("width",result.process + "%");
+                    $("#task_status").find("span").html("{% trans 'Execution Succeed' %}");
+                    $("#task_status").find("span").removeClass("sandybrown-fonts").addClass("green-fonts");
+                    $("#total_time").html(result.total_time + "s");
+                    $("#completed_count").html(result.success_count);
+                }else if(result.process){
+                    $("#process_id").removeClass("progress-bar-warning").addClass("progress-bar-success");
+                    $("#process_id").css("width",result.process + "%");
+                    $("#completed_count").html(result.success_count);
+                }
+            },
+        });
+    }
+
+    function get_data (TaskScheduleID){
+        $.ajax({
+            type: "POST",
+            dataType:"json",
+            url: "{% url 'jobs:batch_scripts_taskschedule' %}",
+            data: {"tsid":TaskScheduleID},
+            success: function (obj) {
+                if (obj.error){
+                    swal({
+                        title: '{% trans 'An exception occurs' %}',
+                        text: obj.error,
+                        type: "warning",
+                        closeOnConfirm: false
+                    })
+                }else {
+                    var data = obj.data;
+                    if (data.result) {
+                        $(".remove_info").removeClass("info");
+                        $('#' + TaskScheduleID).attr("class", "info remove_info");
+                        $("#current_server").html(TaskScheduleID);
+                        term.clear();
+                        term.write(data.result);
+                    }
+                }
+            },
+        })
+    }
+    </script>
+{% endblock %}

@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load	bootstrap3 %}
+{% load i18n %}
+{% load static %}
+
+{% block  title %}{% trans 'Intervals' %}{% endblock %}
+{% block header-css %}
+
+{% endblock %}
+{% block page-content %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>{% trans 'Intervals' %}</h2>
+            <ol class="breadcrumb">
+                <li>
+                     <a href="/">{% trans 'Home' %}</a>
+                </li>
+                <li>
+                    <a href="{% url 'jobs:scripts_list' %}">{% trans 'Jobs Manage' %}</a>
+                </li>
+                <li class="active">
+                    <strong>{% trans 'Intervals' %}</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+    <div class="wrapper wrapper-content">
+        <div class="row">
+
+            <div class="col-lg-12" id="split-right">
+
+                <div class="ibox float-e-margins">
+
+                    <div class="ibox-title">
+                        <h5>{% trans 'Intervals' %}</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="#" >{% trans 'Config Option 1' %}</a>
+                                </li>
+                                <li><a href="#" >{% trans 'Config Option 2' %}</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <form enctype="multipart/form-data" method="post" class="form-horizontal" action="">
+                        {% csrf_token %}
+                        {% if form.errors %}
+                            <div class="alert alert-danger" style="margin: 20px auto 0px">
+                                {{ form.errors }}
+                            </div>
+                        {% endif %}
+
+                        <div class="form-group">
+                            <div class="col-sm-10 col-sm-offset-0">
+                                <h3>{% trans 'Crontab Basic Info' %}</h3>
+
+                                {% bootstrap_field form.minute layout="horizontal" %}
+                                {% bootstrap_field form.hour layout="horizontal" %}
+                                {% bootstrap_field form.day_of_week layout="horizontal" %}
+                                {% bootstrap_field form.day_of_month  layout="horizontal" %}
+                                {% bootstrap_field form.month_of_year  layout="horizontal" %}
+                                {% bootstrap_field form.timezone  layout="horizontal" %}
+
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-3">
+                                <button type="submit" class="btn btn-success" >{% trans 'confirm' %}</button>
+                                <a class="btn btn-white" href="{% url "jobs:crontabs_list" %}">{% trans 'Cancel' %}</a>
+                            </div>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+{% block footer-js %}
+
+{% endblock %}
+{% block footer-js-ajax %}
+{% endblock %}

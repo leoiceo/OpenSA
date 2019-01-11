@@ -1,0 +1,30 @@
+{% load i18n %}
+<div class="footer fixed low_width_display_none">
+    <div class="pull-right" id="main">
+        <form name="languageform" id="languageform" method='post'>{% csrf_token %}
+        <input name="next" type="hidden" value="{{request.META.REQUEST_URI}}" />
+           <select id="language" name="language" onchange="selectdo(this)">
+               <option value="1" >{% trans "Languages" %}</option>
+                {% for lang in LANGUAGES %}
+                    <option value="{{ lang.0 }}">{{ lang.1 }}</option>
+                {% endfor %}
+             </select>
+        </form>
+    </div>
+    <div class="pull-right">
+            <i class="fa fa-globe" aria-hidden="true"></i>
+    </div>
+    <div class="text-center">
+        <strong>Copyright</strong>©2018-2021 OpenSA. leoiceo@gmail.com All Rights Reserved
+    </div>
+</div>
+
+<script type="application/javascript">
+    function selectdo(obj) {
+        str="/i18n/setlang/";
+        myform = document.getElementById('languageform');
+        myform.method = "POST";
+        myform.action = str;
+        myform.submit();
+    }
+</script>

@@ -1,0 +1,208 @@
+{% extends "base.html" %}
+{% load	bootstrap3 %}
+{% load i18n %}
+{% load static %}
+
+{% block  title %}{% trans 'Role Manage' %}{% endblock %}
+
+{% block page-content %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>{% trans 'Role Manage' %}</h2>
+            <ol class="breadcrumb">
+                <li>
+                     <a href="/">{% trans 'Home' %}</a>
+                </li>
+                <li>
+                    <a>{% trans 'System Setup' %}</a>
+                </li>
+                <li class="active">
+                    <strong>{% trans 'Role Manage' %}</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+
+    <div class="wrapper wrapper-content animated fadeInRight   ">
+        <div class="row">
+
+            <div class="col-lg-12" id="split-right">
+
+                <div class="ibox float-e-margins">
+
+                    <div class="ibox-title">
+                        <h5>{% trans 'Role Manage' %}</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="#" >{% trans 'Config Option 1' %}</a>
+                                </li>
+                                <li><a href="#" >{% trans 'Config Option 2' %}</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <select id="urls_total" name="urls" class="form-control m-b" size="12" multiple style="display: none">
+                        {% for purl in urls %}
+                            <option value="{{ purl.id }}">{{ purl.name }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <select id="urls_select_total" name="urls_select" class="form-control m-b" size="12"  multiple style="display: none">
+                        {% for purl in urls_select %}
+                        <option value="{{ purl.id }}">{{ purl.name }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <div class="ibox-content">
+                        {% if error %}
+                            <div class="alert alert-warning text-center">{{ error }}</div>
+                        {% endif %}
+                        {% if msg %}
+                            <div class="alert alert-success text-center">{% trans 'Role Permission update success' %}</div>
+                        {% endif %}
+                        <div id="sudoPerm"  class="form-horizontal">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="form-group">
+                                    <label for="group_name" class="col-sm-2 control-label">角色名称</label>
+                                    <div class="col-sm-8">
+                                        <input id="role_id" name="role_id"  type="text" class="form-control" value="{{ role_obj.id }}" style="display: none">
+                                        <input id="role_name" name="role_name"  type="text" class="form-control" value="{{ role_obj.name }}" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="hr-line-dashed"></div>
+
+                                <div class="form-group">
+                                    <label for="group_name" class="col-sm-2 control-label">过滤</label>
+                                    <div class="col-sm-4">
+                                        <input id="noselect" class="form-control" oninput="search_ip(this.value, 'urls', 'urls_total')">
+                                    </div>
+                                    <div class="col-sm-1">
+                                    </div>
+                                    <div id="select" class="col-sm-3">
+                                        <input  class="form-control" oninput="search_ip(this.value, 'urls_select', 'urls_select_total')">
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="" class="col-sm-2 control-label">URLS<span class="red-fonts">*</span></label>
+                                    <div class="col-sm-4">
+                                        <div>
+                                            <select id="urls" name="urls" class="form-control m-b" size="12" multiple>
+                                                {% for purl in urls %}
+                                                    <option value="{{ purl.id }}">{{ purl.name }}({{purl.url}})</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-1">
+                                        <div class="btn-group" style="margin-top: 60px;">
+                                            <button type="button" class="btn btn-white" onclick="move('urls', 'urls_select', 'urls_total', 'urls_select_total'  )"><i class="fa fa-chevron-right"></i></button>
+                                            <button type="button" class="btn btn-white" onclick="move('urls_select', 'urls', 'urls_select_total', 'urls_total')"><i class="fa fa-chevron-left"></i> </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-3">
+                                        <div>
+                                            <select id="urls_select" name="urls_select" class="form-control m-b" size="12"  multiple>
+                                                {% for url in role_urls %}
+                                                <option value="{{ url.id }}">{{ url.name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-sm-4 col-sm-offset-2">
+                                        <button class="btn btn-white" type="reset">取消</button>
+                                        <button id="submit_button" class="btn btn-primary asset_confirm">更新</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+{% block footer-js %}
+
+    <script>
+    $(document).on('click', '#submit_button', function () {
+            var id = {{ role_obj.id }};
+            var urls_select = $('#urls_select').val();
+            console.log(urls_select);
+            swal({
+                title: '{% trans 'You Are Sure To Update' %}',
+                text: '{% trans 'You Will Never Recover' %}',
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: '{% trans 'confirm' %}',
+                cancelButtonText:'{% trans 'cancel' %}',
+                closeOnConfirm: false
+            }, function () {
+                $.ajax({
+                    headers: {"X-CSRFToken": '{{ csrf_token }}'},
+                    url: "{% url 'users:role_edit' pk=role_obj.id %}",
+                    type: 'POST',
+                    data: {'nid': id,'urls_select':urls_select},
+                    success: function (data) {
+                        var obj = JSON.parse(data);
+                        if (obj.status) {
+                            swal({title: '{% trans 'Update' %}', text: '{% trans 'Deleted Successfully' %}', type: "success"}, function () {
+                                window.location.reload();
+                            })
+                        } else {
+                            swal('{% trans 'Delete Error' %}', '{% trans 'Delete Error' %}' + "[ " + obj.error + " ]" + '{% trans 'Error' %}', "error");
+                        }
+                    }
+                });
+            });
+        });
+
+    $(document).ready(function(){
+        $("#submit_button").click(function(){
+            $('#urls_select option').each(function(){
+                $(this).prop('selected', true)
+                 })
+               })
+             });
+
+    function search_ip(text,noselect,total) {
+        $("#" + noselect).children().each(
+            function () {
+                $(this).remove();
+            }
+        );
+        $("#" + total).children().each(function () {
+            if($(this).text().search(text) != -1){
+                $("#" + noselect).append($(this).clone())
+            }
+        })
+    }
+    </script>
+
+    {% endblock%}

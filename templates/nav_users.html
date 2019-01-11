@@ -1,0 +1,174 @@
+{% load i18n %}
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+
+        <ul class="nav metismenu" id="side-menu">
+
+            {% include 'nav_li_profile.html' %}
+
+            <li id="index">
+               <a href="/"><i class="fa fa-dashboard"></i> <span class="nav-label">{% trans 'Dashboard' %}</span></a>
+            </li>
+
+            {% for p in user.role.permission.all %}
+                {% ifequal p.lable_name "asset_list" %}
+                <li id="asset" class="{{ asset_active }}">
+                <a href="#" ><i class="fa fa-sitemap"></i> <span class="nav-label">{% trans 'Service Manage' %}</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        {% for m in  p.menu.all %}
+                            {% ifequal m.first "asset-list" %}
+                                <li class="{{ asset_list_active }}">
+                                    <a href="{% url 'asset:asset_list' %}">{% trans 'Server Manage' %}</a>
+                                </li>
+                            {% endifequal %}
+                            {% ifequal m.first "idc-list" %}
+                                <li class="{{ asset_idc_active }}">
+                                    <a href="{% url 'asset:idc_list' %}">{% trans 'Idc Manage' %}</a>
+                                </li>
+                            {% endifequal %}
+                            {% ifequal m.first "product-list" %}
+                                <li class="{{ asset_product_active }}">
+                                    <a href="{% url 'asset:product_list' %}">{% trans 'Product Manage' %}</a>
+                                </li>
+                            {% endifequal %}
+                            {% ifequal m.first "use-list" %}
+                                <li class="{{ asset_use_active }}">
+                                    <a href="{% url 'asset:use_list' %}">{% trans 'Server Use' %}</a>
+                                </li>
+                            {% endifequal %}
+                            {% ifequal m.first "workenv-list" %}
+                                <li class="{{ asset_work_active }}">
+                                    <a href="{% url 'asset:workenv_list' %}">{% trans 'Work Env' %}</a>
+                                </li>
+                            {% endifequal %}
+                            {% ifequal m.first "area-list" %}
+                                <li class="{{ asset_area_active }}">
+                                    <a href="{% url 'asset:area_list' %}">{% trans 'Area Manage' %}</a>
+                                </li>
+                            {% endifequal %}
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% endifequal %}
+            {% endfor %}
+
+            {% for p in user.role.permission.all %}
+                {% ifequal p.lable_name "jobs_list" %}
+                <li id="jobs" class="{{ jobs_active }}">
+                <a href="#"><i class="fa fa-flask"></i> <span class="nav-label">{% trans 'Jobs Manage' %}</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    {% for m in  p.menu.all %}
+                        {% ifequal m.first "scripts-list" %}
+                            <li class="{{ scripts_manage_active }}">
+                                <a href="{% url 'jobs:scripts_list' %}">{% trans 'Scripts Manage' %}</a>
+                            </li>
+                        {% endifequal %}
+                        {% ifequal m.first "periodictasks" %}
+                            <li class="{{ scheduled_tasks_active }}">
+                                <a href="{% url 'jobs:periodictasks_list' %}">{% trans 'Scheduled Tasks' %}</a>
+                            </li>
+                        {% endifequal %}
+                        {% ifequal m.first "asset-list" %}
+                            <li class="{{ tasks_scheduling_active }}">
+                                <a href="#">{% trans 'Task scheduling' %}</a>
+                            </li>
+                        {% endifequal %}
+                        {% ifequal m.first "crontabs" %}
+                            <li class="{{ crontab_active }}">
+                                <a href="{% url 'jobs:crontabs_list' %}">{% trans 'Crontab' %}</a>
+                            </li>
+                        {% endifequal %}
+                        {% ifequal m.first "intervals" %}
+                            <li class="{{ interval_active }}">
+                                <a href="{% url 'jobs:intervals_list' %}">{% trans 'Interval' %}</a>
+                            </li>
+                        {% endifequal %}
+                    {% endfor %}
+                    <li class="{{ batch_tasks_active }}">
+                        <a href="#">{% trans 'Batch Tasks' %}<span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level">
+                            {% for m in p.menu.all %}
+                                {% ifequal m.secondary "batch-files" %}
+                                    <li class="{{ batch_file_active }}"><a href="{% url 'jobs:batch_files' %}">{% trans 'File Distribution' %}</a></li>
+                                {% endifequal %}
+                                {% ifequal m.secondary "batch-cmd" %}
+                                    <li class="{{ batch_cmd_active}}"><a href="{% url 'jobs:cmd_list' %}">{% trans 'Batch CMD' %}</a></li>
+                                {% endifequal %}
+                                {% ifequal m.secondary "batch-scripts" %}
+                                    <li class="{{ batch_script_active }}"><a href="{% url 'jobs:batch_scripts' %}">{% trans 'Batch Scripts' %}</a></li>
+                                {% endifequal %}
+                                {% ifequal m.secondary "batch-tasks" %}
+                                    <li class="{{ batch_task_active }}"><a href="{% url 'jobs:batch_task' %}">{% trans 'Batch Tasks' %}</a></li>
+                                {% endifequal %}
+                            {% endfor %}
+                        </ul>
+                    </li>
+                </ul>
+                </li>
+                {% endifequal %}
+            {% endfor %}
+
+            {% for p in user.role.permission.all %}
+                {% ifequal p.lable_name "audit_list" %}
+                    <li id="audit" class="{{ audit_active }}">
+                        <a href="#"><i class="glyphicon glyphicon-eye-open"></i> <span class="nav-label">{% trans 'Audits' %}</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            {% for m in  p.menu.all %}
+                                {% ifequal m.first "login-log" %}
+                                    <li class="{{ audit_login_active }}"><a href="{% url 'audit:login-log-list' %}">{% trans 'Login Log' %}</a></li>
+                                {% endifequal %}
+                                {% ifequal m.first "request-log" %}
+                                    <li class="{{ audit_request_active }}"><a href="{% url 'audit:request-log-list' %}">{% trans 'Request Log' %}</a></li>
+                                {% endifequal %}
+                                {% ifequal m.first "jobs-log" %}
+                                    <li class="{{ jobs_logs }}"><a href="{% url 'audit:jobs_logs_command' %}">{% trans 'Jobs Log' %}</a></li>
+                                {% endifequal %}
+                                {% ifequal m.first "password-change-log" %}
+                                    <li class="{{ password_change_log }}"><a href="{% url 'audit:password_change_log' %}">{% trans 'Password Log' %}</a></li>
+                                {% endifequal %}
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% endifequal %}
+            {% endfor %}
+
+            {% for p in user.role.permission.all %}
+                {% ifequal p.lable_name "users_list" %}
+                <li id="users" class="{{ users_active }}">
+                    <a href="#" ><i class="fa fa-gears"></i> <span class="nav-label">{% trans 'System Setup' %}</span><span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level collapse">
+                        {% for m in  p.menu.all %}
+                            {% ifequal m.first "user-manage" %}
+                                <li class="{{ users_users_list }}">
+                                    <a href="{% url 'users:users_list' %}">{% trans 'User Manage' %}</a>
+                                </li>
+                            {% endifequal %}
+                            {% ifequal m.first "department-manage" %}
+                                <li class="{{ users_groups_list }}">
+                                    <a href="{% url 'users:groups_list' %}">{% trans 'DepartMent Manage' %}</a>
+                                </li>
+                            {% endifequal %}
+                            {% ifequal m.first "project-manage" %}
+                                <li class="{{ users_project_list }}">
+                                    <a href="{% url 'users:project_list' %}">{% trans 'Project Manage' %}</a>
+                                </li>
+                            {% endifequal %}
+                            {% ifequal m.first "role-manage" %}
+                                <li class="{{ users_role_list }}">
+                                    <a href="{% url 'users:role_list' %}">{% trans 'Role Manage' %}</a>
+                                </li>
+                            {% endifequal %}
+                            {% ifequal m.first "permission-manage" %}
+                                <li class="{{ users_permission_list }}">
+                                    <a href="{% url 'users:permission_list' %}">{% trans 'Permission List' %}</a>
+                                </li>
+                            {% endifequal %}
+                        {% endfor %}
+                    </ul>
+                </li>
+                {% endifequal %}
+            {% endfor %}
+
+        </ul>
+    </div>
+</nav>

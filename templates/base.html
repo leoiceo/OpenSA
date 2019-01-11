@@ -1,0 +1,88 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" /> -->
+    <title>{% trans 'OpenSa' %}</title>
+
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    {% include 'link_css.html' %}
+    {% include 'head_script.html' %}
+    {% block header-css %}
+    {% endblock %}
+
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+        {% include 'nav.html' %}
+        <div id="page-wrapper" class="gray-bg low_width_page-wrapper">
+            <div class="row border-bottom">
+                {% include 'nav_bar_header.html' %}
+            </div>
+            {% block page-content %}{% endblock %}
+            {% include 'footer.html' %}
+        </div>
+    </div>
+
+</body>
+    <script>
+         $('.choice-project').click(function () {
+            var project_id = $(this).attr('name');
+            console.log(project_id);
+            $.ajax({
+                headers: {"X-CSRFToken": '{{ csrf_token }}'},
+                url: "{% url 'choice_project' %}",
+                type: 'POST',
+                data: {'nid': project_id},
+                success: function (data) {
+                    if (data == 1){
+                        window.location.reload();
+                    }else {
+                        window.location.href('/');
+                    }
+                    }
+            });
+        });
+
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "progressBar": true,
+            "preventDuplicates": true,
+            "positionClass": "toast-top-center",
+            "onclick": null,
+            "showDuration": "400",
+            "hideDuration": "1000",
+            "timeOut": "7000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+    </script>
+
+    {% ifequal project None %}
+    <script>
+        toastr.warning("请先选择您要操作的项目！")
+    </script>
+    {% endifequal %}
+
+    {% include 'foot_script.html' %}
+    {% block footer-js %}
+    {% endblock %}
+    {% block footer-js-ajax %}
+    {% endblock %}
+    <script type="text/JavaScript">
+     $.ajaxSetup({headers: {"X-CSRFToken": '{{ csrf_token }}'}});
+    </script>
+</html>
+

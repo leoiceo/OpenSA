@@ -1,0 +1,5 @@
+{% ifequal user.is_superuser 1 %}
+    {% include 'admin.html' %}
+{% else %}
+    {% include 'nav_users.html' %}
+{% endifequal %}

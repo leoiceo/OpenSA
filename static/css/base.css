@@ -1,0 +1,48 @@
+/* 颜色 */
+.red-fonts {
+    color: #ed5565;
+}
+.green-fonts{
+  color: green;
+}
+
+.sandybrown-fonts{
+  color: sandybrown;
+}
+
+/* textarea 自适应父容器大小 */
+.comments {
+    width: 100%; /*自动适应父布局宽度*/
+    overflow: auto;
+    word-break: break-all;
+    /*在ie中解决断行问题(防止自动变为在一行显示，主要解决ie兼容问题，ie8中当设宽度为100%时，文本域类容超过一行时，当我们双击文本内容就会自动变为一行显示，所以只能用ie的专有断行属性“word-break或word-wrap”控制其断行)*/
+}
+
+.icon-centos,.icon-debian,.icon-ubuntu,.icon-windows {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	background-image: url(../img/icon/cvm-201812191038.png);
+	vertical-align: -3px;
+	background-position: -252px -268px;
+}
+
+.icon-centos {
+	background-image: url(../img/icon/cvm-201812191038.png);
+	background-position: -252px -268px;
+}
+
+.icon-debian {
+	background-image: url(../img/icon/cvm-201812191038.png);
+	background-position: -296px 0px
+}
+
+.icon-ubuntu {
+	background-image: url(../img/icon/cvm-201812191038.png);
+	background-position: -296px -54px
+}
+
+.icon-windows {
+	background-image: url(../img/icon/cvm-201812191038.png);
+	background-position: -296px -72px
+}

@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block  title %}{% trans 'UserInfo' %}{% endblock %}
+{% block header-css %}
+
+{% load bootstrap3 %}
+{% endblock %}
+
+
+{% block  page-content %}
+
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>{% trans 'UserInfo' %}</h2>
+            <ol class="breadcrumb">
+                <li>
+                     <a href="/">{% trans 'Home' %}</a>
+                </li>
+                <li>
+                    <a>{% trans 'System Setup' %}</a>
+                </li>
+                <li class="active">
+                    <strong>{% trans 'UserInfo' %}</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="panel-options">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a class="text-center"><i class="fa fa-laptop"></i>{% trans 'UserInfo' %}</a>
+                            </li>
+                            <li class="pull-right">
+                                <a class="btn btn-outline btn-default" href="{% url "users:users_update"  nid %}"><i
+                                        class="fa fa-edit"></i>{% trans 'Update' %}</a>
+                            </li>
+                            <li class="pull-right">
+                                <a class="btn btn-outline btn-danger  asset_del">
+                                    <i class="fa fa-edit"></i>{% trans 'Delete' %}
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="tab-content">
+                        <div class="col-sm-7" style="padding-left: 0">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-title">
+                                    <span class="label"><b>{{ users.username }}</b></span>
+                                    <div class="ibox-tools">
+                                        <a class="collapse-link">
+                                            <i class="fa fa-chevron-up"></i>
+                                        </a>
+                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                            <i class="fa fa-wrench"></i>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-user">
+                                        </ul>
+                                        <a class="close-link">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="ibox-content">
+
+                                    <table class="table">
+                                        <tbody>
+                                        <tr>
+                                            <td style=" border-top: none !important;" width="20%">{% trans 'UserName' %}:</td>
+                                            <td style=" border-top: none !important;"><b>{{ users.username }}</b></td>
+                                        </tr>
+										<tr>
+                                            <td width="20%">{% trans 'Email Address' %}:</td>
+                                            <td ><b>{{ users.email }}</b></td>
+                                        </tr>
+										<tr>
+                                            <td  width="20%">{% trans 'User Department' %}:</td>
+                                            <td ><b>{{ users.department }}</b></td>
+                                        </tr>
+										<tr>
+                                            <td  width="20%">{% trans 'Mobile Phone' %}:</td>
+                                            <td ><b>{{ users.mobile }}</b></td>
+                                        </tr>
+										<tr>
+                                            <td  width="20%">{% trans 'User Project' %}:</td>
+                                            <td ><b>{% for i in users.project.all %}{{ i.name }}, {% endfor %}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td  width="20%">{% trans 'User Level' %}:</td>
+                                            <td ><b>{{ users.get_level_display }}</b></td>
+                                        </tr>
+										<tr>
+                                            <td  width="20%">{% trans 'User Role' %}:</td>
+                                            <td ><b>{{ users.role }}</b></td>
+                                        </tr>
+										<tr>
+                                            <td  width="20%">{% trans 'Status' %}:</td>
+                                            <td>{% ifequal  users.is_active  1 %} <span class="fa fa-check-circle" style="color: green"></span>{% else %} <span class="fa fa-times-circle" style="color: red"></span>{% endifequal %}</td>
+                                        </tr>
+										<tr>
+                                            <td  width="20%">{% trans 'User Type' %}:</td>
+                                            <td ><b>{% if row.is_superuser == 1 %}{% trans 'Superuser' %}{% else %}{% trans 'Username' %}{% endif %}</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td  width="20%">{% trans 'Login By' %}:</td>
+                                            <td ><b>{{ users.login_date|date:"Y-m-d H:i:s" }}</b></td>
+                                        </tr>
+										<tr>
+                                            <td  width="20%">{% trans 'Comment' %}:</td>
+                                            <td ><b>{{ users.comment }}</b></td>
+                                        </tr>
+										<tr>
+                                            <td  width="20%">{% trans 'Create By' %}:</td>
+                                            <td ><b>{{ users.create_date|date:"Y-m-d h:i:s" }}</b></td>
+                                        </tr>
+										<tr>
+                                            <td  width="20%">{% trans 'Login Limit' %}:</td>
+                                            <td ><b>{{ users.limit }}</b></td>
+                                        </tr>
+										<tr>
+                                            <td  width="20%">{% trans 'Valid Date' %}:</td>
+                                            <td >
+                                                {% ifequal users.valid_date None %}
+                                                    <b>永不过期</b>
+                                                {% else %}
+                                                    <b>{{ users.valid_date }}</b>
+                                                {% endifequal %}
+                                            </td>
+                                        </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-5" style="padding-left: 0;padding-right: 0">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <i class="fa fa-info-circle"></i> 快速修改
+                                </div>
+                                <div class="panel-body">
+                                    <table class="table">
+                                        <tbody>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+{% endblock %}
+
+{% block footer-js %}
+
+
+        <script>
+            $(document).on('click', '.asset_del', function () {
+                var id = $(this).parent().parent().attr('id');
+                swal({
+                    title: '{% trans 'You Are Sure To Delete' %}',
+                    text: '{% trans 'You Will Never Recover' %}',
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: '{% trans 'confirm' %}',
+                    cancelButtonText:'{% trans 'cancel' %}',
+                    closeOnConfirm: false
+                }, function () {
+                    $.ajax({
+                        headers: {"X-CSRFToken": '{{ csrf_token }}'},
+                        url: "{% url 'users:users_all_del' %}",
+                        type: 'POST',
+                        data: {'nid': id},
+                        success: function (data) {
+                            var obj = JSON.parse(data);
+                            if (obj.status) {
+                                swal({title: '{% trans 'Delete' %}', text: '{% trans 'Deleted Successfully' %}', type: "success"}, function () {
+                                    window.location.reload();
+                                })
+                            } else {
+                                swal('{% trans 'Delete Error' %}', '{% trans 'Delete Error' %}' + "[ " + obj.error + " ]" + '{% trans 'Error' %}', "error");
+                            }
+                        }
+                    });
+                });
+            });
+        </script>
+
+
+    {% endblock %}

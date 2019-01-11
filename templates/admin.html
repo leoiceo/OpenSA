@@ -1,0 +1,102 @@
+{% load i18n %}
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+
+        <ul class="nav metismenu" id="side-menu">
+
+            {% include 'nav_li_profile.html' %}
+
+            <li id="index">
+               <a href="/"><i class="fa fa-dashboard"></i> <span class="nav-label">{% trans 'Dashboard' %}</span></a>
+            </li>
+
+            <li id="asset" class="{{ asset_active }}">
+                <a href="#" ><i class="fa fa-sitemap"></i> <span class="nav-label">{% trans 'Service Manage' %}</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li class="{{ asset_list_active }}">
+                        <a href="{% url 'asset:asset_list' %}">{% trans 'Server Manage' %}</a>
+                    </li>
+                    <li class="{{ asset_idc_active }}">
+                        <a href="{% url 'asset:idc_list' %}">{% trans 'Idc Manage' %}</a>
+                    </li>
+                    <li class="{{ asset_product_active }}">
+                        <a href="{% url 'asset:product_list' %}">{% trans 'Product Manage' %}</a>
+                    </li>
+                    <li class="{{ asset_use_active }}">
+                        <a href="{% url 'asset:use_list' %}">{% trans 'Server Use' %}</a>
+                    </li>
+                    <li class="{{ asset_work_active }}">
+                        <a href="{% url 'asset:workenv_list' %}">{% trans 'Work Env' %}</a>
+                    </li>
+                    <li class="{{ asset_area_active }}">
+                        <a href="{% url 'asset:area_list' %}">{% trans 'Area Manage' %}</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li id="jobs" class="{{ jobs_active }}">
+                <a href="#"><i class="fa fa-flask"></i> <span class="nav-label">{% trans 'Jobs Manage' %}</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li class="{{ scripts_manage_active }}">
+                        <a href="{% url 'jobs:scripts_list' %}">{% trans 'Scripts Manage' %}</a>
+                    </li>
+                    <li class="{{ scheduled_tasks_active }}">
+                        <a href="{% url 'jobs:periodictasks_list' %}">{% trans 'Scheduled Tasks' %}</a>
+                    </li>
+                    <li class="{{ tasks_scheduling_active }}">
+                        <a href="{% url 'jobs:orchestration_list' %}">{% trans 'Task scheduling' %}</a>
+                    </li>
+                    <li class="{{ batch_tasks_active }}">
+                        <a href="#">{% trans 'Batch Tasks' %}<span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level">
+                            <li class="{{ batch_file_active }}"><a href="{% url 'jobs:batch_files' %}">{% trans 'File Distribution' %}</a></li>
+                            <li class="{{ batch_cmd_active}}"><a href="{% url 'jobs:cmd_list' %}">{% trans 'Batch CMD' %}</a></li>
+                            <li class="{{ batch_script_active }}"><a href="{% url 'jobs:batch_scripts' %}">{% trans 'Batch Scripts' %}</a></li>
+                            <li class="{{ batch_task_active }}"><a href="{% url 'jobs:batch_task' %}">{% trans 'Batch Tasks' %}</a></li>
+                        </ul>
+                    </li>
+                    <li class="{{ crontab_active }}">
+                        <a href="{% url 'jobs:crontabs_list' %}">{% trans 'Crontab' %}</a>
+                    </li>
+                    <li class="{{ interval_active }}">
+                        <a href="{% url 'jobs:intervals_list' %}">{% trans 'Interval' %}</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li id="audit" class="{{ audit_active }}">
+                <a href="#"><i class="glyphicon glyphicon-eye-open"></i> <span class="nav-label">{% trans 'Audits' %}</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li class="{{ audit_login_active }}"><a href="{% url 'audit:login-log-list' %}">{% trans 'Login Log' %}</a></li>
+                    <li class="{{ audit_request_active }}"><a href="{% url 'audit:request-log-list' %}">{% trans 'Request Log' %}</a></li>
+                    <li class="{{ jobs_logs }}"><a href="{% url 'audit:jobs_logs_command' %}">{% trans 'Jobs Log' %}</a></li>
+                    <li class="{{ password_change_log }}"><a href="{% url 'audit:password_change_log' %}">{% trans 'Password Log' %}</a></li>
+                </ul>
+            </li>
+
+            <li id="users" class="{{ users_active }}">
+                <a href="#" ><i class="fa fa-gears"></i> <span class="nav-label">{% trans 'System Setup' %}</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li class="{{ users_users_list }}">
+                        <a href="{% url 'users:users_list' %}">{% trans 'User Manage' %}</a>
+                    </li>
+                    <li class="{{ users_groups_list }}">
+                        <a href="{% url 'users:groups_list' %}">{% trans 'DepartMent Manage' %}</a>
+                    </li>
+                    <li class="{{ users_project_list }}">
+                        <a href="{% url 'users:project_list' %}">{% trans 'Project Manage' %}</a>
+                    </li>
+                    <li class="{{ users_key_list }}">
+                        <a href="{% url 'users:key_list' %}">{% trans 'Key Manage' %}</a>
+                    </li>
+                    <li class="{{ users_role_list }}">
+                        <a href="{% url 'users:role_list' %}">{% trans 'Role Manage' %}</a>
+                    </li>
+                    <li class="{{ users_permission_list }}">
+                        <a href="{% url 'users:permission_list' %}">{% trans 'Permission List' %}</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>

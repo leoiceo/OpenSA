@@ -1,0 +1,29 @@
+{% load i18n %}
+{% load static %}
+<li class="nav-header">
+    <div class="dropdown profile-element">
+        <span>
+            <img alt="image" class="img-circle" width="48" height="48" src="/static/img/a8.jpg" />
+        </span>
+        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            <span class="clear">
+                <span class="block m-t-xs">
+                    <strong class="font-bold">{{ user.username }}  <span style="color: #8095a8"></span></strong>
+                </span>
+                <span class="text-muted text-xs block">
+                     {% trans 'UserProfile' %}<b class="caret"></b>
+                </span>
+            </span>
+        </a>
+        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+            <li id="admin"><a href="/admin/" target="_blank">{% trans 'Backend' %}</a></li>
+            <li id="manager"><a href="{% url  "users:users_detail"   pk=user.id %}">{% trans 'MyProfile' %}</a></li>
+            <li id="personal"><a href="#">{% trans 'Change Password' %}</a></li>
+            <li class="divider"></li>
+            <li><a href="{% url 'users:logout' %}">{% trans 'Logout' %}</a></li>
+        </ul>
+    </div>
+    <div class="logo-element">
+        JS+
+    </div>
+</li>

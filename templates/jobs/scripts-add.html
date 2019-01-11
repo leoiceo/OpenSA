@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+{% load	bootstrap3 %}
+{% load i18n %}
+{% load static %}
+
+{% block  title %}{% trans 'Scripts Manage' %}{% endblock %}
+{% block header-css %}
+
+{% endblock %}
+{% block page-content %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>{% trans 'Scripts Manage' %}</h2>
+            <ol class="breadcrumb">
+                <li>
+                     <a href="/">{% trans 'Home' %}</a>
+                </li>
+                <li>
+                    <a>{% trans 'Jobs Manage' %}</a>
+                </li>
+                <li class="active">
+                    <strong>{% trans 'Scripts Manage' %}</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+    <div class="wrapper wrapper-content">
+        <div class="row">
+
+            <div class="col-lg-12" id="split-right">
+
+                <div class="ibox float-e-margins">
+
+                    <div class="ibox-title">
+                        <h5>{% trans 'Scripts Manage' %}</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="#" >{% trans 'Config Option 1' %}</a>
+                                </li>
+                                <li><a href="#" >{% trans 'Config Option 2' %}</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        {% if error %}
+                            <div class="alert alert-danger text-center">{{ error }}</div>
+                        {% endif %}
+
+                        <form id="assetForm" method="post" class="form-horizontal">
+                            {% csrf_token %}
+                            <div class="form-group"><label class="col-sm-2 control-label"> 脚本名称 <span class="red-fonts">*</span></label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="name" class="form-control" value={{script_name}}>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group"><label class="col-sm-2 control-label"> 脚本备注 <span class="red-fonts">*</span></label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="comment" class="form-control" value={{script_name}}>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group"><label class="col-sm-2 control-label"> 脚本类型 <span class="red-fonts">*</span></label>
+                                <div class="col-sm-8">
+                                    <input type="radio" value="0" name="script_type" checked="checked">.sh&nbsp;
+                                    <input type="radio" value="1" name="script_type" >.py&nbsp;
+                                    <input type="radio" value="2" name="script_type" >.bat
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group arg-form">
+                                <label class="col-sm-2 control-label">输入参数 <span class="green-fonts">&nbsp;&nbsp;</span></label>
+                                <div class="col-sm-4 args-outer hidden">
+                                    <input type="text" name="input[]" placeholder="参数名" class="form-control args ">
+                                </div>
+                                <div class="col-sm-2 add-items-outer">
+                                    <button style="margin-left: 0px;" type="button" id="add-items" class="form-group btn btn-hover btn-info" ng-click="addInput()" ng-disabled="storing"><i class="glyphicon glyphicon-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group"><label class="col-sm-2 control-label">脚本内容 <span class="red-fonts">*</span></label>
+                                <div class="col-sm-9">
+                                    <textarea id="code" name="content">
+                                    </textarea>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="hr-line-dashed"></div>
+                        <div align="center">
+                            {% ifequal user.level 2 %}
+                                <button type="submit" class="btn btn-success"  form="assetForm" formmethod="post" formaction="{% url 'jobs:scripts_add' %}">{% trans 'Commit' %}</button>
+                            {% endifequal%}
+                          <a type="submit" class="btn btn-primary" href="{% url 'jobs:scripts_list' %}" >{% trans 'Back' %}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+{% block footer-js %}
+    <script>
+     $(document).ready(function() {
+         var editor_one = CodeMirror.fromTextArea(document.getElementById("code"), {
+             lineNumbers: true,
+             matchBrackets: true,
+             styleActiveLine: true,
+             theme: "ambiance"
+         });
+
+        var sh_env = "#!/bin/bash";
+        var py_env = "#!/usr/bin/python";
+        var bat_env = "@echo off";
+        var codeType = $('[name="script_type"]:checked').val();
+
+        if(codeType == 'py'){
+            editor_one.setValue(py_env);
+        }else if(codeType == 'bat'){
+            editor_one.setValue(bat_env);
+        }else{
+            editor_one.setValue(sh_env);
+        }
+
+        $('[name="script_type"]').change(function(){
+         var codeType = $(this).val();
+         if(codeType == 'py'){
+             editor_one.setValue(py_env);
+         }else if(codeType == 'bat'){
+             editor_one.setValue(bat_env);
+         }
+         else{
+             editor_one.setValue(sh_env);
+         }
+        });
+
+
+     });
+
+    $("#add-items").click(function () {
+        if($(this).parent().prev().hasClass('hidden')){
+            return $(this).parent().prev().removeClass('hidden');
+        }
+        var removeBut = '<buttun style="margin-left: 15px;" class="btn btn-hover btn-danger remove-arg"><i class="glyphicon glyphicon-remove"></i></buttun>';
+        var html = '<div class="form-group arg-form">' + $(".arg-form:last").html() + removeBut + '</div>';
+        var num = parseInt($(".args-num:last").text());
+        $(".arg-form:last").after(html);
+        $(".args:last").attr({"name":"input[]"});
+        $(".args-num:last").empty().text(num+1);
+        $(".remove-arg:last").siblings('.remove-arg').remove();
+        registerRemoveArg();
+        if($(".add-items-outer").length == 1)
+                return;
+        $(".add-items-outer:last").remove();
+     });
+
+    function registerRemoveArg()
+    {
+        $(".remove-arg:last").click(function(){
+            $(this).parent().fadeOut();
+        });
+     }
+    </script>
+{% endblock %}
