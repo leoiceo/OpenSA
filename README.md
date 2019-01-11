@@ -110,4 +110,4 @@ python manage.py runserver 0.0.0.0:8000
 #### 作者
 * v 0.1
 * leoiceo
-* panzxl
+* 盘振鹏 
