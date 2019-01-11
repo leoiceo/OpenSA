@@ -1,4 +1,4 @@
-# opensa
+# OpenSA
 # 企业级运维自动化平台 
 ####安装部署说明
 * 系统: CentOS 7
@@ -54,7 +54,10 @@ python manage.py runserver 0.0.0.0:8000
 * 初始账号密码登陆
 > 账号: opensa@imdst.com
 > 密码：redhat
-
+* Demo地址
+>http://opensa.imdst.com 
+>user: demo@imdst.com 
+>pass: Demo123
 #### 功能说明
 ### 资产管理
 ### 作业管理
