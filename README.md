@@ -52,7 +52,7 @@ EOF
 cd OpenSA
 pip -r requirements.txt
 ```
-* 初始化数据库
+* 初始化数据库 (修改 config.conf 设置DB和redis配置信息)
 ```
 cd /opt/OpenSA
 sh migrate.sh
