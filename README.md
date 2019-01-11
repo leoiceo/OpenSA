@@ -7,6 +7,8 @@
 * 使用2.7版本inspina模版
 * 支持国际化(默认中/英)，有些细节未完善，欢迎加入完善项目，联系WX “leoiceo” 或者加群
 * 交流群号 ：142189771
+#### screenshots
+![screenshots](./static/img/QQ20190111-221435.gif  "screenshots")
 
 #### 安装部署说明
 * 系统: CentOS 7
