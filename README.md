@@ -72,6 +72,8 @@ python manage.py runserver 0.0.0.0:8000
 >http://opensa.imdst.com 
 >user: demo@imdst.com 
 >pass: Demo123
+
+#### [中文指南 wiki](https://github.com/leoiceo/OpenSA/wiki)
 #### 功能说明
 ### 资产管理
 ### 作业管理
