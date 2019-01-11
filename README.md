@@ -3,6 +3,7 @@
 
 #### 架构说明
 * Django 2.1 + Mysql 5.7 + redis 5.0 + celery v4.2.0 
+* 生产环境请使用 nginx + uwsgi,不对公网开放,或者使用SSL双向认证
 * 命令和文件分发基于SSH协议，支持Linux/Windows(cygwin)|支持快速修改为ansible
 * 使用2.7版本inspina模版
 * 支持国际化(默认中/英)，有些细节未完善，欢迎加入完善项目，联系WX “leoiceo” 或者加群
