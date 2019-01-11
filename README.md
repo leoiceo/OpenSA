@@ -1,5 +1,12 @@
 # OpenSA
 # 企业级运维自动化平台 
+
+#### 架构说明
+* Django 2.1 + Mysql 5.7 + redis 3.2 + celery v4.2.0 
+* 命令和文件分发基于SSH协议，支持Linux/Windows(cygwin)|支持快速修改为ansible
+* 使用2.7版本inspina模版
+* 支持国际化(默认中/英)，有些细节未完善，欢迎加入完善项目，联系WX “leoiceo” 或者加群
+
 ####安装部署说明
 * 系统: CentOS 7
 ```
@@ -88,12 +95,6 @@ python manage.py runserver 0.0.0.0:8000
 * 持续集成(待开发)
 * 灰度发布(待开发)
 * 反向代理可视化(待开发)
-
-#### 架构说明
-* Django 2.1 + Mysql 5.7 + redis 3.2 + celery v4.2.0 
-* 命令和文件分发基于SSH协议，支持Linux/Windows(cygwin)|支持快速修改为ansible
-* 使用2.7版本inspina模版
-* 支持国际化(默认中/英)
 
 #### 交流群QQ: 142189771
 
