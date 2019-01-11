@@ -106,7 +106,7 @@ python manage.py runserver 0.0.0.0:8000
 #### 预览进度
 * [博客地址](https://blog.imdst.com/kai-yuan-yun-wei-zi-dong-hua-ping-tai-kai-fa-she-ji-si-lu/)
 
-####作者
+#### 作者
 * v 0.1
 * leoiceo
 * panzxl
