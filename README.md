@@ -70,7 +70,7 @@ python manage.py runserver 0.0.0.0:8000
 * 初始账号密码登陆
 > 账号: opensa@imdst.com
 > 密码：redhat
-* Demo地址
+* Demo地址 普通用户如下，管理用户同上（两小时重置一次）
 >http://opensa.imdst.com 
 >user: demo@imdst.com 
 >pass: Demo123
