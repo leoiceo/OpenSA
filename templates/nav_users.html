@@ -88,16 +88,16 @@
                         <a href="#">{% trans 'Batch Tasks' %}<span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level">
                             {% for m in p.menu.all %}
-                                {% ifequal m.secondary "batch-files" %}
+                                {% ifequal m.first "batch-files" %}
                                     <li class="{{ batch_file_active }}"><a href="{% url 'jobs:batch_files' %}">{% trans 'File Distribution' %}</a></li>
                                 {% endifequal %}
-                                {% ifequal m.secondary "batch-cmd" %}
+                                {% ifequal m.first "batch-cmd" %}
                                     <li class="{{ batch_cmd_active}}"><a href="{% url 'jobs:cmd_list' %}">{% trans 'Batch CMD' %}</a></li>
                                 {% endifequal %}
-                                {% ifequal m.secondary "batch-scripts" %}
+                                {% ifequal m.first "batch-scripts" %}
                                     <li class="{{ batch_script_active }}"><a href="{% url 'jobs:batch_scripts' %}">{% trans 'Batch Scripts' %}</a></li>
                                 {% endifequal %}
-                                {% ifequal m.secondary "batch-tasks" %}
+                                {% ifequal m.first "batch-tasks" %}
                                     <li class="{{ batch_task_active }}"><a href="{% url 'jobs:batch_task' %}">{% trans 'Batch Tasks' %}</a></li>
                                 {% endifequal %}
                             {% endfor %}
