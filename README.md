@@ -60,9 +60,19 @@ pip -r requirements.txt
 cd /opt/OpenSA
 sh migrate.sh
 
-#初始化权限和用户
+# 初始化权限和用户
 python manage.py permission_data
+
+# 国际化文件生成
+django-admin makemessages -l en
+django-admin compilemessages
 ```
+
+* Celery 启动说明
+```
+/usr/local/python37/bin/python3.7 /usr/bin/celery -B -A opensa worker --loglevel=INFO
+```
+
 * 启动
 ```
 python manage.py runserver 0.0.0.0:8000
