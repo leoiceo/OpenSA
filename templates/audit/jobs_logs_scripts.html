@@ -35,7 +35,7 @@
                     <ul class="nav nav-tabs">
                         <li class=""><a href="{% url 'audit:jobs_logs_command' %}"><i class="fa fa-briefcase"></i> {% trans 'Batch Cmd Logs' %}</a></li>
                         <li class="active"><a href="{% url 'audit:jobs_logs_scripts' %}"><i class="fa fa-briefcase"></i> {% trans 'Batch Scripts Logs' %}</a></li>
-                        <li class=""><a href="#"><i class="fa fa-briefcase"></i> {% trans 'File Distribution Logs' %}</a></li>
+                        <li class=""><a href="{% url 'audit:jobs_logs_files' %}"><i class="fa fa-briefcase"></i> {% trans 'File Distribution Logs' %}</a></li>
                         <li class=""><a href="{% url 'audit:jobs_logs_scheduling' %}"><i class="fa fa-briefcase"></i> {% trans 'Batch Task Logs' %}</a></li>
                         <li class=""><a href="{% url 'audit:jobs_logs_crontab' %}">{% trans 'Crontab Task Logs' %}</a></li>
                     </ul>

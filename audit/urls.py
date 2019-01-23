@@ -2,9 +2,11 @@
 # ~*~ coding: utf-8 ~*~
 # by leoiceo
 from __future__ import absolute_import
-from django.urls import path
-from audit.views import loginfo, joblog
 
+from django.urls import path
+from jobs.views import scripts
+from audit.views import loginfo, joblog
+#from . import views
 app_name = 'audit'
 
 urlpatterns = [
@@ -22,4 +24,7 @@ urlpatterns = [
 
     path('scheduling-log/', joblog.SchedulingList.as_view(), name='jobs_logs_scheduling'),
     path('scheduling-result/', joblog.SchedulingResult.as_view(), name='jobs_scheduling_result'),
+
+    path('files-log/', joblog.BatchFilesList.as_view(), name='jobs_logs_files'),
+    path('files-result/', joblog.BatchFilesResult.as_view(), name='jobs_files_result'),
     ]

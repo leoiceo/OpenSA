@@ -3,7 +3,7 @@
 {% load i18n %}
 {% load static %}
 
-{% block  title %}{% trans 'Command Logs' %}{% endblock %}
+{% block  title %}{% trans 'Upload Files Logs' %}{% endblock %}
 {% block header-css %}
     <link href="{% static 'css/plugins/dataTables/datatables.min.css' %}" rel="stylesheet">
 {% endblock %}
@@ -11,7 +11,7 @@
 {% block page-content %}
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>{% trans 'Command Logs' %}</h2>
+            <h2>{% trans 'Upload Files Logs' %}</h2>
             <ol class="breadcrumb">
                 <li>
                      <a href="/">{% trans 'Home' %}</a>
@@ -20,7 +20,7 @@
                     <a href="{% url 'audit:login-log-list' %}">{% trans 'Audits' %}</a>
                 </li>
                 <li class="active">
-                    <strong>{% trans 'Command Logs' %}</strong>
+                    <strong>{% trans 'Upload Files Logs' %}</strong>
                 </li>
             </ol>
         </div>
@@ -33,9 +33,9 @@
             <div class="col-lg-12" id="split-right">
                 <div class="tabs-container">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="{% url 'audit:jobs_logs_command' %}"><i class="fa fa-briefcase"></i> {% trans 'Batch Cmd Logs' %}</a></li>
+                        <li class=""><a href="{% url 'audit:jobs_logs_command' %}"><i class="fa fa-briefcase"></i> {% trans 'Batch Cmd Logs' %}</a></li>
                         <li class=""><a href="{% url 'audit:jobs_logs_scripts' %}"><i class="fa fa-briefcase"></i> {% trans 'Batch Scripts Logs' %}</a></li>
-                        <li class=""><a href="{% url 'audit:jobs_logs_files' %}"><i class="fa fa-briefcase"></i> {% trans 'File Distribution Logs' %}</a></li>
+                        <li class="active"><a href="{% url 'audit:jobs_logs_files' %}"><i class="fa fa-briefcase"></i> {% trans 'File Distribution Logs' %}</a></li>
                         <li class=""><a href="{% url 'audit:jobs_logs_scheduling' %}"><i class="fa fa-briefcase"></i> {% trans 'Batch Task Logs' %}</a></li>
                         <li class=""><a href="{% url 'audit:jobs_logs_crontab' %}">{% trans 'Crontab Task Logs' %}</a></li>
                     </ul>
@@ -65,7 +65,7 @@
                                         <tr>
                                             <th>{% trans 'Number' %}</th>
                                             <th>{% trans 'User Name' %}</th>
-                                            <th>{% trans 'Command' %}</th>
+                                            <th>{% trans 'Path' %}</th>
                                             <th>{% trans 'DateTime' %}</th>
                                             <th>{% trans 'Request Meta' %}</th>
                                             <th>{% trans 'View Results' %}</th>
@@ -76,7 +76,7 @@
                                             <tr class="gradeA" id="{{ row.id }}">
                                             <td>{{forloop.counter}}</td>
                                             <td>{{ row.operator }}</td>
-                                            <td>{{ row.job_name }}</td>
+                                            <td>{{ row.remote_path }}</td>
                                             <td>{{ row.start_time|date:"Y-m-d H:i:s" }}</td>
                                             <td>{{ row.get_type_display }}</td>
                                             <td><a>{% trans 'View' %}</a></td>
@@ -90,7 +90,7 @@
                                             {% if loginlog_list.has_previous %}
                                                 <li class="long"><a href="?{{ loginlog_list.previous_page_number.querystring }}">{% trans 'Home' %}</a></li>
                                             {% else %}
-                                                <li><a href="{% url "audit:jobs_logs_command" %}?page=1">{% trans 'Home' %}</a></li>
+                                                <li><a href="{% url "audit:jobs_logs_files" %}?page=1">{% trans 'Home' %}</a></li>
                                             {% endif %}
 
                                             {% for page in loginlog_list.pages %}
@@ -108,7 +108,7 @@
                                                 <li class="long"><a href="?{{ loginlog_list.next_page_number.querystring }}">{% trans 'Next' %}</a></li>
                                             {% endif %}
                                             <li>
-                                                <a href="{% url "audit:jobs_logs_command" %}?page={{ loginlog_list.paginator.num_pages }}">{% trans 'Trailer' %}</a>
+                                                <a href="{% url "audit:jobs_logs_files" %}?page={{ loginlog_list.paginator.num_pages }}">{% trans 'Trailer' %}</a>
                                             </li>
                                                 <li><span style="color: #0a0a0a">{% trans 'Total' %}: &nbsp;{{ loginlog_list.paginator.num_pages }} {% trans 'Page' %}</span>
                                             </li>
@@ -135,11 +135,11 @@
         var ids = $(this).attr('id');
         $.ajax({
             headers: {"X-CSRFToken": '{{ csrf_token }}'},
-            url: "{% url 'audit:jobs_command_result' %}",
+            url: "{% url 'audit:jobs_files_result' %}",
             type: 'POST',
             data: {'id': ids},
             success: function (data) {
-                location.href= "{% url 'audit:jobs_command_result' %}"+"?id="+ids;
+                location.href= "{% url 'audit:jobs_files_result' %}"+"?id="+ids;
             }
         });
     })
