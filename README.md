@@ -5,11 +5,13 @@
 * 生产环境请使用 nginx + uwsgi,不对公网开放,或者使用SSL双向认证
 * 命令和文件分发基于SSH协议，支持Linux/Windows(cygwin)|支持快速修改为ansible
 * 使用2.7版本inspina模版
-* 支持国际化(默认中/英)，有些细节未完善，欢迎加入完善项目，联系WX “leoiceo” 或者加群
-* 交流群号 ：142189771
+* 支持国际化(默认中/英)，有些细节未完善，欢迎加入完善项目，联系WX “leoiceo” 或者加群(142189771)
 * 如果系统自己用得还不错,请多多推荐给身边的朋友 (star！star！star！......)
+
 #### [screenshots](https://github.com/leoiceo/OpenSA/wiki/screenshots) 
 * screenshots文件200M以上,建议 download screenshots 目录进行查看
+
+#### [中文指南 wiki](https://github.com/leoiceo/OpenSA/wiki)
 
 #### 安装部署说明
 * 系统: CentOS 7
@@ -78,14 +80,16 @@ django-admin compilemessages
 python manage.py runserver 0.0.0.0:8000
 ```
 * 初始账号密码登陆
-> 账号: opensa@imdst.com
-> 密码：redhat
-* Demo地址 普通用户如下，管理用户同上（两小时重置一次）
->http://opensa.imdst.com 
->user: demo@imdst.com 
->pass: Demo123
 
-#### [中文指南 wiki](https://github.com/leoiceo/OpenSA/wiki)
+| 账号 | 密码 |
+| --- | --- |
+| opensa@imdst.com | redhat |
+
+* [Demo地址](http://opensa.imdst.com)(管理员账号两小时重置一次)
+
+| 账号 | 密码 |
+| --- | --- |
+| demo@imdst.com | Demo123 |
 
 #### 交流群QQ: 142189771
 
@@ -93,5 +97,4 @@ python manage.py runserver 0.0.0.0:8000
 * [博客地址](https://blog.imdst.com/kai-yuan-yun-wei-zi-dong-hua-ping-tai-kai-fa-she-ji-si-lu/)
 
 #### 参与人员
-* v0.1
 * 盘振鹏 
