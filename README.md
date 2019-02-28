@@ -7,6 +7,7 @@
 * 使用2.7版本inspina模版
 * 支持国际化(默认中/英)，有些细节未完善，欢迎加入完善项目，联系WX “leoiceo” 或者加群(142189771)
 * 如果系统自己用得还不错,请多多推荐给身边的朋友 (star！star！star！......)
+* 欢迎提交功能开发和优化建议！
 
 #### [screenshots](https://github.com/leoiceo/OpenSA/wiki/screenshots) 
 * screenshots文件200M以上,建议 download screenshots 目录进行查看
