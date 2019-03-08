@@ -94,6 +94,11 @@ python manage.py runserver 0.0.0.0:8000
 
 #### 交流群QQ: 142189771
 
+#### 截图
+![](https://github.com/leoiceo/OpenSA/blob/master/screenshots/1.png)
+![](https://github.com/leoiceo/OpenSA/blob/master/screenshots/2.png)
+![](https://github.com/leoiceo/OpenSA/blob/master/screenshots/3.png)
+![](https://github.com/leoiceo/OpenSA/blob/master/screenshots/4.png)
 #### 预览进度
 * [博客地址](https://blog.imdst.com/kai-yuan-yun-wei-zi-dong-hua-ping-tai-kai-fa-she-ji-si-lu/)
 
