@@ -26,8 +26,10 @@ urlpatterns = [
 
     # Product View
     path('product-list/', product.ProductList.as_view(), name='product_list'),
+    path('product-service/<int:pk>/', product.ProductService.as_view(), name='product_service'),
     path('product-add/', product.ProductAdd.as_view(), name='product_add'),
     path('product-update/<int:pk>/', product.ProductUpdate.as_view(), name='product_update'),
+    path('product-chat/<int:pk>/', product.ProductChat.as_view(), name='product_chat'),
     path('product-all-del/', product.ProductDel.as_view(), name='product_all_del'),
 
     # Server Use View

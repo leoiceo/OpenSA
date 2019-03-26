@@ -21,6 +21,8 @@ pymysql.install_as_MySQLdb()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_DIR = os.path.dirname(BASE_DIR)
+LOG_DIR = os.path.join(PROJECT_DIR, 'OpenSA-master/logs')
 
 
 # Quick-start development settings - unsuitable for production
@@ -180,6 +182,22 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 
+#api
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.FormParser',
+    ),
+}
+
+
 
 SESSION_COOKIE_AGE=60*60
 SESSION_EXPIRE_AT_BROWSER_CLOSE=True
@@ -234,7 +252,84 @@ CELERYD_TASK_SOFT_TIME_LIMIT = 1200
 CELERY_TASK_RESULT_EXPIRES = 1200
 CELERY_IMPORTS = ('opensa.celery')
 
-
 #文件或者配置目录
 DATA_DIR="/data/opensa"
+LOG_DIR="/data/opensa/logs"
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'main': {
+            'datefmt': '%Y-%m-%d %H:%M:%S',
+            'format': '%(asctime)s [%(module)s %(levelname)s] %(message)s',
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+        'msg': {
+            'format': '%(message)s'
+        }
+    },
+    'handlers': {
+        'null': {
+            'level': 'DEBUG',
+            'class': 'logging.NullHandler',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'main'
+        },
+        'error': {
+            'encoding': 'utf8',
+            'level': 'ERROR',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'maxBytes': 1024 * 1024 * 100,  # 文件大小
+            'backupCount': 7,  # 备份份数
+            'formatter': 'main',  # 使用哪种formatters日志格式
+            'filename': '{}/error.log'.format(LOG_DIR),  # 日志输出文件
+        },
+        'default': {
+            'encoding': 'utf8',
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'maxBytes': 1024*1024*100, # 文件大小
+            'backupCount': 7, # 备份份数
+            'formatter': 'main',# 使用哪种formatters日志格式
+            'filename': '{}/all.log'.format(LOG_DIR),  # 日志输出文件
+        },
+    },
+    'loggers': {
+        'django':
+            {
+                'handlers': ['null'],
+                'propagate': False,
+                'level': 'INFO',
+            },
+            'django.request': {
+                'handlers': ['console', 'default'],
+                'level': 'INFO',
+                'propagate': False,
+            },
+            'django.server': {
+                'handlers': ['console', 'default'],
+                'level': 'INFO',
+                'propagate': False,
+            },
+            'Opensa.log': {
+                'handlers': ['error'],
+                'level': 'ERROR',
+                'propagate': True
+            },
+            'celery.core.log': {
+                'handlers': ['error'],
+                'level': 'ERROR',
+                'propagate': True
+            },
+
+    }
+}

@@ -3,10 +3,8 @@
 {% load i18n %}
 {% load static %}
 {% block header-css %}
-
-
-
-
+    <link rel="stylesheet" href="{% static 'modaal/css/modaal.min.css' %}">
+    <link rel="stylesheet" href="{% static 'jquery-confirm/jquery-confirm.min.css' %}">
 {% endblock %}
 
 {% block  title %}{% trans 'Product List' %}{% endblock %}
@@ -90,7 +88,6 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-
                                     {% for   row   in   product_list %}
 
                                         <tr class="gradeA" id="{{ row.id }}">
@@ -100,6 +97,7 @@
                                         <td class="center">
                                             {% ifequal user.level 2 %}
                                             <a class="btn btn-primary  btn-xs" href="{% url 'asset:product_update' pk=row.id %}">{% trans 'Update' %}</a>
+                                            <a href="{% url 'asset:product_chat' row.id %}" class="modaal-ajax" target="_blank"><button type="button" class="btn btn-info btn-xs">{% trans 'Arch' %}</button></a>
                                             <a class="btn btn-danger  btn-xs asset_del">{% trans 'Delete' %}</a>
                                             {% else %}
                                                 <a class="btn btn-danger  btn-xs asset_del">{% trans 'No Permission' %}</a>
@@ -108,16 +106,10 @@
                                     </tr>
                                     {% endfor %}
                                     </tbody>
-
                                 </table>
                             </form>
-
-
                         </div>
-
                     </div>
-
-
                 </div>
             </div>
         </div>
@@ -129,8 +121,17 @@
 {% block footer-js %}
 
     <script src="{% static 'js/plugins/dataTables/datatables.min.js' %}"></script>
+    <script src="{% static 'jquery-confirm/jquery-confirm.min.js' %}"></script>
+    <script src="{% static 'modaal/js/modaal.min.js' %}"></script>
 
     <script>
+
+        // 查看架构图
+        $('.modaal-ajax').modaal({
+            type: 'ajax',
+            width: 1000
+        });
+
         $(document).ready(function(){
             $('.dataTables-example').dataTable().fnDestroy();
             $('.dataTables-example').DataTable({

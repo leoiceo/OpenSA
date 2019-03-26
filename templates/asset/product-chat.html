@@ -1,0 +1,76 @@
+{% load static %}
+{% load i18n %}
+<link rel="stylesheet" href="{% static 'orgchart/css/jquery.orgchart.min.css' %}">
+<style>
+    #chart-container {
+        font-family: Arial, serif;
+        height: 420px;
+        border: 2px dashed #aaa;
+        border-radius: 5px;
+        overflow: auto;
+        text-align: center;
+    }
+
+    .orgchart .node .content {
+        min-height: 0;
+        margin-right: 0;
+        margin-left: 0;
+        padding: 0;
+    }
+
+    .orgchart .top-level .title {
+        background-color: #006699;
+    }
+
+    .orgchart .second-level .title {
+        background-color: #009933;
+    }
+</style>
+
+
+<div id="chart-container">
+    <div align="center" id="edit-org">
+        <a href="{% url 'asset:product_service'  product_obj.id %}">
+            <button type="button" class="btn btn-block btn-primary btn-flat"
+                    style="width: 10%;margin-bottom: 10px">编辑
+            </button>
+        </a>
+    </div>
+</div>
+<script src="{% static 'orgchart/js/jquery.orgchart.min.js' %}"></script>
+
+<script>
+    // 生成架构图
+    (function ($) {
+        $(function () {
+            let ds = {
+                'name': '{% trans "Product Name" %}',
+                'title': '{{ product_obj.name }}',
+                'className': 'top-level',
+                'children': [
+                    {% for service in services %}
+                        {
+                            'name': '{{ service.name }}',
+                            'title': '{{ service.assets.count }} host',
+                            'className': 'second-level',
+                            'children': [
+                                {% for asset in service.assets.all %}
+                                    {
+                                        'name': '{{ asset.ip }}',
+                                        'title': '<i class="{% if asset.os_type == 0 %}icon-centos{% endif %}{% if asset.os_type == 1 %}icon-windows{% endif %}{% if asset.os_type == 2 %}icon-ubuntu{% endif %}{% if asset.os_type == 3 %}icon-debian{% endif %}"></i> {{ asset.hostname }}',
+                                        'className': 'third-level',
+                                    },
+                                {% endfor %}
+                            ]
+                        },
+                    {% endfor %}
+                ]
+            };
+
+            $('#chart-container').orgchart({
+                'data': ds,
+                'nodeContent': 'title',
+            });
+        });
+    })(jQuery);
+</script>

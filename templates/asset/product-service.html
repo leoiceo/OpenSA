@@ -1,0 +1,385 @@
+{% extends "base.html" %}
+{% load	bootstrap3 %}
+{% load i18n %}
+{% load static %}
+{% block header-css %}
+    <link rel="stylesheet" href="{% static 'modaal/css/modaal.min.css' %}">
+    <link rel="stylesheet" href="{% static 'jquery-confirm/jquery-confirm.min.css' %}">
+    <link href="{% static 'css/plugins/select2/select2.model.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'orgchart/css/jquery.orgchart.min.css' %}">
+
+    <style>
+    #chart-container {
+            font-family: Arial, serif;
+            height: 420px;
+            border: 2px dashed #aaa;
+            border-radius: 5px;
+            overflow: auto;
+            text-align: center;
+        }
+
+    .orgchart .node .content {
+        min-height: 0;
+        margin-right: 0;
+        margin-left: 0;
+        padding: 0;
+    }
+
+    .orgchart .top-level .title {
+        background-color: #006699;
+    }
+
+    .orgchart .second-level .title {
+        background-color: #009933;
+    }
+    </style>
+
+
+{% endblock %}
+
+{% block  title %}{% trans 'Product List' %}{% endblock %}
+
+{% block page-content %}
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+             <h2>{% trans 'Server List' %}</h2>
+            <ol class="breadcrumb">
+                <li>
+                     <a href="/">{% trans 'Home' %}</a>
+                </li>
+                <li>
+                    <a href="{% url "asset:asset_list" %}">{% trans 'Service Manage' %}</a>
+                </li>
+                <li class="active">
+                    <strong>{% trans 'Server List' %}</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+
+    <div class="wrapper wrapper-content animated fadeInRight   ">
+        <div class="row">
+            <div class="col-lg-12" id="split-right">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>{% trans 'Server List' %}</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="#" >{% trans 'Config Option 1' %}</a>
+                                </li>
+                                <li><a href="#" >{% trans 'Config Option 2' %}</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-sm-7 pull-left" style="margin-bottom: 3px">
+                            <button class="btn btn-sm btn-primary pull-left" data-toggle="modal" data-target="#ServiceModal"
+                                    id="add-service">
+                                <i class="fa fa-plus-square"></i>
+                                <span class="bigger-110">新增应用</span>
+                            </button>
+                        </div>
+
+                        <!--dataTable-->
+                        <div class="col-xs-12">
+                            <!-- /.box -->
+                            <div class="box">
+                                <div class="box-body">
+                                    <table id="service-list" class="table table-bordered table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th>当前项目</th>
+                                            <th>服务名称</th>
+                                            <th>所在机器</th>
+                                            <th>备注</th>
+                                            <th>操作{{ services.count}}</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for service in services %}
+                                            <tr>
+                                                <td>{{ product_obj.name }}</td>
+                                                <td>{{ service.name }}</td>
+                                                <td>
+                                                    {% for asset in service.assets.all %}
+                                                        {{ asset.ip }}<br>
+                                                    {% endfor %}
+                                                </td>
+                                                <td>{{ service.memo }}</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-primary btn-xs modify" data-toggle="modal"
+                                                            data-id="{{ service.id }}" data-target="#ServiceModal">修改
+                                                    </button>
+                                                    <button type="button" class="btn btn-danger btn-xs delete"
+                                                            data-id="{{ service.id }}">删除
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                            <!-- /.box -->
+
+                            <!-- ServiceModal  -->
+                            <div class="modal fade" id="ServiceModal" tabindex="-1" role="dialog" aria-labelledby="ServiceModalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                &times;
+                                            </button>
+                                            <h4 class="modal-title" id="ServiceModalLabel">
+
+                                            </h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="service_info" class="main form-horizontal">
+                                                <fieldset>
+                                                    <div class="form-group">
+                                                        <label for="product" class="col-sm-2 control-label">当前产品</label>
+                                                        <div class="col-sm-8">
+                                                            <select class="form-control" disabled name="product" id="product" style="width: 100%;">
+                                                                <option value="{{ product_obj.id }}"
+                                                                        selected>{{ product_obj.name }}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="service_name" class="col-sm-2 control-label">服务名称</label>
+                                                        <div class="col-sm-8">
+                                                            <input type="text" class="form-control" name="service_name"
+                                                                   id="service_name"/>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="service_assets" class="col-sm-2 control-label">所在机器({{ asset_myobj.count }})</label>
+                                                        <div class="col-sm-8">
+                                                            <select class="form-control select2" name="service_assets" multiple id="service_assets" style="width: 100%;">
+                                                                {% for asset in asset_myobj %}
+                                                                    <option value="{{ asset.id }}">{{ asset.ip }}-{{ asset.hostname }}</option>
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="service_memo" class="col-sm-2 control-label">备注</label>
+                                                        <div class="col-sm-8">
+                                                        <textarea class="form-control" name="service_memo" id="service_memo"></textarea>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="space-24"></div>
+
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-md btn-default" data-dismiss="modal">关闭</button>
+                                            <button type="button" class="btn btn-md btn-primary" data-dismiss="modal" id="service_ops">添加</button>
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal -->
+                            </div>
+                        </div>
+
+                        <div id="chart-container"></div>
+                    </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block footer-js %}
+
+    <script src="{% static 'js/plugins/select2/select2.full.min.js' %}"></script>
+    <script src="{% static 'jquery-confirm/jquery-confirm.min.js' %}"></script>
+    <script src="{% static 'modaal/js/modaal.min.js' %}"></script>
+    <script src="{% static 'orgchart/js/jquery.orgchart.min.js' %}"></script>
+    <script>
+        $(function () {
+            $('.select2').select2({
+                allowClear: true
+            })
+        });
+
+        let service_tbody = $('#service-list tbody');
+        let service_ops = $('#service_ops');
+
+        // 新增项目
+        $('#add-service').on('click', function () {
+            document.getElementById('service_info').reset();
+            $("#product").val('{{ pk }}').trigger('change');
+            $('#service_assets').val('').trigger('change');
+            $('.modal-title').text('新增服务');
+
+            service_ops.unbind('click').on('click', function () {
+                let data = {
+                    product: $('#product').val(),
+                    name: $('#service_name').val(),
+                    assets: $('#service_assets').val(),
+                    memo: $('#service_memo').val(),
+                };
+
+                $.ajax({
+                    url: '{% url "service-list" %}',
+                    type: 'POST',
+                    data: JSON.stringify(data),
+                    dataType: 'json',
+                    contentType: "application/json",
+                    success: function () {
+                        window.location.reload()
+                    },
+                    error: function (response) {
+                        $.alert({
+                            title: 'Tips',
+                            type: 'red',
+                            content: response.responseText,
+                        })
+                    }
+                })
+            })
+        });
+
+        // 更新项目
+        service_tbody.on('click', '.modify', function () {
+            let service_id = $(this).attr('data-id');
+            $('.modal-title').text('修改项目信息');
+            service_ops.text('确认修改');
+            $.get('{% url "service-list" %}' + service_id + '/', function (data) {
+                $('#product').val(data.product).trigger('change');
+                $('#service_name').val(data.name);
+                $('#service_assets').val(data.assets).trigger('change');
+                $('#service_memo').val(data.memo);
+            });
+
+            service_ops.unbind('click').on('click', function () {
+                let data = {
+                    name: $('#service_name').val(),
+                    assets: $('#service_assets').val(),
+                    memo: $('#service_memo').val(),
+                };
+
+                $.ajax({
+                    url: '{% url "service-list" %}' + service_id + '/',
+                    type: 'PATCH',
+                    data: JSON.stringify(data),
+                    dataType: 'json',
+                    contentType: "application/json",
+                    success: function () {
+                        window.location.reload()
+                    },
+                    error: function (response) {
+                        $.alert({
+                            title: 'Tips',
+                            type: 'red',
+                            content: response.responseText,
+                        })
+                    }
+                })
+            });
+        });
+
+        // 删除项目
+        service_tbody.on('click', '.delete', function () {
+            {% if user.level == 2 %}
+                let pk = $(this).attr('data-id');
+                $.confirm({
+                    title: 'Tips',
+                    content: '确定要删除这条记录么？',
+                    type: 'red',
+                    buttons: {
+                        Ok: function () {
+                            $.ajax({
+                                url: '{% url "service-list" %}' + pk + '/',
+                                method: 'DELETE',
+                                success: function () {
+                                    window.location.reload()
+                                },
+                                error: function (data) {
+                                    $.alert({
+                                        title: 'Tips',
+                                        type: 'red',
+                                        content: '删除失败！' + data.responseText,
+                                    })
+                                }
+                            })
+                        },
+                        Cancel: function () {
+                            //
+                        }
+                    }
+                });
+            {% else %}
+                $.alert({
+                    title: 'Tips',
+                    type: 'red',
+                    content: '抱歉！您没有删除项目的权限！如有疑问，请联系管理员！',
+                });
+            {% endif %}
+        });
+
+        // 生成架构图
+        (function ($) {
+        $(function () {
+            let ds = {
+                'name': '{% trans "Product Name" %}',
+                'title': '{{ product_obj.name }}',
+                'className': 'top-level',
+                'children': [
+                    {% for service in services %}
+                        {
+                            'name': '{{ service.name }}',
+                            'title': '{{ service.assets.count }} host',
+                            'className': 'second-level',
+                            'children': [
+                                {% for asset in service.assets.all %}
+                                    {
+                                        'name': '{{ asset.ip }}',
+                                        'title': '<i class="{% if asset.os_type == 0 %}icon-centos{% endif %}{% if asset.os_type == 1 %}icon-windows{% endif %}{% if asset.os_type == 2 %}icon-ubuntu{% endif %}{% if asset.os_type == 3 %}icon-debian{% endif %}"></i> {{ asset.hostname }}',
+                                        'className': 'third-level',
+                                    },
+                                {% endfor %}
+                            ]
+                        },
+                    {% endfor %}
+                ]
+            };
+
+            $('#chart-container').orgchart({
+                'data': ds,
+                'nodeContent': 'title',
+            });
+        });
+    })(jQuery);
+
+
+    </script>
+
+{% endblock %}

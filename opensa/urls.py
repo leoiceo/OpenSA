@@ -20,8 +20,13 @@ from .api import Choice_Project
 from django.conf.urls.static import static
 from opensa import settings
 import os
+from asset.api import AssetViewSet,IdcViewSet,ServiceViewSet
 from rest_framework import routers
+
 router = routers.DefaultRouter()
+router.register('asset', AssetViewSet)
+router.register('idc', IdcViewSet)
+router.register('service', ServiceViewSet)
 
 handler404 = page_not_found
 handler500 = server_error

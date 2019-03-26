@@ -145,3 +145,17 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+		
+class Service(models.Model):
+    product = models.ForeignKey(to='Product', default=None, blank=True, null=True,on_delete=models.SET_NULL)
+    name = models.CharField(max_length=32, verbose_name='Service Name', help_text='MySQL,Nginx')
+    assets = models.ManyToManyField(to='Asset', verbose_name='Deployed Server')
+    memo = models.TextField(blank=True, null=True, verbose_name='Service Memo')
+
+    class Meta:
+        db_table = 'service'
+        verbose_name = _('Service Architecture')
+        verbose_name_plural = _('Service Architecture')
+
+    def __str__(self):
+        return self.name
