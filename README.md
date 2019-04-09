@@ -106,4 +106,4 @@ python manage.py runserver 0.0.0.0:8000
 * [博客地址](https://blog.imdst.com/kai-yuan-yun-wei-zi-dong-hua-ping-tai-kai-fa-she-ji-si-lu/)
 
 #### 参与人员
-* 盘振鹏 
+* pzp
