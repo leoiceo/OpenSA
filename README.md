@@ -1,5 +1,8 @@
 # OpenSA 运维自动化平台 
 
+[![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
+[![Badge](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu/#/zh_CN)
+
 #### 架构说明
 * Django 2.1 + Mysql 5.7 + redis 5.0 + celery v4.2.0 
 * 生产环境请使用 nginx + uwsgi,不对公网开放,或者使用SSL双向认证
