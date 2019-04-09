@@ -10,7 +10,7 @@ Automat==0.7.0
 backcall==0.1.0
 bcrypt==3.1.4
 billiard==3.5.0.4
-celery==4.2.0
+celery==4.3.0rc1
 cffi==1.11.5
 channels==1.1.8
 chardet==3.0.4
