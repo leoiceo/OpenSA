@@ -17,7 +17,7 @@ Jinja2==2.10
 kombu==4.4.0
 MarkupSafe==1.1.1
 numpy==1.15.4
-paramiko==2.1.4
+paramiko==2.4.2
 Pillow==5.4.1
 pip==19.0.3
 pyasn1==0.4.5
