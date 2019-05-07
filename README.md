@@ -78,7 +78,7 @@ django-admin compilemessages
 
 * Celery 启动说明
 ```
-/usr/local/python37/bin/python3.7 /usr/bin/celery -B -A opensa worker --loglevel=INFO
+/usr/local/python37/bin/celery -B -A opensa worker --loglevel=INFO
 ```
 
 * 启动
