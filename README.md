@@ -76,9 +76,9 @@ django-admin makemessages -l en
 django-admin compilemessages
 ```
 
-* Celery 启动说明
+* Celery 后台启动
 ```
-/usr/local/python37/bin/celery -B -A opensa worker --loglevel=INFO
+nohup /usr/local/python37/bin/celery -B -A opensa worker --loglevel=INFO  &
 ```
 
 * 启动
