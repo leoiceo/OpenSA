@@ -48,7 +48,6 @@ cd /opt/
 git clone https://github.com/leoiceo/OpenSA
 wget --no-check-certificate https://bootstrap.pypa.io/ez_setup.py
 python ez_setup.py --insecure
-easy_install pip
 
 # 修改pypi源
 mkdir -p ~/.pip/
