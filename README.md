@@ -49,6 +49,11 @@ git clone https://github.com/leoiceo/OpenSA
 wget --no-check-certificate https://bootstrap.pypa.io/ez_setup.py
 python ez_setup.py --insecure
 
+# 创建日志目录 
+```
+mkdir -p /data/opensa/logs
+```
+
 # 修改pypi源
 mkdir -p ~/.pip/
 cat ~/.pip/pip.conf <<EOF
