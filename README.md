@@ -63,7 +63,7 @@ trusted-host=mirrors.aliyun.com
 EOF
 
 cd OpenSA
-pip install -r requirements.txt
+/usr/local/python37/bin/pip install -r requirements.txt
 ```
 * 初始化数据库 (修改 config.conf 设置DB和redis配置信息)
 ```
