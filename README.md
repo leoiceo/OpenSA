@@ -87,13 +87,13 @@ nohup /usr/local/python37/bin/celery -B -A opensa worker --loglevel=INFO  &
 ```
 python manage.py runserver 0.0.0.0:8000
 ```
-* 初始账号密码登陆
+* 初始账号密码登陆(管理员账号两小时重置一次)
 
 | 账号 | 密码 |
 | --- | --- |
 | opensa@imdst.com | redhat |
 
-* [Demo地址](http://opensa.imdst.com)(管理员账号两小时重置一次)
+* [Demo地址](http://opensa.imdst.com)管理员密码同上,如下为普通用户
 
 | 账号 | 密码 |
 | --- | --- |
