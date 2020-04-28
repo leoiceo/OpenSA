@@ -33,7 +33,7 @@ echo 'LANG="zh_CN.UTF-8"' > /etc/locale.conf
 * 安装 Python3  && redis 
 ```
 wget http://www.python.org/ftp/python/3.7.1/Python-3.7.1.tar.xz
-tar -zxvf Python-3.7.1.tar.xz && cd Python-3.7.1 
+tar -xvf Python-3.7.1.tar.xz && cd Python-3.7.1 
 ./configure --prefix=/usr/local/python37
 make && make install
 
