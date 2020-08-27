@@ -54,7 +54,7 @@ mkdir -p /data/opensa/logs
  
 # 修改pypi源
 mkdir -p ~/.pip/
-cat ~/.pip/pip.conf <<EOF
+cat > ~/.pip/pip.conf <<EOF
 [global]
 index-url = http://mirrors.aliyun.com/pypi/simple/
 
