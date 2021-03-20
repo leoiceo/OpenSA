@@ -13,7 +13,7 @@ django-pure-pagination==0.3.0
 django-redis==4.10.0
 django-timezone-field==3.0
 djangorestframework==3.9.0
-Jinja2==2.10
+Jinja2==2.11.3
 kombu==4.4.0
 MarkupSafe==1.1.1
 numpy==1.15.4
