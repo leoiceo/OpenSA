@@ -88,6 +88,11 @@ nohup /usr/local/python37/bin/celery -B -A opensa worker --loglevel=INFO  &
 python manage.py runserver 0.0.0.0:8000
 ```
  
+* 默认用户名密码
+```
+管理员： opensa@imdst.com
+密码：redhat
+```
 
 #### 交流群QQ: 142189771
 
