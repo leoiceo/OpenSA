@@ -80,11 +80,13 @@ django-admin compilemessages
 
 * Celery 后台启动
 ```
+cd /opt/OpenSA
 nohup /usr/local/python37/bin/celery -B -A opensa worker --loglevel=INFO  &
 ```
 
 * 启动
 ```
+cd /opt/OpenSA
 python manage.py runserver 0.0.0.0:8000
 ```
  
