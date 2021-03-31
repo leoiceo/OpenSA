@@ -45,7 +45,7 @@ def batch_scripts_func(*args,**kwargs):
     localfile = "{}/{}".format(script_dir, script_name)
     remotefile = "/tmp/{}".format(script_name)
 
-    batch_script = Connection(ip=asset_obj.ip, user=user, port=asset_obj.port, key=keyfile, remote_file=remotefile, password=keypass,
+    batch_script = Connection(ip=asset_obj.ip, user=user, port=asset_obj.port, key=keyfile, remote_file=remotefile, password=keypass,keypass=jr_obj.key.password,
                               timeout=timeout)
     batch_script.upload(localfile)
 
@@ -115,7 +115,7 @@ def ExecutionCmd(*args,**kwargs):
     keypass = jr_obj.key.password
     keyfile = generate_keyfile(jr_obj.key.id, jr_obj.key.private)
     current_task.update_state(state='PROGRESS', meta={'current': "40%", 'total': 100})
-    batch_script = Connection(ip=asset_obj.ip, user=user, port=asset_obj.port, key=keyfile, password=keypass,)
+    batch_script = Connection(ip=asset_obj.ip, user=user, port=asset_obj.port, key=keyfile, keypass=keypass,)
     ret = batch_script.linux_cmd(args[2])
     current_task.update_state(state='PROGRESS', meta={'current': "60%", 'total': 100})
     if ret["result"]:
@@ -160,7 +160,7 @@ def batch_task_func(*args,**kwargs):
             remotefile = "/tmp/{}".format(script_name)
 
             batch_script = Connection(ip=asset_obj.ip, user=user, port=asset_obj.port, key=keyfile, remote_file=remotefile,
-                                      password=keypass,timeout=timeout)
+                                      keypass=keypass,timeout=timeout)
 
             batch_script.upload(localfile)
             cmd = "{} {}".format(script_env,remotefile)
