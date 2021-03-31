@@ -162,7 +162,7 @@ class Choice_Project(LoginRequiredMixin,View):
             return HttpResponse(number)
 
 class Connection(object):
-    def __init__(self, ip, user, port=22, key='/root/.ssh/id_rsa',remote_file='/tmp',local_dir=None,remote_dir=None,password=None,timeout=300):
+    def __init__(self, ip, user, port=22, key='/root/.ssh/id_rsa',remote_file='/tmp',local_dir=None,remote_dir=None,password=None,keypass=None,timeout=300):
         self.ip = ip
         self.user = user
         self.port = int(port)
@@ -171,11 +171,15 @@ class Connection(object):
         self.remote_file = remote_file
         self.local_dir = local_dir
         self.remote_dir = remote_dir
-        self.private_key = paramiko.RSAKey.from_private_key_file(key)
+        #self.private_key = paramiko.RSAKey.from_private_key_file(key)
         self.client = paramiko.SSHClient()
         self.client.load_system_host_keys()
         self.client.set_missing_host_key_policy(paramiko.AutoAddPolicy)
         if not password:
+            if not keypass:
+                self.private_key = paramiko.RSAKey.from_private_key_file(key)
+            else:
+                self.private_key = paramiko.RSAKey.from_private_key_file(key, keypass)
             self.client.connect(hostname=self.ip,
                                 port=self.port,
                                 username=self.user,
