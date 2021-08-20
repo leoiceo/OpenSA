@@ -1,2 +1,2 @@
-/usr/local/python37/bin/python manage.py makemigrations
-/usr/local/python37/bin/python manage.py migrate
+/usr/local/python37/bin/python3 manage.py makemigrations
+/usr/local/python37/bin/python3 manage.py migrate
