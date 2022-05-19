@@ -111,6 +111,7 @@ python manage.py runserver 0.0.0.0:8000
 
 #### 附上一波小广告，【炎陵黄桃】 自家果园，每年一季，欢迎尝鲜
 * [快来吃桃了！](https://blog.imdst.com/ylht-zjgy-xzxf/)
+* 微信小程序搜索 【炎陵黄桃酃峰店】
 * 扫码购买
 
 ![](https://github.com/leoiceo/OpenSA/blob/master/static/img/0a73f3fcf8d43667286430b11c10b.png)
