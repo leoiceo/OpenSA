@@ -114,4 +114,4 @@ python manage.py runserver 0.0.0.0:8000
 * 微信小程序搜索 【炎陵黄桃酃峰店】
 * 扫码购买
 
-![](https://github.com/leoiceo/OpenSA/blob/master/static/img/0a73f3fcf8d43667286430b11c10b.png)
+![](https://github.com/leoiceo/OpenSA/blob/master/screenshots/e8c586c13c4ba440a7cb831df8805.jpg)
