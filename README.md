@@ -115,3 +115,7 @@ python manage.py runserver 0.0.0.0:8000
 * 扫码购买
 
 ![](https://github.com/leoiceo/OpenSA/blob/master/screenshots/e8c586c13c4ba440a7cb831df8805.jpg)
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=leoiceo/opensa&type=Date)](https://star-history.com/#leoiceo/opensa&Date)
