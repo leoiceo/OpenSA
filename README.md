@@ -109,12 +109,10 @@ python manage.py runserver 0.0.0.0:8000
 #### 参与人员
 * pzp
 
-#### 附上一波小广告，【炎陵黄桃】 自家果园，每年一季，欢迎尝鲜
+#### 附上一波小广告，【炎陵黄桃】 自家果园，每年8月一季，欢迎尝鲜
 * [快来吃桃了！](https://blog.imdst.com/ylht-zjgy-xzxf/)
-* 微信小程序搜索 【炎陵黄桃酃峰店】
-* 扫码购买
-
-![](https://github.com/leoiceo/OpenSA/blob/master/screenshots/e8c586c13c4ba440a7cb831df8805.jpg)
+* [微信小程序 【酃峰炎陵黄桃】](https://store.weixin.qq.com/shop/b/qVKjavEqofybIlq?entrance_id=h5)
+* [湘粤避暑度假](https://blog.imdst.com/hu-nan-yan-ling-chu-liao-yun-shang-da-yuan-huan-you-ge-bi-shu-sheng-di-ling-feng-cun/)
 
 ## Star History
 
