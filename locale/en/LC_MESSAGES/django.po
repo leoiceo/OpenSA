@@ -256,7 +256,7 @@ msgstr "工作环境"
 
 #: asset/models.py:117
 msgid "Idc Name"
-msgstr "项目名称"
+msgstr "机房名称"
 
 #: asset/models.py:118 templates/asset/idc-list.html:89
 
@@ -312,7 +312,7 @@ msgstr "机房管理"
 
 #| msgid "Project Name"
 msgid "Product Name"
-msgstr "项目名称"
+msgstr "产品名称"
 
 #: asset/models.py:139 templates/asset/product-list.html:88
 msgid "Product Short Name"
@@ -1196,7 +1196,7 @@ msgstr "工作环境名称"
 #: templates/asset/asset-detail.html:98 templates/asset/asset-list.html:102
 #: templates/asset/idc-list.html:87
 msgid "IDC Name"
-msgstr "项目名称"
+msgstr "机房名称"
 
 #: templates/asset/asset-detail.html:177
 msgid "Server Type"
