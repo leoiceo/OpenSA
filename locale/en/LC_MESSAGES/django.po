@@ -1308,10 +1308,9 @@ msgid "User Name"
 msgstr "关联用户"
 
 #: templates/audit/login-log.html:72 templates/audit/request-log.html:80
-
 #| msgid "Number of CPUs"
 msgid "Number"
-msgstr "CPU核数"
+msgstr "序号"
 
 #: templates/audit/login-log.html:74 templates/audit/request-log.html:82
 #| msgid "Remote addr"
