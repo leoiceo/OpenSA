@@ -2,7 +2,7 @@ amqp==2.4.2
 asn1crypto==0.24.0
 bcrypt==3.1.6
 billiard==3.6.0.0
-celery==4.3.0rc1
+celery==5.2.2
 cffi==1.12.2
 cryptography==2.6.1
 Django==2.1.5
